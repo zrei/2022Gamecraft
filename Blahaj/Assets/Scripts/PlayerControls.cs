@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
 
     #region fields
@@ -52,7 +52,11 @@ public class PlayerController : MonoBehaviour
             {
                 rb2D.MovePosition(rb2D.position + movementInput * movementSpeed * Time.fixedDeltaTime);
             }
-
+            //Debug.Log(movementInput);
+            Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));
+            //Debug.Log(rotationZ);
+            transform.rotation = rotationZ;
+            
             //check direction
             if (movementInput.x > 0) {
                 mySR.flipX = false;
