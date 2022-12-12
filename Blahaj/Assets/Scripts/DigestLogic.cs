@@ -6,6 +6,7 @@ static class DigestLogic
     private static float scaleFactor = 1f;
     public static Tuple<Skill, int> Digest(int red, int purple, int yellow)
     {
+        PlayerStats.ChangeOrbsEvent(-red, -yellow, -purple);
         int skillValue = (int)Math.Round((red + purple + yellow) * scaleFactor);
         if (purple == 0 && red == 0 && yellow > 0)
         {
