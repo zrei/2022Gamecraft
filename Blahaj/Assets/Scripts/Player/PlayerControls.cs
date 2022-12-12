@@ -59,17 +59,28 @@ public class PlayerControls : MonoBehaviour
             {
                 rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             }
-            //Debug.Log(movementInput);
-            Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));
-            //Debug.Log(rotationZ);
-            transform.rotation = rotationZ;
+            Debug.Log(movementInput);
+            if (this.movementInput.x == 0) {
+                if (this.movementInput.y == 1 ) {
+                    transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+                } else if (this.movementInput.y == -1) {
+                    transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                }
+            } else {
+                Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));
+                    Debug.Log(rotationZ);
+                    transform.rotation = rotationZ;
+            }
+
+            
+            
             
             //check direction
             if (movementInput.x > 0) {
-                mySR.flipX = false;
-            } else if (movementInput.x < 0) {
                 mySR.flipX = true;
-            }
+            } else if (movementInput.x < 0) {
+                mySR.flipX = false;
+            } 
         }
         if (this.attacking)
         {
