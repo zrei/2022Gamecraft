@@ -206,10 +206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891c7b16a14c94859b95a6aeb0eed1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackSpeed: 0
-  movementSpeed: 10
-  maxHealth: 10
+  baseAttackDamage: 0
+  baseAttackSpeed: 0
+  baseMovementSpeed: 10
+  baseMaxHealth: 10
   minAttackDamage: 0
   maxAttackDamage: 0
   minAttackSpeed: 0
