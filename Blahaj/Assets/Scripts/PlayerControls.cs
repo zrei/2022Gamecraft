@@ -14,6 +14,7 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
 
+    private bool attacking = false;
     private Vector2 movementInput;
     [SerializeField] private ContactFilter2D movementFilter;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
@@ -35,6 +36,11 @@ public class PlayerControls : MonoBehaviour
     private void OnMove(InputValue movementValue) 
     {
         this.movementInput = movementValue.Get<Vector2>();
+    }
+
+    private void OnFire()
+    {
+        this.attacking = true;
     }
 
     private void FixedUpdate()
@@ -63,6 +69,41 @@ public class PlayerControls : MonoBehaviour
             } else if (movementInput.x < 0) {
                 mySR.flipX = true;
             }
+        }
+        if (this.attacking)
+        {
+            // Attack! With cooldown
+            Debug.Log("Attack");
+            this.attacking = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            // check skill 1
+            Debug.Log("Y has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            // check skill 2
+            Debug.Log("U has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            // check skill 3
+            Debug.Log("I has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            // check skill 4
+            Debug.Log("O has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            // check skill 5
+            Debug.Log("P has been pressed");
         }
     }
 }
