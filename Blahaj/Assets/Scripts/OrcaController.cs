@@ -6,22 +6,20 @@ public class OrcaController : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private int health;
+    [SerializeField] private float health;
     [SerializeField] private float movementSpeed;
-    [SerializeField] private int attackSpeed;
-    [SerializeField] private int attackDamage;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private float attackDamage;
     [SerializeField] private float attackRadius;
-    [SerializeField]private int minMovementSpeed;
+    [SerializeField]private float minMovementSpeed;
 
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
     private GameObject player;
 
-    public delegate void TakeDamage(int damageAmount);
-    public static TakeDamage DamageEvent;
-
-    public delegate void Slow(int slowAmount);
-    public static Slow SlowEvent;
+    public delegate void ChangeStats(float damageAmount);
+    public static ChangeStats DamageEvent;
+    public static ChangeStats SlowEvent;
 
     #endregion
 
@@ -39,7 +37,7 @@ public class OrcaController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        var step =  movementSpeed * Time.deltaTime; // calculate distance to move
+        var step =  this.movementSpeed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
         if (Vector3.Distance(transform.position, player.transform.position) < attackRadius) 
         {
@@ -48,21 +46,25 @@ public class OrcaController : MonoBehaviour
         }
     }
 
-    private void Damage(int damageAmount)
+    private void Damage(float damageAmount)
     {
         this.health -= damageAmount;
         if (this.health <= 0)
         {
-            // death anim
-            OrcaController.DamageEvent -= Damage;
-            OrcaController.SlowEvent -= SlowDown;
+            // death anim     
             Destroy(this.gameObject);
         }
     }
 
-    private void SlowDown(int slowAmount)
+    private void SlowDown(float slowAmount)
     {
         this.movementSpeed = Mathf.Max(this.minMovementSpeed, this.minMovementSpeed - slowAmount);
+    }
+
+    private void OnDestroy()
+    {
+        OrcaController.DamageEvent -= Damage;
+        OrcaController.SlowEvent -= SlowDown;
     }
 
     #endregion
