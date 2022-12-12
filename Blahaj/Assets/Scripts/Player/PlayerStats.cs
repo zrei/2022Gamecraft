@@ -9,10 +9,14 @@ public class PlayerStats : MonoBehaviour
 
     private List<Skill> skillsList = new List<Skill>();
     private float health;
-    [SerializeField] private float attackDamage;
-    [SerializeField] private float attackSpeed; 
-    [SerializeField] private float movementSpeed;
-    [SerializeField] private float maxHealth;
+    [SerializeField] private float baseAttackDamage;
+    private float attackDamage;
+    [SerializeField] private float baseAttackSpeed; 
+    private float attackSpeed;
+    [SerializeField] private float baseMovementSpeed;
+    private float movementSpeed;
+    [SerializeField] private float baseMaxHealth;
+    private float maxHealth;
     [SerializeField] private float minAttackDamage;
     [SerializeField] private float maxAttackDamage;
     [SerializeField] private float minAttackSpeed;
@@ -40,6 +44,9 @@ public class PlayerStats : MonoBehaviour
     public delegate void SkillGain(Skill skill);
     public static SkillGain GainSkillEvent;
     
+    public delegate void StatsReset();
+    public static StatsReset ResetStatsEvent;
+
     private SpriteRenderer mySR;
 
     #endregion
@@ -57,7 +64,8 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.ChangeOrbsEvent += ChangeOrbs;
         PlayerStats.GainSkillEvent += GainSkill;
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
-        this.health = maxHealth;
+        PlayerStats.ResetStatsEvent += ResetStats;
+        ResetStats();
     }
 
     private void Awake()
@@ -162,6 +170,15 @@ public class PlayerStats : MonoBehaviour
         return skillsList.Count;
     }
 
+    private void ResetStats()
+    {
+        this.maxHealth = this.baseMaxHealth;
+        this.attackDamage = this.baseAttackDamage;
+        this.attackSpeed = this.baseAttackSpeed;
+        this.movementSpeed = this.baseMovementSpeed;
+        this.health = this.maxHealth;
+    } 
+
     private void OnDestroy()
     {
         PlayerStats.DamageEvent -= Damage;
@@ -171,6 +188,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.ChangeMovementSpeedEvent -= ChangeMovementSpeed;
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
+        PlayerStats.ResetStatsEvent -= ResetStats;
     }
     
     #endregion
