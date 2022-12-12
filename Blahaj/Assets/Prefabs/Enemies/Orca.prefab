@@ -125,3 +125,7 @@ MonoBehaviour:
   attackDamage: 1
   attackRadius: 0.5
   minMovementSpeed: 1
+  numOrbsDropped: 3
+  RedOrb: {fileID: 7100642399210993830, guid: c70983691c52d47809a4a5dd32c069d4, type: 3}
+  YellowOrb: {fileID: 7864985485559605410, guid: d801bebbb36f74a40ad3c7c2e8938f32, type: 3}
+  PurpleOrb: {fileID: 8265185047536792606, guid: d874f850e997043f0ab6dc703548e54c, type: 3}
