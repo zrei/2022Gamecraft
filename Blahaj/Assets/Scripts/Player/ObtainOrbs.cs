@@ -9,17 +9,17 @@ public class ObtainOrbs : MonoBehaviour
     {
         if (otherObject.CompareTag("PurpleOrb"))
         {
-            Debug.Log("Purple Orb!");
-            Destroy(otherObject.gameObject);
+            //Debug.Log("Purple Orb!");
             PlayerStats.ChangeOrbsEvent(0, 0, 1);
+            Destroy(otherObject.gameObject);
         } else if (otherObject.CompareTag("YellowOrb"))
         {
-            Debug.Log("Yellow orb");
+            //Debug.Log("Yellow orb");
             PlayerStats.ChangeOrbsEvent(0, 1, 0);
             Destroy(otherObject.gameObject);
         } else if (otherObject.CompareTag("RedOrb"))
         {
-            Debug.Log("Red orb");
+            //Debug.Log("Red orb");
             PlayerStats.ChangeOrbsEvent(1, 0, 0);
             Destroy(otherObject.gameObject);
         }
