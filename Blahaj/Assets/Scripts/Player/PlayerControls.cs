@@ -8,15 +8,16 @@ public class PlayerControls : MonoBehaviour
 
     #region fields
 
-    [SerializeField] private float movementSpeed;
     [SerializeField] private float collisionOffset = 0.05f;
     
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
 
+    private bool attacking = false;
     private Vector2 movementInput;
     [SerializeField] private ContactFilter2D movementFilter;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    PlayerStats stats;
 
     #endregion
 
@@ -24,6 +25,7 @@ public class PlayerControls : MonoBehaviour
     {
         this.rb2D = GetComponent<Rigidbody2D>();
         this.mySR = GetComponent<SpriteRenderer>();
+        this.stats = GetComponent<PlayerStats>();
     }
 
     // Start is called before the first frame update
@@ -37,6 +39,11 @@ public class PlayerControls : MonoBehaviour
         this.movementInput = movementValue.Get<Vector2>();
     }
 
+    private void OnFire()
+    {
+        this.attacking = true;
+    }
+
     private void FixedUpdate()
     {
         if (this.movementInput != Vector2.zero)
@@ -45,12 +52,12 @@ public class PlayerControls : MonoBehaviour
                 movementInput,
                 movementFilter,
                 castCollisions,
-                movementSpeed * Time.fixedDeltaTime + collisionOffset
+                stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
                 );
 
             if (numCollisions == 0)
             {
-                rb2D.MovePosition(rb2D.position + movementInput * movementSpeed * Time.fixedDeltaTime);
+                rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             }
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));
@@ -63,6 +70,41 @@ public class PlayerControls : MonoBehaviour
             } else if (movementInput.x < 0) {
                 mySR.flipX = true;
             }
+        }
+        if (this.attacking)
+        {
+            // Attack! With cooldown
+            Debug.Log("Attack");
+            this.attacking = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            // check skill 1
+            Debug.Log("Y has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            // check skill 2
+            Debug.Log("U has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            // check skill 3
+            Debug.Log("I has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            // check skill 4
+            Debug.Log("O has been pressed");
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            // check skill 5
+            Debug.Log("P has been pressed");
         }
     }
 }
