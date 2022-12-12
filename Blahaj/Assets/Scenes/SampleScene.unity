@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 445591173}
   - component: {fileID: 445591172}
   - component: {fileID: 445591174}
+  - component: {fileID: 445591175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -273,7 +274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3010c8ca4a8504c10b41e7f3d53af74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
   collisionOffset: 0.05
   movementFilter:
     useTriggers: 0
@@ -289,6 +289,29 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+--- !u!114 &445591175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445591169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891c7b16a14c94859b95a6aeb0eed1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  attackDamage: 0
+  attackSpeed: 0
+  movementSpeed: 10
+  maxHealth: 10
+  minAttackDamage: 0
+  maxAttackDamage: 0
+  minAttackSpeed: 0
+  maxAttackSpeed: 0
+  minMovementSpeed: 1
+  maxMovementSpeed: 15
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour
 
     #region fields
 
-    [SerializeField] private float movementSpeed;
+    //[SerializeField] private float movementSpeed;
     [SerializeField] private float collisionOffset = 0.05f;
     
     private Rigidbody2D rb2D;
@@ -45,12 +45,12 @@ public class PlayerControls : MonoBehaviour
                 movementInput,
                 movementFilter,
                 castCollisions,
-                movementSpeed * Time.fixedDeltaTime + collisionOffset
+                PlayerStats.MovementSpeedGetter() * Time.fixedDeltaTime + collisionOffset
                 );
 
             if (numCollisions == 0)
             {
-                rb2D.MovePosition(rb2D.position + movementInput * movementSpeed * Time.fixedDeltaTime);
+                rb2D.MovePosition(rb2D.position + movementInput * PlayerStats.MovementSpeedGetter() * Time.fixedDeltaTime);
             }
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));
