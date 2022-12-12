@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Constants;
 
 public class GameManager : MonoBehaviour
 {
@@ -84,15 +85,4 @@ public class GameManager : MonoBehaviour
         state = newState;
     }
 
-    public enum GameState
-    {
-        StartMenu,
-        NewGame,
-        InGame,
-        NextLevel,
-        PauseGame,
-        DigestionState,
-        WinGame,
-        LoseGame,
-    }
 }
