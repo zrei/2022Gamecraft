@@ -62,15 +62,17 @@ public class OrcaController : MonoBehaviour
                 Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-2.0f, 2.0f), 
                     transform.position.y + Random.Range(-2.0f, 2.0f), 
                     transform.position.z + Random.Range(-2.0f, 2.0f));
-                if (randomNumber == 0)
+                switch (randomNumber)
                 {
-                    Instantiate(RedOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
-                } else if (randomNumber == 1)
-                {
-                    Instantiate(YellowOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
-                } else 
-                {
-                    Instantiate(PurpleOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
+                    case 0:
+                        Instantiate(RedOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
+                        break;
+                    case 1:
+                        Instantiate(YellowOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
+                        break;
+                    case 2:
+                        Instantiate(PurpleOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
+                        break;
                 }
             }
             // death anim     

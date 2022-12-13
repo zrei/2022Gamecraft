@@ -71,6 +71,7 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         this.mySR = GetComponent<SpriteRenderer>();
+        //this.skillsList.Add(Skill.Explosion);
     }
 
     // Update is called once per frame

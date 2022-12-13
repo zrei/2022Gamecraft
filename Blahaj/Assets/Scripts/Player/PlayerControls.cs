@@ -60,7 +60,7 @@ public class PlayerControls : MonoBehaviour
                 rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             }
             //Debug.Log(movementInput);
-            Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                Debug.Log(rotationZ);
+            Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                //Debug.Log(rotationZ);
             transform.rotation = rotationZ;
             
             if (movementInput.x >= 0) {
@@ -79,6 +79,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))
@@ -106,5 +107,5 @@ public class PlayerControls : MonoBehaviour
             // check skill 5
             Debug.Log("P has been pressed");
         }
-    }
+    }*/
 }
