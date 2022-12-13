@@ -35,6 +35,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Sprite poisonSprite;
 
     private Vector3 initialPosition;
+
+    [SerializeField] HealthBar healthBar; 
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
         {Orbs.Red, 0},
@@ -79,6 +81,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.ResetStatsEvent += ResetStats;
         ResetStats();
         this.initialPosition = transform.position;
+        healthBar.SetMaxHealth(baseMaxHealth);
     }
 
     private void Awake()
@@ -89,12 +92,18 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        /* Debug Health bar
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Damage(2f);
+        }
+        */
     }
     
     private void Damage(float damageAmount)
     {
         this.health -= damageAmount;
-        if (this.health < 0)
+        healthBar.SetHealth(this.health);
+        if (this.health <= 0)
         {
             // some death animation
             Destroy(this.gameObject);
@@ -150,6 +159,7 @@ public class PlayerStats : MonoBehaviour
     private void RestoreHealth(float amountRestored)
     {
         this.health = Mathf.Min(this.maxHealth, this.health + amountRestored);
+        healthBar.SetHealth(this.health);
     }
 
     private void ChangeMaxHealth(float amount)
@@ -157,6 +167,7 @@ public class PlayerStats : MonoBehaviour
         float ratio = this.health / this.maxHealth;
         this.maxHealth += amount;
         this.health = ratio * this.maxHealth;
+        healthBar.SetMaxHealth(this.maxHealth);
     }
 
     private void ChangeOrbs(int red, int yellow, int purple)
