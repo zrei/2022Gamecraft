@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Constants;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -107,11 +108,12 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        /* Debug Health bar
+        /*
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
-        }
-        */
+        }*/
+        
+        
     }
     
     private void Damage(float damageAmount)
@@ -122,6 +124,7 @@ public class PlayerStats : MonoBehaviour
         {
             // some death animation
             Destroy(this.gameObject);
+            SceneManager.LoadScene("LoseGame");
         }
         StartCoroutine("FlashRedOnDamage"); // or have a more elaborate animation
     }
