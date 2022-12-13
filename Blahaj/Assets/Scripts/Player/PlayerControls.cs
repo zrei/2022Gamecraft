@@ -64,11 +64,14 @@ public class PlayerControls : MonoBehaviour
             //Debug.Log(rotationZ);
             transform.rotation = rotationZ;
             
+            float x = Mathf.Abs(transform.localScale.x);
+            float y = transform.localScale.y;
+            float z = transform.localScale.z;
             if (movementInput.x >= 0) {
-                transform.localScale = new Vector3(-1f, 1f, 1f);
+                transform.localScale = new Vector3(-x, y, z);
                 //mySR.flipX = true;
             } else if (movementInput.x < 0) {
-                transform.localScale = new Vector3(1f, 1f, 1f);
+                transform.localScale = new Vector3(x, y, z);
                 //mySR.flipX = false;
             }
             
