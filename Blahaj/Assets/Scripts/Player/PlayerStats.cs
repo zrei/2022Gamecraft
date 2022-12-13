@@ -92,10 +92,11 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        /* Debug Health bar
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
         }
+        */
         
     }
     
