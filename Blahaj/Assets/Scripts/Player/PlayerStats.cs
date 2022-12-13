@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,12 @@ public class PlayerStats : MonoBehaviour
 
     #region Fields
 
-    private List<Skill> skillsList = new List<Skill>();
+    private Dictionary<Skill, int> skills = new Dictionary<Skill, int>{
+        {Skill.Explosion, 0},
+        {Skill.Poison, 0},
+        {Skill.Stun, 0},
+        {Skill.Healing, 0}
+    };
     private float health;
     [SerializeField] private float baseAttackDamage;
     private float attackDamage;
@@ -23,8 +29,14 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxAttackSpeed;
     [SerializeField] private float minMovementSpeed;
     [SerializeField] private float maxMovementSpeed;
+    [SerializeField] private Sprite stunSprite;
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite explodeSprite;
+    [SerializeField] private Sprite poisonSprite;
 
-    public HealthBar healthBar; 
+    private Vector3 initialPosition;
+
+    [SerializeField] HealthBar healthBar; 
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
         {Orbs.Red, 0},
@@ -43,7 +55,7 @@ public class PlayerStats : MonoBehaviour
     public delegate void OrbsChange(int red, int yellow, int purple);
     public static OrbsChange ChangeOrbsEvent;
 
-    public delegate void SkillGain(Skill skill);
+    public delegate void SkillGain(Tuple<Skill, int> skill);
     public static SkillGain GainSkillEvent;
     
     public delegate void StatsReset();
@@ -68,6 +80,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
         PlayerStats.ResetStatsEvent += ResetStats;
         ResetStats();
+        this.initialPosition = transform.position;
         healthBar.SetMaxHealth(baseMaxHealth);
     }
 
@@ -164,21 +177,15 @@ public class PlayerStats : MonoBehaviour
         this.orbs[Orbs.Yellow] += yellow;
         this.orbs[Orbs.Purple] += purple;
     }
-
     
-    private void GainSkill(Skill skill)
+    private void GainSkill(Tuple<Skill, int> skill)
     {
-        this.skillsList.Add(skill);
+        this.skills[skill.Item1] += skill.Item2;
     }
     
-    public Skill RetrieveSkill(int index)
+    public int RetrieveSkillLevel(Skill skill)
     {   
-        return skillsList[index];   
-    }
-
-    public int GetNumberOfSkills()
-    {
-        return skillsList.Count;
+        return skills[skill];   
     }
 
     private void ResetStats()
@@ -188,7 +195,28 @@ public class PlayerStats : MonoBehaviour
         this.attackSpeed = this.baseAttackSpeed;
         this.movementSpeed = this.baseMovementSpeed;
         this.health = this.maxHealth;
-    } 
+        ChangeSprite(SpriteStates.Normal);
+        transform.position = this.initialPosition;
+    }
+
+    public void ChangeSprite(SpriteStates state)
+    {
+        switch (state)
+        {
+            case (SpriteStates.Normal):
+                mySR.sprite = normalSprite;
+                break;
+            case (SpriteStates.Stun):
+                mySR.sprite = stunSprite;
+                break;
+            case (SpriteStates.Poison):
+                mySR.sprite = poisonSprite;
+                break;
+            case (SpriteStates.Explosion):
+                mySR.sprite = explodeSprite;
+                break;
+        }
+    }
 
     private void OnDestroy()
     {

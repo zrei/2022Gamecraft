@@ -30,4 +30,12 @@ namespace Constants
         Purple,
         Yellow,
     }
+
+    public enum SpriteStates
+    {
+        Normal,
+        Stun,
+        Poison,
+        Explosion,
+    }
 }

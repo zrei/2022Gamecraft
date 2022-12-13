@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             case GameState.NewGame:
                 // New Game
                 // Reset player stats
-
+                PlayerStats.ResetStatsEvent();
                 // Reset level
                 level = 1;
                 SceneManager.LoadScene("Level" + level);
