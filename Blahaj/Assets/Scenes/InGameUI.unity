@@ -546,6 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 842461942}
   - component: {fileID: 842461943}
+  - component: {fileID: 842461944}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -626,6 +627,49 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &842461944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842461941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637d8325293137c4f974725e9e70f66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 842461943}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.52156866, g: 0.14509805, b: 0.09411766, a: 1}
+    key1: {r: 0.8301887, g: 0.7204758, b: 0.15194014, a: 1}
+    key2: {r: 0.095565096, g: 0.52156866, b: 0.094117634, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 39321
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  fill: {fileID: 1777197658}
 --- !u!1001 &872576356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1068,7 +1112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.65075}
+  m_AnchoredPosition: {x: 0, y: -0.6507492}
   m_SizeDelta: {x: 0, y: -1.3015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777197658
@@ -1177,6 +1221,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 842461944}
     - target: {fileID: 873477143388361340, guid: 7f57613302a84412a9e086885a360705, type: 3}
       propertyPath: m_FlipX
       value: 0
