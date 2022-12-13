@@ -46,7 +46,7 @@ public class OrcaController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
         if (Vector3.Distance(transform.position, player.transform.position) < attackRadius) 
         {
-            Debug.Log("Attack"); // must add countdown
+            //Debug.Log("Attack"); // must add countdown
             //PlayerStats.Damage(this.attackDamage);
         }
     }

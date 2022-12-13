@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 912346708484662577}
   - component: {fileID: 912346708484662576}
   - component: {fileID: 912346708484662583}
+  - component: {fileID: 1833015643555441763}
   m_Layer: 0
   m_Name: Orca
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,3 +130,19 @@ MonoBehaviour:
   RedOrb: {fileID: 7100642399210993830, guid: c70983691c52d47809a4a5dd32c069d4, type: 3}
   YellowOrb: {fileID: 7864985485559605410, guid: d801bebbb36f74a40ad3c7c2e8938f32, type: 3}
   PurpleOrb: {fileID: 8265185047536792606, guid: d874f850e997043f0ab6dc703548e54c, type: 3}
+--- !u!70 &1833015643555441763
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912346708484662579}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 11.96, y: 6.2999997}
+  m_Direction: 1

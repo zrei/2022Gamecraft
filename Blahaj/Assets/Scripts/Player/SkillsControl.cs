@@ -11,6 +11,10 @@ public class SkillsControl : MonoBehaviour
     private Sprite normalSprite;
     private PlayerStats stats;
 
+    [SerializeField] private float explosionRadius;
+    [SerializeField] private float poisonRadius;
+    [SerializeField] private float stunRadius;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,11 +75,26 @@ public class SkillsControl : MonoBehaviour
         {
             case Skill.Explosion:
                 Debug.Log("Explode :)");
+                Explosion();
                 break;
             case Skill.Stun:
                 break;
             case Skill.Poison:
                 break;
+        }
+    }
+
+    private void Explosion()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        Debug.Log(colliders.Length);
+        foreach (var hitCollider in colliders)
+        {
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                Debug.Log("?");
+                hitCollider.SendMessage("Damage", 1);
+            }
         }
     }
 

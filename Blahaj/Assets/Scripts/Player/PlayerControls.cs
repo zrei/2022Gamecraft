@@ -74,7 +74,7 @@ public class PlayerControls : MonoBehaviour
         if (this.attacking)
         {
             // Attack! With cooldown
-            Debug.Log("Attack");
+            //Debug.Log("Attack");
             this.attacking = false;
         }
     }
