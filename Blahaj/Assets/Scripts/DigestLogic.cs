@@ -1,10 +1,27 @@
 using System;
 using Constants;
+//using TMPro;
+//using UnityEngine;
 
-static class DigestLogic
+public class DigestLogic
 {
     private static float scaleFactor = 1f;
-    public static Tuple<Skill, int> Digest(int red, int purple, int yellow)
+
+    /*
+    public TMP_Text redOrbs;
+    public TMP_Text yellowOrbs;
+    public TMP_Text purpleOrbs; 
+    private GameObject player = gameObject.FindGameObjectsWithTag("Player");
+    private PlayerStats stats = player.GetComponent<PlayerStats>();
+
+    public void Start() {
+        redOrbs.text = $"{stats.getRedOrbs()}";
+        yellowOrbs.text = $"{stats.getYellowOrbs()}";
+        purpleOrbs.text = $"{stats.getPurpleOrbs()}";
+    }
+    */
+
+    public Tuple<Skill, int> Digest(int red, int purple, int yellow)
     {
         PlayerStats.ChangeOrbsEvent(-red, -yellow, -purple);
         int skillValue = (int)Math.Round((red + purple + yellow) * scaleFactor);

@@ -94,12 +94,11 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        /* Debug health bar
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
         }
-        
-        
+        */
     }
     
     private void Damage(float damageAmount)
@@ -232,6 +231,18 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
         PlayerStats.ResetStatsEvent -= ResetStats;
+    }
+
+    public int getRedOrbs() {
+        return this.orbs[Orbs.Red];
+    }
+
+    public int getYellowOrbs() {
+        return this.orbs[Orbs.Yellow];
+    }
+
+    public int getPurpleOrbs() {
+        return this.orbs[Orbs.Purple];
     }
     
     #endregion
