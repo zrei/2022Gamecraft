@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Constants;
 public class PlayerControls : MonoBehaviour
 {
 
@@ -14,10 +14,15 @@ public class PlayerControls : MonoBehaviour
     private SpriteRenderer mySR;
 
     private bool attacking = false;
+    private bool canPoison = true;
+    private bool canStun = true;
+    private bool canExplode = true;
+    private bool canHeal = true;
     private Vector2 movementInput;
     [SerializeField] private ContactFilter2D movementFilter;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
-    PlayerStats stats;
+    private PlayerStats stats;
+    private SkillsControl skills;
 
     #endregion
 
@@ -26,6 +31,7 @@ public class PlayerControls : MonoBehaviour
         this.rb2D = GetComponent<Rigidbody2D>();
         this.mySR = GetComponent<SpriteRenderer>();
         this.stats = GetComponent<PlayerStats>();
+        this.skills = GetComponent<SkillsControl>();
     }
 
     // Start is called before the first frame update
@@ -89,28 +95,90 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
+            // explosion
             // check skill 1
+            if (canExplode && stats.RetrieveSkillLevel(Skill.Explosion) > 0)
+            {
+                Debug.Log("Have Skill, Cooldown okay");
+                skills.UseSkill(Skill.Explosion);
+                StartCoroutine(SkillCooldown(Skill.Explosion, stats.GetCooldown(Skill.Explosion)));
+            }
             Debug.Log("Y has been pressed");
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
+            if (canStun && stats.RetrieveSkillLevel(Skill.Stun) > 0)
+            {
+                Debug.Log("Have Skill, Cooldown okay");
+                skills.UseSkill(Skill.Stun);
+                StartCoroutine(SkillCooldown(Skill.Stun, stats.GetCooldown(Skill.Stun)));
+            }
             // check skill 2
             Debug.Log("U has been pressed");
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
+            if (canPoison && stats.RetrieveSkillLevel(Skill.Poison) > 0)
+            {
+                Debug.Log("Have Skill, Cooldown okay");
+                skills.UseSkill(Skill.Poison);
+                StartCoroutine(SkillCooldown(Skill.Poison, stats.GetCooldown(Skill.Poison)));
+            }
             // check skill 3
             Debug.Log("I has been pressed");
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
+            if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
+            {
+                Debug.Log("Have Skill, Cooldown okay");
+                skills.UseSkill(Skill.Healing);
+                StartCoroutine(SkillCooldown(Skill.Healing, stats.GetCooldown(Skill.Healing)));
+            }
             // check skill 4
             Debug.Log("O has been pressed");
         }
-        if (Input.GetKeyDown(KeyCode.P))
+    }
+
+    private IEnumerator SkillCooldown(Skill skill, float cooldown)
+    {
+        float time = 0f;
+        float interval = 0.3f;
+        switch (skill)
         {
-            // check skill 5
-            Debug.Log("P has been pressed");
+            case (Skill.Explosion):
+                this.canExplode = false;
+                break;
+            case (Skill.Poison):
+                this.canPoison = false;
+                break;
+            case (Skill.Stun):
+                this.canStun = false;
+                break;
+            case (Skill.Healing):
+                this.canHeal = false;
+                break;
+        }
+        while (time < cooldown) 
+        {
+            yield return new WaitForSeconds(interval);
+            time += interval;
+        }
+        switch (skill)
+        {
+            case (Skill.Explosion):
+                this.canExplode = true;
+                break;
+            case (Skill.Poison):
+                this.canPoison = true;
+                break;
+            case (Skill.Stun):
+                this.canStun = true;
+                break;
+            case (Skill.Healing):
+                this.canHeal = true;
+                break;
         }
     }
+
 }
