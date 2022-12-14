@@ -100,7 +100,7 @@ public class PlayerStats : MonoBehaviour
         
     }
     
-    private void Damage(float damageAmount)
+    public void Damage(float damageAmount)
     {
         this.health -= damageAmount;
         healthBar.SetHealth(this.health);
@@ -229,6 +229,10 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
         PlayerStats.ResetStatsEvent -= ResetStats;
+    }
+
+    public float getAttackDamage() {
+        return attackDamage;
     }
     
     #endregion

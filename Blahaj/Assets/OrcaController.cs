@@ -13,10 +13,14 @@ public class OrcaController : MonoBehaviour
     [SerializeField] private float attackRadius;
     [SerializeField]private float minMovementSpeed;
     [SerializeField] private int numOrbsDropped;
+    [SerializeField] private float attackCooldown;
+    [SerializeField] private float lastAttackDamageTime;
 
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
     private GameObject player;
+    private PlayerStats playerStats;
+    public Collider2D objectCollider;
 
     public delegate void ChangeStats(float damageAmount);
     public static ChangeStats DamageEvent;
@@ -37,21 +41,38 @@ public class OrcaController : MonoBehaviour
         this.player = GameObject.FindWithTag("Player");
         OrcaController.DamageEvent += Damage;
         OrcaController.SlowEvent += SlowDown;
+        this.objectCollider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
     private void Update()
     {
         var step =  this.movementSpeed * Time.deltaTime; // calculate distance to move
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
-        if (Vector3.Distance(transform.position, player.transform.position) < attackRadius) 
+        if (Time.time >= lastAttackDamageTime + attackCooldown)
         {
-            Debug.Log("Attack"); // must add countdown
-            //PlayerStats.Damage(this.attackDamage);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+
+            float x = Mathf.Abs(transform.localScale.x);
+            float y = transform.localScale.y;
+            float z = transform.localScale.z;
+            if (player.transform.position.x - transform.position.x >= 0) {
+                transform.localScale = new Vector3(-x, y, z);
+                //mySR.flipX = true;
+            } else if (player.transform.position.x - transform.position.x < 0) {
+                transform.localScale = new Vector3(x, y, z);
+                //mySR.flipX = false;
+            }
+        }
+
+        if ((Vector3.Distance(transform.position, player.transform.position) < attackRadius) && (Time.time >= lastAttackDamageTime + attackCooldown))
+        {
+            lastAttackDamageTime = Time.time;
+            Debug.Log("Attack");
+            player.GetComponent<PlayerStats>().Damage(this.attackDamage);
         }
     }
 
-    private void Damage(float damageAmount)
+    public void Damage(float damageAmount)
     {
         this.health -= damageAmount;
         if (this.health <= 0)

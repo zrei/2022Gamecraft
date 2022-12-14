@@ -906,6 +906,36 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 930518101}
+--- !u!1 &1325880772 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 912346708484662579, guid: ca0b1a09cf3654ddca4c7f8c21d21341, type: 3}
+  m_PrefabInstance: {fileID: 1461858682}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1325880777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325880772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6f60ce0ff86be43baf2fb51f63dbd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  movementSpeed: 0
+  attackSpeed: 0
+  attackDamage: 1
+  attackRadius: 0
+  minMovementSpeed: 0
+  numOrbsDropped: 0
+  attackCooldown: 0
+  lastAttackDamageTime: 0
+  objectCollider: {fileID: 0}
+  RedOrb: {fileID: 0}
+  YellowOrb: {fileID: 0}
+  PurpleOrb: {fileID: 0}
 --- !u!1 &1354508678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1083,8 @@ PrefabInstance:
       propertyPath: health
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 912346708484662583, guid: ca0b1a09cf3654ddca4c7f8c21d21341, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ca0b1a09cf3654ddca4c7f8c21d21341, type: 3}
 --- !u!1 &1592833273 stripped
 GameObject:

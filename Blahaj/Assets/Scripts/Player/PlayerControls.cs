@@ -113,4 +113,12 @@ public class PlayerControls : MonoBehaviour
             Debug.Log("P has been pressed");
         }
     }
+
+    public bool getAttacking() {
+        return attacking;
+    }
+
+    public float getAttackDamage() {
+        return this.stats.getAttackDamage();
+    }
 }
