@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class OrcaController : MonoBehaviour
 {
     #region Fields
@@ -25,6 +25,11 @@ public class OrcaController : MonoBehaviour
     public delegate void ChangeStats(float damageAmount);
     public static ChangeStats DamageEvent;
     public static ChangeStats SlowEvent;
+    public static ChangeStats StunEvent;
+
+    public delegate void GetPoisoned(Tuple<float, float, float> poisonInfo);
+
+    public static GetPoisoned PoisonEvent;
 
     [SerializeField] private GameObject RedOrb;
     [SerializeField] private GameObject YellowOrb;
@@ -42,6 +47,8 @@ public class OrcaController : MonoBehaviour
         OrcaController.DamageEvent += Damage;
         OrcaController.SlowEvent += SlowDown;
         this.objectCollider = GetComponent<Collider2D>();
+        OrcaController.StunEvent += Stun;
+        OrcaController.PoisonEvent += Poison;
     }
 
     // Update is called once per frame
@@ -79,10 +86,10 @@ public class OrcaController : MonoBehaviour
         {
             for (int i = 0; i < numOrbsDropped; i++)
             {
-                int randomNumber = Random.Range(0, 3);
-                Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-2.0f, 2.0f), 
-                    transform.position.y + Random.Range(-2.0f, 2.0f), 
-                    transform.position.z + Random.Range(-2.0f, 2.0f));
+                int randomNumber = UnityEngine.Random.Range(0, 3);
+                Vector3 spawnPosition = new Vector3(transform.position.x + UnityEngine.Random.Range(-2.0f, 2.0f), 
+                    transform.position.y + UnityEngine.Random.Range(-2.0f, 2.0f), 
+                    transform.position.z + UnityEngine.Random.Range(-2.0f, 2.0f));
                 switch (randomNumber)
                 {
                     case (0):
@@ -110,6 +117,48 @@ public class OrcaController : MonoBehaviour
     {
         OrcaController.DamageEvent -= Damage;
         OrcaController.SlowEvent -= SlowDown;
+        OrcaController.StunEvent -= Stun;
+        OrcaController.PoisonEvent -= Poison;
+    }
+
+    private IEnumerator PoisonDamage(float poisonDamage, float damageInterval, float damageTime)
+    {
+        mySR.color = new Color(1.0f, 0f, 1.0f);
+        float time = 0;
+        while (time < damageTime)
+        {
+            Damage(poisonDamage);
+            yield return new WaitForSeconds(damageInterval);
+            time += damageInterval;
+        }
+        mySR.color = new Color(1.0f, 1.0f, 1.0f);
+    }
+
+    private IEnumerator StunTime(float stunTime)
+    {
+        mySR.color = new Color(1.0f, 1.0f, 0f);
+        float baseMovementSpeed = this.movementSpeed;
+        this.movementSpeed = 0;
+        float time = 0f;
+        float interval = 0.5f;
+        while (time < stunTime)
+        {
+            yield return new WaitForSeconds(interval);
+            time += interval;
+        }
+        mySR.color = new Color(1.0f, 1.0f, 1.0f);
+        this.movementSpeed = baseMovementSpeed;
+    }
+
+    private void Poison(Tuple<float, float, float> poisonInfo)
+    //float poisonDamage, float damageInterval, float damageTime)
+    {
+        StartCoroutine(PoisonDamage(poisonInfo.Item1, poisonInfo.Item2, poisonInfo.Item3));
+    }
+
+    private void Stun(float stunTime)
+    {
+        StartCoroutine(StunTime(stunTime));
     }
 
     #endregion
