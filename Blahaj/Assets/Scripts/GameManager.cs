@@ -6,7 +6,7 @@ using Constants;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager instance;
     private static GameState state;
     private static int level;
 
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         switch(state)
         {
             case GameState.StartMenu:
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("LoseGame");
                 break;
         }
+        */
     }
 
     public GameState GetGameState()
@@ -83,6 +85,12 @@ public class GameManager : MonoBehaviour
 
     public void SetGameState(GameState newState) {
         state = newState;
+    }
+
+    public void RestartButton()
+    {
+        SetGameState(GameState.StartMenu);
+        SceneManager.LoadScene("StartMenu");
     }
 
 }

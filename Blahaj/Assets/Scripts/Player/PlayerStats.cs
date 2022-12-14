@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Constants;
+using UnityEngine.SceneManagement;
+
 public class PlayerStats : MonoBehaviour
 {
 
     #region Fields
 
     private Dictionary<Skill, int> skills = new Dictionary<Skill, int>{
-        {Skill.Explosion, 0},
-        {Skill.Poison, 0},
-        {Skill.Stun, 0},
+        {Skill.Explosion, 1},
+        {Skill.Poison, 1},
+        {Skill.Stun, 1},
         {Skill.Healing, 0}
     };
     private float health;
@@ -34,6 +36,19 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Sprite explodeSprite;
     [SerializeField] private Sprite poisonSprite;
 
+    [SerializeField] private float baseExplosionRadius;
+    [SerializeField] private float basePoisonRadius;
+    [SerializeField] private float baseStunRadius;
+    [SerializeField] private float baseExplosionDamage;
+    [SerializeField] private float baseStunDamage;
+    [SerializeField] private float basePoisonDamage;
+    [SerializeField] private float basePoisonTime;
+    [SerializeField] private float baseStunTime;
+    [SerializeField] private float baseHealAmount;
+    [SerializeField] private float baseExplosionCooldown;
+    [SerializeField] private float baseStunCooldown;
+    [SerializeField] private float basePoisonCooldown;
+    [SerializeField] private float baseHealCooldown;
     private Vector3 initialPosition;
 
     [SerializeField] HealthBar healthBar; 
@@ -82,6 +97,7 @@ public class PlayerStats : MonoBehaviour
         ResetStats();
         this.initialPosition = transform.position;
         healthBar.SetMaxHealth(baseMaxHealth);
+        
     }
 
     private void Awake()
@@ -92,11 +108,11 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        /* Debug Health bar
+        /*
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
-        }
-        */
+        }*/
+        
         
     }
     
@@ -108,6 +124,7 @@ public class PlayerStats : MonoBehaviour
         {
             // some death animation
             Destroy(this.gameObject);
+            SceneManager.LoadScene("LoseGame");
         }
         StartCoroutine("FlashRedOnDamage"); // or have a more elaborate animation
     }
@@ -182,13 +199,59 @@ public class PlayerStats : MonoBehaviour
     private void GainSkill(Tuple<Skill, int> skill)
     {
         this.skills[skill.Item1] += skill.Item2;
+        Debug.Log(this.skills[skill.Item1]);
     }
     
     public int RetrieveSkillLevel(Skill skill)
     {   
+        Debug.Log(skills);
         return skills[skill];   
     }
 
+    public Tuple<float, float, float> GetSkillInfo(Skill skill)
+    {
+        int skillLevel = RetrieveSkillLevel(skill);
+        if (skill == Skill.Explosion)
+        {
+            //scale the info based on the skill level somehow
+            return new Tuple<float, float, float>(this.baseExplosionDamage, this.baseExplosionRadius, 0f);
+        } else if (skill == Skill.Poison)
+        {
+            return new Tuple<float, float, float>(this.basePoisonDamage, this.basePoisonRadius, this.basePoisonTime);
+        } else if (skill == Skill.Stun)
+        {
+            return new Tuple<float, float, float>(this.baseStunDamage, this.baseStunRadius, this.baseStunTime);
+        } else if (skill == Skill.Healing) 
+        {
+            return new Tuple<float, float, float>(this.baseHealAmount, 0f, 0f);
+        } else 
+        {
+            return new Tuple<float, float, float>(0f, 0f, 0f);
+        }
+    }
+
+    public float GetCooldown(Skill skill)
+    {
+        int skillLevel = RetrieveSkillLevel(skill);
+        //use to factor cooldown
+        if (skill == Skill.Stun) 
+        {
+            return this.baseStunCooldown;    
+        } else if (skill == Skill.Poison)
+        {
+            return this.basePoisonCooldown;
+        } else if (skill == Skill.Explosion)
+        {
+            return this.baseExplosionCooldown;
+        } else if (skill == Skill.Healing)
+        {
+            return this.baseHealCooldown;
+        } else 
+        {
+            return 0f;
+        }
+        
+    }
     private void ResetStats()
     {
         this.maxHealth = this.baseMaxHealth;
