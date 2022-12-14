@@ -7,7 +7,7 @@ public class BackgroundScroll : MonoBehaviour
 {
    [SerializeField]
    private Transform centerBG;
-   public float offset = 40f; 
+   private float offset = 40f; 
 
     void Update() {
 

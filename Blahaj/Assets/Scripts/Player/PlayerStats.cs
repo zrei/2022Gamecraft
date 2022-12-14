@@ -183,7 +183,34 @@ public class PlayerStats : MonoBehaviour
     
     private void GainSkill(Tuple<Skill, int> skill)
     {
-        this.skills[skill.Item1] += skill.Item2;
+        switch (skill.Item1)
+        {
+            case Skill.Explosion:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Stun:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Poison:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Healing:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.HpUp:
+                ChangeMaxHealth(skill.Item2);
+                break;
+            case Skill.AttackSpeedUp:
+                ChangeAttackSpeed(skill.Item2);
+                break;
+            case Skill.AttackUp:
+                ChangeAttackDamage(skill.Item2);
+                break;
+            case Skill.MovementSpeedUp:
+                ChangeMovementSpeed(skill.Item2);
+                break;
+        }
+        //this.skills[skill.Item1] += skill.Item2;
     }
     
     public int RetrieveSkillLevel(Skill skill)
