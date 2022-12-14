@@ -53,43 +53,49 @@ public class PlayerControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.movementInput != Vector2.zero)
-        {
-            // int numCollisions = rb2D.Cast(
-            //     movementInput,
-            //     movementFilter,
-            //     castCollisions,
-            //     stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
-            //     );
+        // if (this.movementInput != Vector2.zero)
+        // {
+        //     // int numCollisions = rb2D.Cast(
+        //     //     movementInput,
+        //     //     movementFilter,
+        //     //     castCollisions,
+        //     //     stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
+        //     //     );
 
-            // if (numCollisions == 0)
-            // {
-                rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
-            // }
-            //Debug.Log(movementInput);
-            Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
-            //Debug.Log(rotationZ);
-            transform.rotation = rotationZ;
-            
-            float x = Mathf.Abs(transform.localScale.x);
-            float y = transform.localScale.y;
-            float z = transform.localScale.z;
-            if (movementInput.x >= 0) {
-                transform.localScale = new Vector3(-x, y, z);
-                //mySR.flipX = true;
-            } else if (movementInput.x < 0) {
-                transform.localScale = new Vector3(x, y, z);
-                //mySR.flipX = false;
-            }
-            
-            
+        //     // if (numCollisions == 0)
+        //     // {
+        //         rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+        //     // }
+        float playerSpeed  =  stats.GetMovementSpeed();
+        
+        rb2D.velocity  = movementInput * playerSpeed;
+
+        //     // Debug.Log(movementInput);
+        Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
+        //Debug.Log(rotationZ);
+        transform.rotation = rotationZ;
+        
+        float x = Mathf.Abs(transform.localScale.x);
+        float y = transform.localScale.y;
+        float z = transform.localScale.z;
+        if (movementInput.x >= 0) {
+            transform.localScale = new Vector3(-x, y, z);
+            //mySR.flipX = true;
+        } else if (movementInput.x < 0) {
+            transform.localScale = new Vector3(x, y, z);
+            //mySR.flipX = false;
         }
-        if (this.attacking)
-        {
-            // Attack! With cooldown
-            Debug.Log("Attack");
-            this.attacking = false;
-        }
+            
+            
+        // }
+        // if (this.attacking)
+        // {
+        //     // Attack! With cooldown
+        //     Debug.Log("Attack");
+        //     this.attacking = false;
+        // }
+
+
     }
 
     private void Update()
@@ -196,11 +202,11 @@ public class PlayerControls : MonoBehaviour
         this.attacking = true;
         this.canAttack = false;
         float dashPower = stats.GetAttackDashPower();
-        stats.ChangeMovementSpeedNoLimit(dashPower);
+        rb2D.velocity = rb2D.velocity * dashPower;
         stats.SetInvulnerable(true);
         yield return new WaitForSeconds(stats.GetAttackDuration());
         this.attacking = false;
-        stats.ChangeMovementSpeedNoLimit(-dashPower);
+        stats.ChangeMovementSpeedNoLimit(-1 * dashPower);
         stats.SetInvulnerable(false);
         yield return new WaitForSeconds(stats.GetAttackCooldown());
         this.canAttack = true;
