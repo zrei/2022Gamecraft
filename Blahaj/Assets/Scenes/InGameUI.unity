@@ -1323,13 +1323,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1325880772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d6f60ce0ff86be43baf2fb51f63dbd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 56fe33408b892da468c7aa0c76ab8e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
   movementSpeed: 0
   attackSpeed: 0
-  attackDamage: 1
+  attackDamage: 0
   attackRadius: 0
   minMovementSpeed: 0
   numOrbsDropped: 0

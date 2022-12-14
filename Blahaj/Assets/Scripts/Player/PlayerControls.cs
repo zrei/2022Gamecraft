@@ -14,6 +14,7 @@ public class PlayerControls : MonoBehaviour
     private SpriteRenderer mySR;
 
     private bool attacking = false;
+    private bool canAttack = true;
     private bool canPoison = true;
     private bool canStun = true;
     private bool canExplode = true;
@@ -54,17 +55,17 @@ public class PlayerControls : MonoBehaviour
     {
         if (this.movementInput != Vector2.zero)
         {
-            int numCollisions = rb2D.Cast(
-                movementInput,
-                movementFilter,
-                castCollisions,
-                stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
-                );
+            // int numCollisions = rb2D.Cast(
+            //     movementInput,
+            //     movementFilter,
+            //     castCollisions,
+            //     stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
+            //     );
 
-            if (numCollisions == 0)
-            {
+            // if (numCollisions == 0)
+            // {
                 rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
-            }
+            // }
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
             //Debug.Log(rotationZ);
@@ -93,6 +94,16 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // attack
+            Debug.Log("Space has been pressed");
+            if (canAttack) 
+            {
+                Debug.Log("Attack able, attacking");
+                StartCoroutine("Attack");
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Y))
         {
             // explosion
@@ -181,11 +192,21 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    public bool getAttacking() {
-        return attacking;
+    private IEnumerable Attack() {
+        this.attacking = true;
+        this.canAttack = false;
+        float dashPower = stats.GetAttackDashPower();
+        stats.ChangeMovementSpeedNoLimit(dashPower);
+        stats.SetInvulnerable(true);
+        yield return new WaitForSeconds(stats.GetAttackDuration());
+        this.attacking = false;
+        stats.ChangeMovementSpeedNoLimit(-dashPower);
+        stats.SetInvulnerable(false);
+        yield return new WaitForSeconds(stats.GetAttackCooldown());
+        this.canAttack = true;
     }
 
-    public float getAttackDamage() {
-        return this.stats.getAttackDamage();
+    public bool getAttacking() {
+        return attacking;
     }
 }

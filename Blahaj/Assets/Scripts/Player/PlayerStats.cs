@@ -17,25 +17,33 @@ public class PlayerStats : MonoBehaviour
         {Skill.Healing, 0}
     };
     private float health;
+    [SerializeField] private bool invulnerable;
     [SerializeField] private float baseAttackDamage;
     private float attackDamage;
-    [SerializeField] private float baseAttackSpeed; 
-    private float attackSpeed;
+    [SerializeField] private float baseAttackDuration; 
+    private float attackDuration;
+    [SerializeField] private float baseAttackDashPower;
+    private float attackDashPower;
+    [SerializeField] private float baseAttackCooldown;
+    private float attackCooldown;
     [SerializeField] private float baseMovementSpeed;
     private float movementSpeed;
     [SerializeField] private float baseMaxHealth;
     private float maxHealth;
     [SerializeField] private float minAttackDamage;
     [SerializeField] private float maxAttackDamage;
-    [SerializeField] private float minAttackSpeed;
-    [SerializeField] private float maxAttackSpeed;
+    [SerializeField] private float minAttackDuration;
+    [SerializeField] private float maxAttackDuration;
+    [SerializeField] private float minAttackCooldown;
+    [SerializeField] private float maxAttackCooldown;
+    [SerializeField] private float minAttackDashPower;
+    [SerializeField] private float maxAttackDashPower;
     [SerializeField] private float minMovementSpeed;
     [SerializeField] private float maxMovementSpeed;
     [SerializeField] private Sprite stunSprite;
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite explodeSprite;
     [SerializeField] private Sprite poisonSprite;
-
     [SerializeField] private float baseExplosionRadius;
     [SerializeField] private float basePoisonRadius;
     [SerializeField] private float baseStunRadius;
@@ -64,7 +72,8 @@ public class PlayerStats : MonoBehaviour
     public static StatsChange RestoreHealthEvent;
     public static StatsChange DamageEvent;
     public static StatsChange ChangeMovementSpeedEvent;
-    public static StatsChange ChangeAttackSpeedEvent;
+    public static StatsChange ChangeAttackDurationEvent;
+    public static StatsChange ChangeAttackCooldownEvent;
     public static StatsChange ChangeMaxHealthEvent;
  
     public delegate void OrbsChange(int red, int yellow, int purple);
@@ -88,7 +97,8 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.DamageEvent += Damage;
         PlayerStats.ChangeAttackDamageEvent += ChangeAttackDamage;
         PlayerStats.RestoreHealthEvent += RestoreHealth;
-        PlayerStats.ChangeAttackSpeedEvent += ChangeAttackSpeed;
+        PlayerStats.ChangeAttackDurationEvent += ChangeAttackDuration;
+        PlayerStats.ChangeAttackCooldownEvent += ChangeAttackCooldown;
         PlayerStats.ChangeMovementSpeedEvent += ChangeMovementSpeed;
         PlayerStats.ChangeOrbsEvent += ChangeOrbs;
         PlayerStats.GainSkillEvent += GainSkill;
@@ -118,15 +128,18 @@ public class PlayerStats : MonoBehaviour
     
     public void Damage(float damageAmount)
     {
-        this.health -= damageAmount;
-        healthBar.SetHealth(this.health);
-        if (this.health <= 0)
+        if (!this.invulnerable)
         {
-            // some death animation
-            Destroy(this.gameObject);
-            SceneManager.LoadScene("LoseGame");
+            this.health -= damageAmount;
+            healthBar.SetHealth(this.health);
+            StartCoroutine("FlashRedOnDamage"); // or have a more elaborate animation
+            if (this.health <= 0)
+            {
+                // some death animation
+                Destroy(this.gameObject);
+                SceneManager.LoadScene("LoseGame");
+            }
         }
-        StartCoroutine("FlashRedOnDamage"); // or have a more elaborate animation
     }
 
     private IEnumerator FlashRedOnDamage() {
@@ -140,8 +153,7 @@ public class PlayerStats : MonoBehaviour
     {
         return this.movementSpeed;
     }
-
-    private void ChangeMovementSpeed(float amount)
+    public void ChangeMovementSpeed(float amount)
     {
         if (amount < 0)
         {
@@ -151,18 +163,43 @@ public class PlayerStats : MonoBehaviour
             this.movementSpeed = Mathf.Min(this.maxMovementSpeed, this.movementSpeed + amount);
         }
     }
+    public void ChangeMovementSpeedNoLimit(float amount)
+    {
+        this.movementSpeed = this.movementSpeed + amount;
+    }
 
-    private void ChangeAttackSpeed(float amount)
+    public float GetAttackDuration()
+    {
+        return this.attackDuration;
+    }
+    private void ChangeAttackDuration(float amount)
     {
         if (amount < 0)
         {
-            this.attackSpeed = Mathf.Max(this.minAttackSpeed, this.attackSpeed - amount);
+            this.attackDuration = Mathf.Max(this.minAttackDuration, this.attackDuration - amount);
         } else 
         {
-            this.attackSpeed = Mathf.Min(this.maxAttackSpeed, this.attackSpeed + amount);
+            this.attackDuration = Mathf.Min(this.maxAttackDuration, this.attackDuration + amount);
         }
     }
-
+    public float GetAttackCooldown()
+    {
+        return this.attackCooldown;
+    }
+    private void ChangeAttackCooldown(float amount)
+    {
+        if (amount < 0)
+        {
+            this.attackCooldown = Mathf.Max(this.minAttackCooldown, this.attackCooldown - amount);
+        } else 
+        {
+            this.attackCooldown = Mathf.Min(this.maxAttackCooldown, this.attackCooldown + amount);
+        }
+    }
+    public float GetAttackDamage()
+    {
+        return this.attackDamage;
+    }
     private void ChangeAttackDamage(float amount)
     {
         if (amount < 0)
@@ -172,6 +209,30 @@ public class PlayerStats : MonoBehaviour
         {
             this.attackDamage = Mathf.Min(this.maxAttackDamage, this.attackDamage + amount);
         }
+    }
+    public float GetAttackDashPower()
+    {
+        return this.attackDashPower;
+    }
+    private void ChangeAttackDashPower(float amount)
+    {
+        if (amount < 0)
+        {
+            this.attackDashPower = Mathf.Max(this.minAttackDashPower, this.attackDashPower - amount);
+        } else
+        {
+            this.attackDashPower = Mathf.Min(this.maxAttackDashPower, this.attackDashPower + amount);
+        }
+    }
+
+    public bool GetInvulnerable() 
+    {
+        return this.invulnerable;
+    }
+
+    public void SetInvulnerable(bool newInvul) 
+    {
+        this.invulnerable = newInvul;
     }
 
     private void RestoreHealth(float amountRestored)
@@ -256,7 +317,8 @@ public class PlayerStats : MonoBehaviour
     {
         this.maxHealth = this.baseMaxHealth;
         this.attackDamage = this.baseAttackDamage;
-        this.attackSpeed = this.baseAttackSpeed;
+        this.attackDuration = this.baseAttackDuration;
+        this.attackCooldown = this.baseAttackCooldown;
         this.movementSpeed = this.baseMovementSpeed;
         this.health = this.maxHealth;
         ChangeSprite(SpriteStates.Normal);
@@ -287,15 +349,12 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.DamageEvent -= Damage;
         PlayerStats.ChangeAttackDamageEvent -= ChangeAttackDamage;
         PlayerStats.RestoreHealthEvent -= RestoreHealth;
-        PlayerStats.ChangeAttackSpeedEvent -= ChangeAttackSpeed;
+        PlayerStats.ChangeAttackDurationEvent -= ChangeAttackDuration;
+        PlayerStats.ChangeAttackCooldownEvent -= ChangeAttackCooldown;
         PlayerStats.ChangeMovementSpeedEvent -= ChangeMovementSpeed;
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
         PlayerStats.ResetStatsEvent -= ResetStats;
-    }
-
-    public float getAttackDamage() {
-        return attackDamage;
     }
     
     #endregion
