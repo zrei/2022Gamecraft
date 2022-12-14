@@ -13,7 +13,13 @@ public class MainMenu : MonoBehaviour
 
     public void StartButton()
     {
-         SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0);
+    }
+
+    public void QuitButton()
+    {
+        Debug.Log("ayy lmao quit");
+        //Application.Quit();
     }
    
     // Update is called once per frame
