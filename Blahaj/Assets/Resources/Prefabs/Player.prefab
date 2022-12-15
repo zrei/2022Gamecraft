@@ -236,7 +236,6 @@ MonoBehaviour:
   baseStunCooldown: 0
   basePoisonCooldown: 0
   baseHealCooldown: 0
-  healthBar: {fileID: 0}
 --- !u!70 &8541291039365648131
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -277,7 +276,7 @@ GameObject:
   - component: {fileID: 5604942289288021073}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,7 +325,7 @@ GameObject:
   - component: {fileID: 2059552259044713154}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

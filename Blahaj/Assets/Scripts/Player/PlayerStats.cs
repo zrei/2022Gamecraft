@@ -51,7 +51,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseHealCooldown;
     private Vector3 initialPosition;
 
-    [SerializeField] HealthBar healthBar; 
+    private HealthBar healthBar; 
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
         {Orbs.Red, 20},
@@ -94,8 +94,13 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent += GainSkill;
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
         PlayerStats.ResetStatsEvent += ResetStats;
-        ResetStats();
+        if (GameManager.GetStateEvent() == GameState.NewGame)
+        {
+            ResetStats();
+            GameManager.ChangeStateEvent(GameState.InGame);
+        }
         this.initialPosition = transform.position;
+        healthBar = GameObject.FindGameObjectWithTag("Healthbar").GetComponent<HealthBar>() ?? Instantiate(Resources.Load("Prefabs/HealthBar") as GameObject).GetComponent<HealthBar>();
         healthBar.SetMaxHealth(baseMaxHealth);
         
     }

@@ -52,7 +52,9 @@ public class PlayerControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.movementInput != Vector2.zero)
+        if (this.movementInput != Vector2.zero
+            && (GameManager.GetStateEvent() == GameState.InGame
+            || GameManager.GetStateEvent() == GameState.WinLevel))
         {
             int numCollisions = rb2D.Cast(
                 movementInput,
