@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 986169624}
   - component: {fileID: 986169623}
   - component: {fileID: 986169622}
+  - component: {fileID: 986169625}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
