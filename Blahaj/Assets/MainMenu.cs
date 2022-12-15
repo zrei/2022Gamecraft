@@ -5,15 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject helpMenu;
+    private bool isHelp;
     // Start is called before the first frame update
     void Start()
     {
-        
+        helpMenu.SetActive(false);
     }
 
     public void StartButton()
     {
         SceneManager.LoadScene(0);
+    }
+
+
+    public void HelpButton()
+    {
+        helpMenu.SetActive(true);
+        isHelp = true;
+    }
+
+    public void CloseHelp()
+    {
+        helpMenu.SetActive(false);
+        isHelp = false;
     }
 
     public void QuitButton()
@@ -25,6 +40,12 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isHelp)
+            {
+                CloseHelp();
+            }
+        }
     }
 }
