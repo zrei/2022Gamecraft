@@ -48,12 +48,11 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseStunCooldown;
     [SerializeField] private float basePoisonCooldown;
     [SerializeField] private float baseHealCooldown;
-    private Vector3 initialPosition;
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
-        {Orbs.Red, 20},
-        {Orbs.Yellow, 20},
-        {Orbs.Purple, 20}
+        {Orbs.Red, 0},
+        {Orbs.Yellow, 0},
+        {Orbs.Purple, 0}
     };
 
     public delegate void StatsChange(float changeAmount);
@@ -98,8 +97,6 @@ public class PlayerStats : MonoBehaviour
         {
             GameManager.ChangeStateEvent(GameState.InGame);
         }
-        this.initialPosition = transform.position;
-
         /* Debug health bar
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
@@ -271,8 +268,24 @@ public class PlayerStats : MonoBehaviour
         this.attackSpeed = this.baseAttackSpeed;
         this.movementSpeed = this.baseMovementSpeed;
         this.health = this.maxHealth;
+        ResetOrbs();
+        ResetSkills();
         ChangeSprite(SpriteStates.Normal);
-        transform.position = this.initialPosition;
+    }
+
+    private void ResetOrbs()
+    {
+        orbs[Orbs.Purple] = 0;
+        orbs[Orbs.Red] = 0;
+        orbs[Orbs.Yellow] = 0;
+    }
+
+    private void ResetSkills()
+    {
+        skills[Skill.Explosion] = 0;
+        skills[Skill.Stun] = 0;
+        skills[Skill.Poison] = 0;
+        skills[Skill.Healing] = 0;
     }
 
     public void ChangeSprite(SpriteStates state)
