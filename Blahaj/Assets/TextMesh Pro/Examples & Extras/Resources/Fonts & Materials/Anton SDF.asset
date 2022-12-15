@@ -175,20 +175,6 @@ MonoBehaviour:
       m_Height: 70
     m_Scale: 1
     m_AtlasIndex: 0
-  - m_Index: 54
-    m_Metrics:
-      m_Width: 37.96875
-      m_Height: 71.421875
-      m_HorizontalBearingX: 2.109375
-      m_HorizontalBearingY: 70.625
-      m_HorizontalAdvance: 41.796875
-    m_GlyphRect:
-      m_X: 10
-      m_Y: 224
-      m_Width: 39
-      m_Height: 72
-    m_Scale: 1
-    m_AtlasIndex: 0
   - m_Index: 66
     m_Metrics:
       m_Width: 28.609375
@@ -297,10 +283,6 @@ MonoBehaviour:
     m_GlyphIndex: 53
     m_Scale: 1
   - m_ElementType: 1
-    m_Unicode: 83
-    m_GlyphIndex: 54
-    m_Scale: 1
-  - m_ElementType: 1
     m_Unicode: 95
     m_GlyphIndex: 66
     m_Scale: 1
@@ -370,10 +352,6 @@ MonoBehaviour:
     m_Y: 120
     m_Width: 61
     m_Height: 94
-  - m_X: 0
-    m_Y: 214
-    m_Width: 58
-    m_Height: 91
   m_FreeGlyphRects:
   - m_X: 79
     m_Y: 30
@@ -395,6 +373,14 @@ MonoBehaviour:
     m_Y: 89
     m_Width: 8
     m_Height: 934
+  - m_X: 0
+    m_Y: 214
+    m_Width: 1023
+    m_Height: 809
+  - m_X: 0
+    m_Y: 206
+    m_Width: 57
+    m_Height: 817
   - m_X: 118
     m_Y: 176
     m_Width: 905
@@ -403,18 +389,6 @@ MonoBehaviour:
     m_Y: 120
     m_Width: 1
     m_Height: 903
-  - m_X: 0
-    m_Y: 305
-    m_Width: 1023
-    m_Height: 718
-  - m_X: 58
-    m_Y: 214
-    m_Width: 965
-    m_Height: 809
-  - m_X: 0
-    m_Y: 206
-    m_Width: 57
-    m_Height: 8
   m_fontInfo:
     Name: Anton
     PointSize: 73
