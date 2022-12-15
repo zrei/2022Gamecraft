@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Constants;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private static GameState state;
-    private static int level;
+    private static GameState state = GameState.StartMenu;
+    private static int level = 0;
+    private static int enemiesLeft = 0;
+
+    // Delegates and events
+    public delegate void ChangeStateDelegate(GameState newState);
+    public delegate GameState GetStateDelegate();
+    public static ChangeStateDelegate ChangeStateEvent;
+    public static GetStateDelegate GetStateEvent;
 
     void Awake()
     {
@@ -22,13 +30,19 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        ChangeStateEvent += ChangeState;
+        GetStateEvent += GetState;
+    }
+
+    public void ChangeState(GameState newState) {
+        state = newState;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         state = GameState.StartMenu;
-        level = 1;
+        level = 0;
     }
 
     // Update is called once per frame
@@ -45,13 +59,13 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.NewGame:
                 // New Game
-                // Reset player stats
-                PlayerStats.ResetStatsEvent();
                 // Reset level
-                level = 1;
-                SceneManager.LoadScene("Game" + level);
-                Time.timeScale = 1f;
-                SetGameState(GameState.InGame);
+                level = 0;
+                if (SceneManager.GetActiveScene().name != GameStages.stages[level])
+                {
+                    Time.timeScale = 1f;
+                    SceneManager.LoadScene(GameStages.stages[level]);
+                }
                 break;
             case GameState.InGame:
                 // Main Game
@@ -59,13 +73,29 @@ public class GameManager : MonoBehaviour
                 {
                     Time.timeScale = 1f;
                 }
+                // if (enemiesLeft == 0 && SceneManager.GetActiveScene().name != GameScenes.DigestionScene)
+                // {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag(GameTags.Enemy);
+                    enemiesLeft = enemies.Length;
+                    if (enemiesLeft == 0)
+                    {
+                        SetGameState(GameState.WinLevel);
+                    }
+                // }
                 break;
             case GameState.NextLevel:
                 // Next Level
                 level++;
-                SceneManager.LoadScene("Game" + level);
-                Time.timeScale = 1f;
-                SetGameState(GameState.InGame);
+                if (level >= GameStages.stages.Length)
+                {
+                    SetGameState(GameState.WinGame);
+                }
+                else
+                {
+                    SceneManager.LoadScene(GameStages.stages[level]);
+                    Time.timeScale = 1f;
+                    SetGameState(GameState.InGame);
+                }
                 break;
             case GameState.PauseGame:
                 // Pause Game
@@ -76,29 +106,29 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.DigestionState:
                 // Digestion State
-                if (SceneManager.GetActiveScene().name != "DigestionScene")
+                if (SceneManager.GetActiveScene().name != GameScenes.DigestionScene)
                 {
-                    SceneManager.LoadScene("DigestionScene");
+                    SceneManager.LoadScene(GameScenes.DigestionScene);
                 }
                 break;
             case GameState.WinGame:
                 Debug.Log("WinGame");
-                if (SceneManager.GetActiveScene().name != "WinGame")
+                if (SceneManager.GetActiveScene().name != GameScenes.WinGame)
                 {
-                    SceneManager.LoadScene("WinGame");
+                    SceneManager.LoadScene(GameScenes.WinGame);
                 }
                 break;
             case GameState.LoseGame:
                 Debug.Log("LoseGame");
-                if (SceneManager.GetActiveScene().name != "LoseGame")
+                if (SceneManager.GetActiveScene().name != GameScenes.LoseGame)
                 {
-                    SceneManager.LoadScene("LoseGame");
+                    SceneManager.LoadScene(GameScenes.LoseGame);
                 }
                 break;
         }
     }
 
-    public GameState GetGameState()
+    public GameState GetState()
     {
         return state;
     }

@@ -94,7 +94,11 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent += GainSkill;
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
         PlayerStats.ResetStatsEvent += ResetStats;
-        ResetStats();
+        if (GameManager.GetStateEvent() == GameState.NewGame)
+        {
+            ResetStats();
+            GameManager.ChangeStateEvent(GameState.InGame);
+        }
         this.initialPosition = transform.position;
         healthBar = GameObject.FindGameObjectWithTag("Healthbar").GetComponent<HealthBar>() ?? Instantiate(Resources.Load("Prefabs/HealthBar") as GameObject).GetComponent<HealthBar>();
         healthBar.SetMaxHealth(baseMaxHealth);

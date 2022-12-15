@@ -9,6 +9,7 @@ TagManager:
   - YellowOrb
   - Enemy
   - Healthbar
+  - WinPortal
   layers:
   - Default
   - TransparentFX
