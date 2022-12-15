@@ -49,6 +49,7 @@ namespace Constants
         public const String StartMenu = "StartMenu";
         public const String Game1 = "Game1";
         public const String DigestionScene = "DigestionScene";
+        public const String Crafting = "Crafting";
         public const String Game2 = "Game2";
         public const String WinGame = "WinGame";
         public const String LoseGame = "LoseGame";

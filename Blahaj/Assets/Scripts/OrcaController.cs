@@ -19,7 +19,6 @@ public class OrcaController : MonoBehaviour
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
     private GameObject player;
-    private PlayerStats playerStats;
     public Collider2D objectCollider;
 
     public delegate void ChangeStats(float damageAmount);
@@ -74,8 +73,8 @@ public class OrcaController : MonoBehaviour
         if ((Vector3.Distance(transform.position, player.transform.position) < attackRadius) && (Time.time >= lastAttackDamageTime + attackCooldown))
         {
             lastAttackDamageTime = Time.time;
-            Debug.Log("Attack");
-            player.GetComponent<PlayerStats>().Damage(this.attackDamage);
+            //Debug.Log("Attack");
+            PlayerStats.DamageEvent(this.attackDamage);
         }
     }
 

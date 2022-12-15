@@ -15,7 +15,7 @@ public class SkillsControl : MonoBehaviour
 
     private void Awake()
     {
-        this.stats = GetComponent<PlayerStats>();
+        this.stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
     }
 
     public void UseSkill(Skill skill)

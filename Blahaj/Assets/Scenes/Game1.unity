@@ -345,6 +345,58 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1713437976}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseStunTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseHealAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: basePoisonTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseStunDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseStunRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseHealCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: basePoisonDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: basePoisonRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseStunCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: basePoisonCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseExplosionDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseExplosionRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 873477143388361334, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: baseExplosionCooldown
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 873477143388361340, guid: 7f57613302a84412a9e086885a360705, type: 3}
       propertyPath: m_FlipX
       value: 0
@@ -403,28 +455,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f57613302a84412a9e086885a360705, type: 3}
---- !u!1 &268226980 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 873477143388361343, guid: 7f57613302a84412a9e086885a360705, type: 3}
-  m_PrefabInstance: {fileID: 268226979}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &268226981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 873477143388361341, guid: 7f57613302a84412a9e086885a360705, type: 3}
   m_PrefabInstance: {fileID: 268226979}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &268226982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268226980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c76a379978bc4ec4b46718f96d8144b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &353277239
 GameObject:
   m_ObjectHideFlags: 0

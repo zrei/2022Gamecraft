@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Constants;
-using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class PlayerStats : MonoBehaviour
         {Skill.Stun, 0},
         {Skill.Healing, 0}
     };
-    [SerializeField] private float health;
+    private float health;
     [SerializeField] private float baseAttackDamage;
     private float attackDamage;
     [SerializeField] private float baseAttackSpeed; 
@@ -50,8 +49,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float basePoisonCooldown;
     [SerializeField] private float baseHealCooldown;
     private Vector3 initialPosition;
-
-    private HealthBar healthBar; 
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
         {Orbs.Red, 20},
@@ -76,8 +73,6 @@ public class PlayerStats : MonoBehaviour
     public delegate void StatsReset();
     public static StatsReset ResetStatsEvent;
 
-    private SpriteRenderer mySR;
-
     #endregion
     
     #region Methods
@@ -94,25 +89,17 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent += GainSkill;
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
         PlayerStats.ResetStatsEvent += ResetStats;
-        if (GameManager.GetStateEvent() == GameState.NewGame)
-        {
-            ResetStats();
-            GameManager.ChangeStateEvent(GameState.InGame);
-        }
-        this.initialPosition = transform.position;
-        healthBar = GameObject.FindGameObjectWithTag("Healthbar").GetComponent<HealthBar>() ?? Instantiate(Resources.Load("Prefabs/HealthBar") as GameObject).GetComponent<HealthBar>();
-        healthBar.SetMaxHealth(baseMaxHealth);
-        
-    }
-
-    private void Awake()
-    {
-        this.mySR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (GameManager.GetStateEvent() == GameState.NewGame)
+        {
+            GameManager.ChangeStateEvent(GameState.InGame);
+        }
+        this.initialPosition = transform.position;
+
         /* Debug health bar
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
@@ -124,21 +111,14 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("Attack successful");
         this.health -= damageAmount;
-        healthBar.SetHealth(this.health);
+        HealthBar.SetHealthEvent(this.health);
         if (this.health <= 0)
         {
             // some death animation
-            Destroy(this.gameObject);
-            SceneManager.LoadScene("LoseGame");
+            Destroy(GameObject.FindWithTag("Player"));
+            GameManager.ChangeStateEvent(GameState.LoseGame);
         }
-        StartCoroutine("FlashRedOnDamage"); // or have a more elaborate animation
-    }
-
-    private IEnumerator FlashRedOnDamage() {
-        mySR.color = new Color(1, 0, 0, 1);
-        yield return new WaitForSeconds(0.15f);
-        mySR.color = new Color(1, 1, 1, 1);
-
+        SpriteChanger.FlashRedEvent();// or have a more elaborate animation
     }
 
     public float GetMovementSpeed()
@@ -182,7 +162,7 @@ public class PlayerStats : MonoBehaviour
     private void RestoreHealth(float amountRestored)
     {
         this.health = Mathf.Min(this.maxHealth, this.health + amountRestored);
-        healthBar.SetHealth(this.health);
+        HealthBar.SetHealthEvent(this.health);
     }
 
     private void ChangeMaxHealth(float amount)
@@ -190,7 +170,6 @@ public class PlayerStats : MonoBehaviour
         float ratio = this.health / this.maxHealth;
         this.maxHealth += amount;
         this.health = ratio * this.maxHealth;
-        healthBar.SetMaxHealth(this.maxHealth);
     }
 
     private void ChangeOrbs(int red, int yellow, int purple)
@@ -301,16 +280,16 @@ public class PlayerStats : MonoBehaviour
         switch (state)
         {
             case (SpriteStates.Normal):
-                mySR.sprite = normalSprite;
+                SpriteChanger.SpriteChangeEvent(normalSprite);
                 break;
             case (SpriteStates.Stun):
-                mySR.sprite = stunSprite;
+                SpriteChanger.SpriteChangeEvent(stunSprite);
                 break;
             case (SpriteStates.Poison):
-                mySR.sprite = poisonSprite;
+                SpriteChanger.SpriteChangeEvent(poisonSprite);
                 break;
             case (SpriteStates.Explosion):
-                mySR.sprite = explodeSprite;
+                SpriteChanger.SpriteChangeEvent(explodeSprite);
                 break;
         }
     }
@@ -337,6 +316,16 @@ public class PlayerStats : MonoBehaviour
 
     public int getPurpleOrbs() {
         return this.orbs[Orbs.Purple];
+    }
+
+    public float getHealth()
+    {
+        return this.health;
+    }
+
+    public float getMaxHealth()
+    {
+        return this.maxHealth;
     }
     
     #endregion

@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
                 {
                     Time.timeScale = 1f;
                     SceneManager.LoadScene(GameStages.stages[level]);
+                    PlayerStats.ResetStatsEvent();
                 }
                 break;
             case GameState.InGame:
@@ -111,6 +112,13 @@ public class GameManager : MonoBehaviour
                     SceneManager.LoadScene(GameScenes.DigestionScene);
                 }
                 break;
+            case GameState.Crafting:
+                // Crafting State
+                if (SceneManager.GetActiveScene().name != GameScenes.Crafting)
+                {
+                    SceneManager.LoadScene(GameScenes.Crafting);
+                }
+                break;
             case GameState.WinGame:
                 Debug.Log("WinGame");
                 if (SceneManager.GetActiveScene().name != GameScenes.WinGame)
@@ -137,20 +145,12 @@ public class GameManager : MonoBehaviour
         state = newState;
     }
 
-    public void RestartButton()
+    /*public void RestartButton()
     {
         SetGameState(GameState.StartMenu);
         SceneManager.LoadScene("StartMenu");
-    }
+    }*/
 
-    public void BackButton() {
-        SetGameState(GameState.Crafting);
-        SceneManager.LoadScene("Crafting");
-    }
-
-    public void StomachButton() {
-        SetGameState(GameState.DigestionState);
-        SceneManager.LoadScene("DigestionScene");
-    }
+    
 
 }
