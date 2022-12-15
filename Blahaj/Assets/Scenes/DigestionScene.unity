@@ -363,6 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redOrbs: {fileID: 982384326}
   yellowOrbs: {fileID: 280220469}
+  yellowOrbs1: 0
   purpleOrbs: {fileID: 233032014}
   redOrbsConsumed: {fileID: 1732479258}
   yellowOrbsConsumed: {fileID: 701720511}
@@ -734,7 +735,7 @@ GameObject:
   - component: {fileID: 612700755}
   m_Layer: 5
   m_Name: Minus
-  m_TagString: Untagged
+  m_TagString: RedOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -803,7 +804,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 612700756}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 228665752}
+        m_TargetAssemblyTypeName: DigestControls, Assembly-CSharp
+        m_MethodName: Minus
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: red
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &612700756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,7 +994,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1364,7 +1377,7 @@ GameObject:
   - component: {fileID: 977636668}
   m_Layer: 5
   m_Name: Plus
-  m_TagString: Untagged
+  m_TagString: PurpleOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1433,7 +1446,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 977636669}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 228665752}
+        m_TargetAssemblyTypeName: DigestControls, Assembly-CSharp
+        m_MethodName: Plus
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: purple
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &977636669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,7 +1646,7 @@ GameObject:
   - component: {fileID: 987573792}
   m_Layer: 5
   m_Name: Plus
-  m_TagString: Untagged
+  m_TagString: RedOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1690,7 +1715,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 987573793}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 228665752}
+        m_TargetAssemblyTypeName: DigestControls, Assembly-CSharp
+        m_MethodName: Plus
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: red
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &987573793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1848,7 +1885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1939,7 +1976,7 @@ GameObject:
   - component: {fileID: 1098117495}
   m_Layer: 5
   m_Name: Minus
-  m_TagString: Untagged
+  m_TagString: PurpleOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2008,7 +2045,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1098117496}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 228665752}
+        m_TargetAssemblyTypeName: DigestControls, Assembly-CSharp
+        m_MethodName: Minus
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: purple
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1098117496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2876,7 +2925,7 @@ GameObject:
   - component: {fileID: 1573877420}
   m_Layer: 5
   m_Name: Plus
-  m_TagString: Untagged
+  m_TagString: YellowOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2945,7 +2994,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1573877421}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 228665752}
+        m_TargetAssemblyTypeName: DigestControls, Assembly-CSharp
+        m_MethodName: Plus
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: yellow
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1573877421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3148,7 +3209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -3719,7 +3780,7 @@ GameObject:
   - component: {fileID: 2032759850}
   m_Layer: 5
   m_Name: Minus
-  m_TagString: Untagged
+  m_TagString: YellowOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3788,7 +3849,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2032759851}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 228665752}
+        m_TargetAssemblyTypeName: DigestControls, Assembly-CSharp
+        m_MethodName: Minus
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: yellow
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2032759851
 MonoBehaviour:
   m_ObjectHideFlags: 0

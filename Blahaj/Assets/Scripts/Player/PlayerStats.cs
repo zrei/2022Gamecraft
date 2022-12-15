@@ -54,9 +54,9 @@ public class PlayerStats : MonoBehaviour
     private HealthBar healthBar; 
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
-        {Orbs.Red, 0},
-        {Orbs.Yellow, 0},
-        {Orbs.Purple, 0}
+        {Orbs.Red, 20},
+        {Orbs.Yellow, 20},
+        {Orbs.Purple, 20}
     };
 
     public delegate void StatsChange(float changeAmount);
