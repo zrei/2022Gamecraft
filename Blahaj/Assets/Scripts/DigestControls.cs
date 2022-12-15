@@ -9,23 +9,77 @@ public class DigestControls : MonoBehaviour
 
     
     public TMP_Text redOrbs;
+    private int redOrbs1;
+
     public TMP_Text yellowOrbs;
+    public int yellowOrbs1;
+
     public TMP_Text purpleOrbs; 
+    private int purpleOrbs1;
+
     public TMP_Text redOrbsConsumed;
+    private int redOrbsC = 0;
+
     public TMP_Text yellowOrbsConsumed;
+    private int yellowOrbsC = 0;
+
     public TMP_Text purpleOrbsConsumed;
+    private int purpleOrbsC = 0;
+
     private GameObject player;
     private PlayerStats stats;
 
+    #region Methods
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
+        redOrbs.text = $"{stats.getRedOrbs()}";
+        yellowOrbs.text = $"{stats.getYellowOrbs()}";
+        purpleOrbs.text = $"{stats.getPurpleOrbs()}";
+        redOrbs1 = Int32.Parse(redOrbs.text);
+        yellowOrbs1 = Int32.Parse(yellowOrbs.text);
+        purpleOrbs1 = Int32.Parse(purpleOrbs.text);
     }
+
+    /*
     private void Start() {
         redOrbs.text = $"{stats.getRedOrbs()}";
         yellowOrbs.text = $"{stats.getYellowOrbs()}";
         purpleOrbs.text = $"{stats.getPurpleOrbs()}";
+    }*/
+
+    public void Plus(string color) {
+        if (color.Equals("red") && redOrbsC < redOrbs1) {
+            redOrbsC++;
+            redOrbsConsumed.text = (redOrbsC).ToString(); 
+
+        } else if (color.Equals("yellow") && yellowOrbsC < yellowOrbs1) {
+            yellowOrbsC++;
+            yellowOrbsConsumed.text = (yellowOrbsC).ToString(); 
+
+        } else if (color.Equals("purple") && purpleOrbsC < purpleOrbs1) {
+            purpleOrbsC++;
+            purpleOrbsConsumed.text = (purpleOrbsC).ToString(); 
+
+        } else { 
+            Debug.Log("Not enough " + color + " orbs");
+        } 
+    }
+
+    public void Minus(string color) {
+        if (color.Equals("red") && redOrbsC > 0) {
+            redOrbsC--;
+            redOrbsConsumed.text = (redOrbsC).ToString(); 
+        } else if (color.Equals("yellow") && yellowOrbsC > 0) {
+            yellowOrbsC--;
+            yellowOrbsConsumed.text = (yellowOrbsC).ToString();
+        } else if (color.Equals("purple") && purpleOrbsC > 0) {
+            purpleOrbsC--;
+            purpleOrbsConsumed.text = (purpleOrbsC).ToString(); 
+        } else { 
+            Debug.Log("Cannot have negative num of " + color + " orbs");
+        } 
     }
 
     public void DigestButton()
@@ -93,5 +147,5 @@ public class DigestControls : MonoBehaviour
             //return null;
         }
     }
-    
+    #endregion
 }
