@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
     public void RestartButton()
     {
         SetGameState(GameState.StartMenu);
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void BackButton() {
