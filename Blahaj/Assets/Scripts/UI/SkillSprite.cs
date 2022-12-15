@@ -12,7 +12,7 @@ public class SkillSprite : MonoBehaviour
     private void Awake()
     {
         this.image = GetComponent<Image>();
-        this.stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        this.stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
         if (stats.RetrieveSkillLevel(skill) > 0) {
             this.image.sprite = skillSprite;
         }

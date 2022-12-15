@@ -30,7 +30,7 @@ public class PlayerControls : MonoBehaviour
     {
         this.rb2D = GetComponent<Rigidbody2D>();
         this.mySR = GetComponent<SpriteRenderer>();
-        this.stats = GetComponent<PlayerStats>();
+        this.stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
         this.skills = GetComponent<SkillsControl>();
     }
 
@@ -52,6 +52,7 @@ public class PlayerControls : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Debug.Log("Movement speed is " + stats.GetMovementSpeed());
         if (this.movementInput != Vector2.zero
             && (GameManager.GetStateEvent() == GameState.InGame
             || GameManager.GetStateEvent() == GameState.WinLevel
@@ -66,8 +67,7 @@ public class PlayerControls : MonoBehaviour
 
             if (numCollisions == 0)
             {
-                Debug.Log("time is" + Time.fixedDeltaTime);
-                Debug.Log(stats.GetMovementSpeed());
+                
                 rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             }
             //Debug.Log(movementInput);
@@ -91,7 +91,7 @@ public class PlayerControls : MonoBehaviour
         if (this.attacking)
         {
             // Attack! With cooldown
-            Debug.Log("Attack");
+            //Debug.Log("Attack");
             this.attacking = false;
         }
     }

@@ -9,14 +9,38 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Gradient gradient; 
     [SerializeField] Image fill; 
 
-    public void SetMaxHealth(float health) {
+    private PlayerStats stats;
+
+    public delegate void SetDelegate(float amount);
+    public static SetDelegate SetMaxHealthEvent;
+    public static SetDelegate SetHealthEvent;
+
+    private void Start()
+    {
+        SetMaxHealthEvent += SetMaxHealth;
+        SetHealthEvent += SetHealth;
+    }
+
+    private void Awake()
+    {
+        stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
+        SetMaxHealth(stats.getMaxHealth());
+        SetHealth(stats.getHealth());
+    }
+    private void SetMaxHealth(float health) {
         slider.maxValue = health; 
         slider.value = health; 
         fill.color = gradient.Evaluate(1f);
     }
 
-    public void SetHealth(float health) {
+    private void SetHealth(float health) {
         slider.value = health;
         fill.color =  gradient.Evaluate(slider.normalizedValue);
+    }
+
+    private void OnDestroy()
+    {
+        SetMaxHealthEvent -= SetMaxHealth;
+        SetHealthEvent -= SetHealth;
     }
 }

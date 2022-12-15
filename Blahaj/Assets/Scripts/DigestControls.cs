@@ -12,7 +12,7 @@ public class DigestControls : MonoBehaviour
     private int redOrbs1;
 
     public TMP_Text yellowOrbs;
-    public int yellowOrbs1;
+    private int yellowOrbs1;
 
     public TMP_Text purpleOrbs; 
     private int purpleOrbs1;
@@ -33,7 +33,7 @@ public class DigestControls : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        stats = player.GetComponent<PlayerStats>();
+        stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
         redOrbs.text = $"{stats.getRedOrbs()}";
         yellowOrbs.text = $"{stats.getYellowOrbs()}";
         purpleOrbs.text = $"{stats.getPurpleOrbs()}";
