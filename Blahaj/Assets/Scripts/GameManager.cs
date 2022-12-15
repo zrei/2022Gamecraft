@@ -52,9 +52,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.StartMenu:
                 // Start Menu
-                if (SceneManager.GetActiveScene().name != "StartMenu")
+                if (SceneManager.GetActiveScene().name != "MainMenu")
                 {
-                    SceneManager.LoadScene("StartMenu");
+                    SceneManager.LoadScene("MainMenu");
                 }
                 break;
             case GameState.NewGame:

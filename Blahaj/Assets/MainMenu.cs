@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
+using Constants;
 
 public class MainMenu : MonoBehaviour
 {
@@ -13,9 +14,15 @@ public class MainMenu : MonoBehaviour
         helpMenu.SetActive(false);
     }
 
-    public void StartButton()
+    /*public void StartButton()
     {
         SceneManager.LoadScene(0);
+    }*/
+
+    public void StartButton()
+    {
+        Debug.Log("New Game");
+        GameManager.ChangeStateEvent(GameState.NewGame);
     }
 
 
