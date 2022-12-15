@@ -51,12 +51,12 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseHealCooldown;
     private Vector3 initialPosition;
 
-    [SerializeField] HealthBar healthBar; 
+    private HealthBar healthBar; 
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
-        {Orbs.Red, 0},
-        {Orbs.Yellow, 0},
-        {Orbs.Purple, 0}
+        {Orbs.Red, 20},
+        {Orbs.Yellow, 20},
+        {Orbs.Purple, 20}
     };
 
     public delegate void StatsChange(float changeAmount);
@@ -94,8 +94,13 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent += GainSkill;
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
         PlayerStats.ResetStatsEvent += ResetStats;
-        ResetStats();
+        if (GameManager.GetStateEvent() == GameState.NewGame)
+        {
+            ResetStats();
+            GameManager.ChangeStateEvent(GameState.InGame);
+        }
         this.initialPosition = transform.position;
+        healthBar = GameObject.FindGameObjectWithTag("Healthbar").GetComponent<HealthBar>() ?? Instantiate(Resources.Load("Prefabs/HealthBar") as GameObject).GetComponent<HealthBar>();
         healthBar.SetMaxHealth(baseMaxHealth);
         
     }
@@ -108,12 +113,11 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        /*
+        /* Debug health bar
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
-        }*/
-        
-        
+        }
+        */
     }
     
     public void Damage(float damageAmount)
@@ -199,8 +203,36 @@ public class PlayerStats : MonoBehaviour
     
     private void GainSkill(Tuple<Skill, int> skill)
     {
-        this.skills[skill.Item1] += skill.Item2;
-        Debug.Log(this.skills[skill.Item1]);
+
+        switch (skill.Item1)
+        {
+            case Skill.Explosion:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Stun:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Poison:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Healing:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.HpUp:
+                ChangeMaxHealth(skill.Item2);
+                break;
+            case Skill.AttackSpeedUp:
+                ChangeAttackSpeed(skill.Item2);
+                break;
+            case Skill.AttackUp:
+                ChangeAttackDamage(skill.Item2);
+                break;
+            case Skill.MovementSpeedUp:
+                ChangeMovementSpeed(skill.Item2);
+                break;
+        }
+        //this.skills[skill.Item1] += skill.Item2;
+
     }
     
     public int RetrieveSkillLevel(Skill skill)
@@ -293,6 +325,18 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
         PlayerStats.ResetStatsEvent -= ResetStats;
+    }
+
+    public int getRedOrbs() {
+        return this.orbs[Orbs.Red];
+    }
+
+    public int getYellowOrbs() {
+        return this.orbs[Orbs.Yellow];
+    }
+
+    public int getPurpleOrbs() {
+        return this.orbs[Orbs.Purple];
     }
     
     #endregion

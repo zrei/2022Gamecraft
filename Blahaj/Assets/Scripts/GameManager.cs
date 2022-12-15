@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Constants;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private static GameState state;
-    private static int level;
+    private static GameState state = GameState.StartMenu;
+    private static int level = 0;
+    private static int enemiesLeft = 0;
+
+    // Delegates and events
+    public delegate void ChangeStateDelegate(GameState newState);
+    public delegate GameState GetStateDelegate();
+    public static ChangeStateDelegate ChangeStateEvent;
+    public static GetStateDelegate GetStateEvent;
 
     void Awake()
     {
@@ -22,63 +30,105 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        ChangeStateEvent += ChangeState;
+        GetStateEvent += GetState;
+    }
+
+    public void ChangeState(GameState newState) {
+        state = newState;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         state = GameState.StartMenu;
-        level = 1;
+        level = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
         switch(state)
         {
             case GameState.StartMenu:
                 // Start Menu
-                SceneManager.LoadScene("StartMenu");
+                if (SceneManager.GetActiveScene().name != "StartMenu")
+                {
+                    SceneManager.LoadScene("StartMenu");
+                }
                 break;
             case GameState.NewGame:
                 // New Game
-                // Reset player stats
-                PlayerStats.ResetStatsEvent();
                 // Reset level
-                level = 1;
-                SceneManager.LoadScene("Level" + level);
+                level = 0;
+                if (SceneManager.GetActiveScene().name != GameStages.stages[level])
+                {
+                    Time.timeScale = 1f;
+                    SceneManager.LoadScene(GameStages.stages[level]);
+                }
                 break;
             case GameState.InGame:
                 // Main Game
-                Time.timeScale = 1f;
+                if (Time.timeScale == 0f)
+                {
+                    Time.timeScale = 1f;
+                }
+                // if (enemiesLeft == 0 && SceneManager.GetActiveScene().name != GameScenes.DigestionScene)
+                // {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag(GameTags.Enemy);
+                    enemiesLeft = enemies.Length;
+                    if (enemiesLeft == 0)
+                    {
+                        SetGameState(GameState.WinLevel);
+                    }
+                // }
                 break;
             case GameState.NextLevel:
                 // Next Level
                 level++;
-                SceneManager.LoadScene("Level" + level);
+                if (level >= GameStages.stages.Length)
+                {
+                    SetGameState(GameState.WinGame);
+                }
+                else
+                {
+                    SceneManager.LoadScene(GameStages.stages[level]);
+                    Time.timeScale = 1f;
+                    SetGameState(GameState.InGame);
+                }
                 break;
             case GameState.PauseGame:
                 // Pause Game
-                Time.timeScale = 0f;
+                if (Time.timeScale == 1f)
+                {
+                    Time.timeScale = 0f;
+                }
                 break;
             case GameState.DigestionState:
                 // Digestion State
-                SceneManager.LoadScene("DigestionScene");
+                if (SceneManager.GetActiveScene().name != GameScenes.DigestionScene)
+                {
+                    SceneManager.LoadScene(GameScenes.DigestionScene);
+                }
                 break;
             case GameState.WinGame:
                 Debug.Log("WinGame");
-                SceneManager.LoadScene("WinGame");
+                if (SceneManager.GetActiveScene().name != GameScenes.WinGame)
+                {
+                    SceneManager.LoadScene(GameScenes.WinGame);
+                }
                 break;
             case GameState.LoseGame:
                 Debug.Log("LoseGame");
-                SceneManager.LoadScene("LoseGame");
+                if (SceneManager.GetActiveScene().name != GameScenes.LoseGame)
+                {
+                    SceneManager.LoadScene(GameScenes.LoseGame);
+                }
                 break;
         }
-        */
     }
 
-    public GameState GetGameState()
+    public GameState GetState()
     {
         return state;
     }
