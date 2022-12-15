@@ -143,4 +143,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
     }
 
+    public void BackButton() {
+        SetGameState(GameState.Crafting);
+        SceneManager.LoadScene("Crafting");
+    }
+
+    public void StomachButton() {
+        SetGameState(GameState.DigestionState);
+        SceneManager.LoadScene("DigestionScene");
+    }
+
 }

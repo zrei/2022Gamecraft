@@ -54,7 +54,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (this.movementInput != Vector2.zero
             && (GameManager.GetStateEvent() == GameState.InGame
-            || GameManager.GetStateEvent() == GameState.WinLevel))
+            || GameManager.GetStateEvent() == GameState.WinLevel
+            || GameManager.GetStateEvent() == GameState.Crafting))
         {
             int numCollisions = rb2D.Cast(
                 movementInput,
@@ -65,6 +66,8 @@ public class PlayerControls : MonoBehaviour
 
             if (numCollisions == 0)
             {
+                Debug.Log("time is" + Time.fixedDeltaTime);
+                Debug.Log(stats.GetMovementSpeed());
                 rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             }
             //Debug.Log(movementInput);
