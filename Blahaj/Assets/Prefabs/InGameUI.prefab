@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2298223776120692768}
   - component: {fileID: 2298223776120692769}
   - component: {fileID: 2298223776120692798}
+  - component: {fileID: 5940511262654574574}
   m_Layer: 5
   m_Name: Poison
   m_TagString: Untagged
@@ -120,19 +121,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2298223776120692769}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2298223776120692769}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 751317301, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &5940511262654574574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2298223776120692796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173be5aae42e84267a56e8a16cbab138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSprite: {fileID: 751317301, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
+  skill: 5
 --- !u!1 &2298223776139498568
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +224,7 @@ GameObject:
   - component: {fileID: 2298223776440954894}
   - component: {fileID: 2298223776440954895}
   - component: {fileID: 2298223776440954892}
+  - component: {fileID: 5000559743800377176}
   m_Layer: 5
   m_Name: Heal
   m_TagString: Untagged
@@ -329,19 +333,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2298223776440954895}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2298223776440954895}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: -1751828761, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &5000559743800377176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2298223776440954890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173be5aae42e84267a56e8a16cbab138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSprite: {fileID: -1751828761, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
+  skill: 7
 --- !u!1 &2298223776618106513
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +360,7 @@ GameObject:
   - component: {fileID: 2298223776618106517}
   - component: {fileID: 2298223776618106514}
   - component: {fileID: 2298223776618106515}
+  - component: {fileID: 407938885005786452}
   m_Layer: 5
   m_Name: Electric
   m_TagString: Untagged
@@ -462,19 +469,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2298223776618106514}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2298223776618106514}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: -612544792, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &407938885005786452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2298223776618106513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173be5aae42e84267a56e8a16cbab138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSprite: {fileID: -612544792, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
+  skill: 4
 --- !u!1 &2298223776665477959
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +735,7 @@ GameObject:
   - component: {fileID: 2298223777706229004}
   - component: {fileID: 2298223777706229005}
   - component: {fileID: 2298223777706229002}
+  - component: {fileID: 7563745080601576473}
   m_Layer: 5
   m_Name: Explode
   m_TagString: Untagged
@@ -834,19 +844,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2298223777706229005}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2298223777706229005}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1630241973, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &7563745080601576473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2298223777706229000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173be5aae42e84267a56e8a16cbab138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSprite: {fileID: 1630241973, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
+  skill: 6
 --- !u!1 &2298223777743936521
 GameObject:
   m_ObjectHideFlags: 0
