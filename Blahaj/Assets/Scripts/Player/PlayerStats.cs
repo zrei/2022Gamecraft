@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour
         {Skill.Stun, 0},
         {Skill.Healing, 0}
     };
-    private float health;
+    [SerializeField] private float health;
     [SerializeField] private float baseAttackDamage;
     private float attackDamage;
     [SerializeField] private float baseAttackSpeed; 
@@ -120,8 +120,9 @@ public class PlayerStats : MonoBehaviour
         */
     }
     
-    private void Damage(float damageAmount)
+    public void Damage(float damageAmount)
     {
+        Debug.Log("Attack successful");
         this.health -= damageAmount;
         healthBar.SetHealth(this.health);
         if (this.health <= 0)
