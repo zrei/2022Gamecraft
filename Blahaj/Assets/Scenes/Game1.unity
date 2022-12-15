@@ -397,6 +397,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1836212250714797523, guid: 7f57613302a84412a9e086885a360705, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f57613302a84412a9e086885a360705, type: 3}
 --- !u!1 &268226980 stripped
@@ -1373,6 +1377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1376944035}
+  - component: {fileID: 1376944037}
   - component: {fileID: 1376944036}
   m_Layer: 0
   m_Name: Portal
@@ -1409,6 +1414,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbbf36a5e9b6b744824ec46fe3d18ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1376944037
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376944034}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1400488693
 GameObject:
   m_ObjectHideFlags: 0
