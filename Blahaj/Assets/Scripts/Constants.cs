@@ -14,6 +14,7 @@ namespace Constants
         DigestionState,
         WinGame,
         LoseGame,
+        Crafting,
     }
 
     public enum Skill

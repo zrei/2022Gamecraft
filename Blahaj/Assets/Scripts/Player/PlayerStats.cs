@@ -11,9 +11,9 @@ public class PlayerStats : MonoBehaviour
     #region Fields
 
     private Dictionary<Skill, int> skills = new Dictionary<Skill, int>{
-        {Skill.Explosion, 1},
-        {Skill.Poison, 1},
-        {Skill.Stun, 1},
+        {Skill.Explosion, 0},
+        {Skill.Poison, 0},
+        {Skill.Stun, 0},
         {Skill.Healing, 0}
     };
     [SerializeField] private float health;

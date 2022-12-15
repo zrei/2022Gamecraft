@@ -7,7 +7,7 @@ public class DigestControls : MonoBehaviour
 {
     private static float scaleFactor = 1f;
 
-    
+    public TMP_Text skillMade; 
     public TMP_Text redOrbs;
     private int redOrbs1;
 
@@ -40,14 +40,8 @@ public class DigestControls : MonoBehaviour
         redOrbs1 = Int32.Parse(redOrbs.text);
         yellowOrbs1 = Int32.Parse(yellowOrbs.text);
         purpleOrbs1 = Int32.Parse(purpleOrbs.text);
+        skillMade = GameObject.FindWithTag("SkillDisplay").GetComponent<TMP_Text>();
     }
-
-    /*
-    private void Start() {
-        redOrbs.text = $"{stats.getRedOrbs()}";
-        yellowOrbs.text = $"{stats.getYellowOrbs()}";
-        purpleOrbs.text = $"{stats.getPurpleOrbs()}";
-    }*/
 
     public void Plus(string color) {
         if (color.Equals("red") && redOrbsC < redOrbs1) {
@@ -85,6 +79,18 @@ public class DigestControls : MonoBehaviour
     public void DigestButton()
     {
         Digest(Int32.Parse(redOrbsConsumed.text), Int32.Parse(purpleOrbsConsumed.text), Int32.Parse(yellowOrbsConsumed.text));
+        redOrbs.text = $"{stats.getRedOrbs()}";
+        yellowOrbs.text = $"{stats.getYellowOrbs()}";
+        purpleOrbs.text = $"{stats.getPurpleOrbs()}";
+        redOrbs1 = Int32.Parse(redOrbs.text);
+        yellowOrbs1 = Int32.Parse(yellowOrbs.text);
+        purpleOrbs1 = Int32.Parse(purpleOrbs.text);
+        redOrbsC = 0; 
+        redOrbsConsumed.text = "0";
+        yellowOrbsC = 0;
+        yellowOrbsConsumed.text = "0";
+        purpleOrbsC = 0;
+        purpleOrbsConsumed.text = "0";
     }
 
     public void Digest(int red, int purple, int yellow)
@@ -93,45 +99,57 @@ public class DigestControls : MonoBehaviour
         PlayerStats.ChangeOrbsEvent(-red, -yellow, -purple);
         Debug.Log(stats.getPurpleOrbs());
         int skillValue = (int)Math.Round((red + purple + yellow) * scaleFactor);
-        if (purple == 0 && red == 0 && yellow > 0)
+
+        if (red == 0 && purple == 0 && yellow == 0 ) {
+            skillMade.text = $"Input the number of orbs to digest by clicking the + and - buttons";
+        } 
+        else if (purple == 0 && red == 0 && yellow > 0)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Stun, skillValue));
+            skillMade.text = $"You have gained the skill: \n" + "Stun";
             //change sprite on UI
             //return new Tuple<Skill, int>(Skill.Stun, skillValue);
         }
         else if (yellow == 0 && purple == 0 && red > 0)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Explosion, skillValue));
+            skillMade.text = $"You have gained the skill: \n" + "Explosion";
             //return new Tuple<Skill, int>(Skill.Explosion, skillValue);
         }
         else if (yellow == 0 && red == 0 && purple > 0)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Poison, skillValue));
+            skillMade.text = $"You have gained the skill: \n" + "Poison";
             //return new Tuple<Skill, int>(Skill.Poison, skillValue);
         }
         else if (purple > yellow && yellow > red)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Healing, skillValue));
+            skillMade.text = $"You have gained the skill: \n" + "Healing";
             //return new Tuple<Skill, int>(Skill.Healing, skillValue);
         }
         else if (yellow > red && red > purple)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.HpUp, skillValue)); //float it
+            skillMade.text = $"Your max HP has increased";
             //return new Tuple<Skill, int>(Skill.HpUp, skillValue);
         }
         else if (red > purple && purple > yellow)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.AttackUp, skillValue));
+            skillMade.text = $"Your attack has increased";
             //return new Tuple<Skill, int>(Skill.AttackUp, skillValue);
         }
         else if (red > yellow && yellow > purple)
         {
-            PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.AttackSpeedUp, skillValue));      
+            PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.AttackSpeedUp, skillValue));    
+            skillMade.text = $"Your attack speed has increased";
             //return new Tuple<Skill, int>(Skill.AttackSpeedUp, skillValue);
         }
         else if (yellow > purple && purple > red)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.MovementSpeedUp, skillValue));
+            skillMade.text = $"Your movement speed has increased";
             //return new Tuple<Skill, int>(Skill.MovementSpeedUp, skillValue);
         }
         else if (yellow == red && red == purple)
@@ -140,11 +158,13 @@ public class DigestControls : MonoBehaviour
             System.Random random = new System.Random();
             Skill randomSkill = (Skill)values.GetValue(random.Next(values.Length));
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(randomSkill, skillValue));
+            skillMade.text = $"You have gained the skill: \n" + $"{randomSkill}";
             //return new Tuple<Skill, int>(randomSkill, skillValue);
         }
         else
         {
             //return null;
+            skillMade.text = $"You have given your shark indigestion >:(";
         }
     }
     #endregion

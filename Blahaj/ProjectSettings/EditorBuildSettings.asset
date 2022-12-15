@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinGame.unity
     guid: 712ce6b43663b1444aac4da0c2d31180
+  - enabled: 1
+    path: Assets/Scenes/Crafting.unity
+    guid: 3253498045ecb884e9d2bb83af02ff64
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bb15bc622d94b4a7bbdf77644a271d71, type: 2}
