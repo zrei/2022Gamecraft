@@ -18,7 +18,7 @@ public class StartGame : MonoBehaviour
     // Start is called before the first frame update
     public void NewGame()
     {
-        Debug.Log("New Game");
+        //Debug.Log("New Game");
         GameManager.ChangeStateEvent(GameState.NewGame);
     }
 }
