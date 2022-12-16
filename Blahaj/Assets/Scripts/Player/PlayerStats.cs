@@ -274,7 +274,7 @@ public class PlayerStats : MonoBehaviour
                 ChangeMaxHealth(skill.Item2 * 0.5f);
                 break;
             case Skill.AttackSpeedUp:
-                ChangeAttackCooldown(skill.Item2 - 0.5f);
+                ChangeAttackCooldown(-skill.Item2 * 0.2f);
                 break;
             case Skill.AttackUp:
                 ChangeAttackDamage(skill.Item2 * 0.5f);
