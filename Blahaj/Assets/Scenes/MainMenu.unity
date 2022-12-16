@@ -1264,7 +1264,7 @@ MonoBehaviour:
   baseAttackDashPower: 0
   baseAttackCooldown: 0
   baseAttackSpeed: 2
-  baseMovementSpeed: 20
+  baseMovementSpeed: 10
   baseMaxHealth: 5
   minAttackDamage: 2
   maxAttackDamage: 20
