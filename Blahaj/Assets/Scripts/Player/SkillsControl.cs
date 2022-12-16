@@ -7,6 +7,8 @@ using Constants;
 public class SkillsControl : MonoBehaviour
 {
     private PlayerStats stats;
+
+    private int timesHealedInLevel = 0;
     [SerializeField] private GameObject fireball;
     private Transform mouth = null;
     
@@ -44,7 +46,11 @@ public class SkillsControl : MonoBehaviour
                 Poison(stats.GetSkillInfo(Skill.Poison));
                 break;
             case Skill.Healing:
-                Heal(stats.GetSkillInfo(Skill.Healing));
+                if (timesHealedInLevel < 1)
+                {
+                    Heal(stats.GetSkillInfo(Skill.Healing));
+                    timesHealedInLevel += 1;
+                }
                 break;
         }
     }

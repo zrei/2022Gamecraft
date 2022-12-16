@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class ShrimpController : MonoBehaviour, EnemyController
 {
@@ -52,7 +53,7 @@ public class ShrimpController : MonoBehaviour, EnemyController
 
     private void ResetShootCountdown()
     {
-        this.shootCountdown = Random.Range(minShootCountdown, maxShootCountdown);
+        this.shootCountdown = UnityEngine.Random.Range(minShootCountdown, maxShootCountdown);
     }
 
     public void Damage(float damageAmount)
@@ -81,15 +82,15 @@ public class ShrimpController : MonoBehaviour, EnemyController
             }
             Destroy(this.gameObject);
         }
-        StartCoroutine("FlashRedOnDamage");
+        //StartCoroutine("FlashRedOnDamage");
     }
 
     private IEnumerator FlashRedOnDamage() {
         mySR.color = new Color(1, 0, 0, 1);
         yield return new WaitForSeconds(0.15f);
         mySR.color = new Color(1, 1, 1, 1);
-
     }
+
     private void OnBecameVisible() {
         if (!activated)
         {
@@ -101,6 +102,40 @@ public class ShrimpController : MonoBehaviour, EnemyController
     private void OnBecameInvisible()
     {
         activated = false;
+    }
+
+    private IEnumerator PoisonDamage(float poisonDamage, float damageInterval, float damageTime)
+    {
+        mySR.color = new Color(1.0f, 0f, 1.0f);
+        float time = 0;
+        while (time < damageTime)
+        {
+            Damage(poisonDamage);
+            yield return new WaitForSeconds(damageInterval);
+            time += damageInterval;
+        }
+        mySR.color = new Color(1.0f, 1.0f, 1.0f);
+    }
+
+    private IEnumerator StunTime(float stunTime)
+    {
+        mySR.color = new Color(1.0f, 1.0f, 0f);
+        activated = false;
+        yield return new WaitForSeconds(stunTime);
+        mySR.color = new Color(1.0f, 1.0f, 1.0f);
+        activated = true;
+    }
+
+    private void Poison(Tuple<float, float, float> poisonInfo)
+    //float poisonDamage, float damageInterval, float damageTime)
+    {
+        StartCoroutine(PoisonDamage(poisonInfo.Item1, poisonInfo.Item2, poisonInfo.Item3));
+    }
+
+    private void Stun(float stunTime)
+    {
+        //Debug.Log("Shrimp stunned!");
+        StartCoroutine(StunTime(stunTime));
     }
 
     #endregion
