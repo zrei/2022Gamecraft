@@ -109,9 +109,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 189
-        y: 1448
+        y: 1420
         width: 1655
-        height: 1098
+        height: 1160
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,8 +129,8 @@ TextureImporter:
       name: Blahaj
       rect:
         serializedVersion: 2
-        x: 2031
-        y: 1481
+        x: 2035
+        y: 1489
         width: 1655
         height: 1160
       alignment: 0
@@ -171,7 +171,7 @@ TextureImporter:
       name: Poison_Blahaj
       rect:
         serializedVersion: 2
-        x: 2075
+        x: 2083
         y: 229
         width: 1655
         height: 1160

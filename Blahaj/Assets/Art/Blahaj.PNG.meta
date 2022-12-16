@@ -108,10 +108,10 @@ TextureImporter:
       name: Electric_Blahaj
       rect:
         serializedVersion: 2
-        x: 189
-        y: 1448
+        x: 185
+        y: 1420
         width: 1655
-        height: 1098
+        height: 1160
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
