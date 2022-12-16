@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class OrcaController : MonoBehaviour
+public class OrcaController : MonoBehaviour, EnemyController
 {
     #region Fields
 
