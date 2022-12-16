@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636aeb612a3124a90bc6196b64f90b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 5
   enemyBullet: {fileID: 3584169781540595317, guid: 774cf8a8f5e2f482195be345ab579cd9, type: 3}
   minShootCountdown: 5
   maxShootCountdown: 2
