@@ -146,13 +146,7 @@ public class OrcaController : MonoBehaviour, EnemyController
         mySR.color = new Color(1.0f, 1.0f, 0f);
         float baseMovementSpeed = this.movementSpeed;
         this.movementSpeed = 0;
-        float time = 0f;
-        float interval = 0.5f;
-        while (time < stunTime)
-        {
-            yield return new WaitForSeconds(interval);
-            time += interval;
-        }
+        yield return new WaitForSeconds(stunTime);
         mySR.color = new Color(1.0f, 1.0f, 1.0f);
         this.movementSpeed = baseMovementSpeed;
     }
