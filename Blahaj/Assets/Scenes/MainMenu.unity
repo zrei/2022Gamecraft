@@ -1259,43 +1259,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invulnerable: 0
-  baseAttackDamage: 10
-  baseAttackDuration: 0
-  baseAttackDashPower: 0
-  baseAttackCooldown: 0
-  baseAttackSpeed: 2
+  baseAttackDamage: 5
+  baseAttackDuration: 0.3
+  baseAttackDashPower: 20
+  baseAttackCooldown: 0.5
+  baseAttackSpeed: 15
   baseMovementSpeed: 10
-  baseMaxHealth: 5
-  minAttackDamage: 2
+  baseMaxHealth: 15
   maxAttackDamage: 20
-  minAttackDuration: 0
   maxAttackDuration: 0
-  minAttackCooldown: 0
   maxAttackCooldown: 0
-  minAttackDashPower: 0
   maxAttackDashPower: 0
-  minAttackSpeed: 2
   maxAttackSpeed: 20
-  minMovementSpeed: 2
   maxMovementSpeed: 20
   stunSprite: {fileID: 758256201, guid: a30332b36dced464fa1db63cab89c234, type: 3}
   normalSprite: {fileID: 282400171, guid: a30332b36dced464fa1db63cab89c234, type: 3}
   explodeSprite: {fileID: -1805864678, guid: d881523fc7632334f891229392b02932, type: 3}
   poisonSprite: {fileID: -2048975676, guid: a30332b36dced464fa1db63cab89c234, type: 3}
-  baseExplosionRadius: 2
+  baseFireballRadius: 0
   basePoisonRadius: 2
   baseStunRadius: 2
-  baseExplosionDamage: 2
+  baseFireballDamage: 3
   baseStunDamage: 2
   basePoisonDamage: 2
   basePoisonTime: 2
   baseStunTime: 2
-  baseExplosionSpeed: 2
+  baseFireballSpeed: 5
   baseHealAmount: 2
-  baseExplosionCooldown: 2
-  baseStunCooldown: 2
-  basePoisonCooldown: 2
-  baseHealCooldown: 2
+  baseFireballCooldown: 0.5
+  baseStunCooldown: 0.5
+  basePoisonCooldown: 0.5
+  baseHealCooldown: 0.5
 --- !u!1 &1628771998
 GameObject:
   m_ObjectHideFlags: 0

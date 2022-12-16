@@ -25,7 +25,7 @@ namespace Constants
         MovementSpeedUp,
         Stun,
         Poison,
-        Explosion,
+        Fireball,
         Healing,
     }
 
@@ -41,7 +41,7 @@ namespace Constants
         Normal,
         Stun,
         Poison,
-        Explosion,
+        Fireball,
     }
 
     public static class GameScenes
@@ -72,6 +72,8 @@ namespace Constants
             "Game1",
             "DigestionScene",
             "Game2",
+            "DigestionScene", 
+            "Game3",
             };
     }
 }

@@ -224,12 +224,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891c7b16a14c94859b95a6aeb0eed1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invulnerable: 0
   baseAttackDamage: 0
+  baseAttackDuration: 0
+  baseAttackDashPower: 0
+  baseAttackCooldown: 0
   baseAttackSpeed: 0
   baseMovementSpeed: 10
   baseMaxHealth: 10
   minAttackDamage: 0
   maxAttackDamage: 0
+  minAttackDuration: 0
+  maxAttackDuration: 0
+  minAttackCooldown: 0
+  maxAttackCooldown: 0
+  minAttackDashPower: 0
+  maxAttackDashPower: 0
   minAttackSpeed: 0
   maxAttackSpeed: 0
   minMovementSpeed: 0
@@ -251,6 +261,34 @@ MonoBehaviour:
   baseStunCooldown: 0
   basePoisonCooldown: 0
   baseHealCooldown: 0
+--- !u!1 &1497856414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7272983846670014081, guid: 4270f4b775b3a8c4392a0c1eb94e3bf4, type: 3}
+  m_PrefabInstance: {fileID: 7272983846260757698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1497856415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497856414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85c55d851c3747069231147dfbfdb01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  movementSpeed: 0
+  attackSpeed: 0
+  attackDamage: 0
+  attackRadius: 0
+  minMovementSpeed: 0
+  numOrbsDropped: 0
+  attackCooldown: 0
+  RedOrb: {fileID: 0}
+  YellowOrb: {fileID: 0}
+  PurpleOrb: {fileID: 0}
 --- !u!1 &1907421200
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,11 @@ TagManager:
   - WinPortal
   - SkillDisplay
   - Wall
+  - DialoguePanel
+  - Fireball
+  - Poison
+  - Heal
+  - Stun
   layers:
   - Default
   - TransparentFX

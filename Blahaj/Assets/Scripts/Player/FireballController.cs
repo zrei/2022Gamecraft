@@ -6,17 +6,17 @@ using System;
 
 public class FireballController : MonoBehaviour
 {
-    private Tuple<float, float, float> explosionInfo;
+    private Tuple<float, float, float> fireballInfo;
 
     private void Awake()
     {
         PlayerStats stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
-        this.explosionInfo = stats.GetSkillInfo(Skill.Explosion);
+        this.fireballInfo = stats.GetSkillInfo(Skill.Fireball);
     }
 
     private void Update()
     {
-        transform.position += transform.up * Time.deltaTime * explosionInfo.Item3;
+        transform.position += transform.up * Time.deltaTime * fireballInfo.Item3;
     }
 
     private void OnTriggerEnter2D(Collider2D otherObject)
@@ -24,14 +24,14 @@ public class FireballController : MonoBehaviour
         //Debug.Log("Hello!");
         if (otherObject.gameObject.CompareTag("Enemy"))
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionInfo.Item2);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireballInfo.Item2);
             //Debug.Log(colliders.Length);
             foreach (var hitCollider in colliders)
             {
                 if (hitCollider.CompareTag("Enemy"))
                 {
                     //Debug.Log("?");
-                    hitCollider.SendMessage("Damage", explosionInfo.Item1);
+                    hitCollider.SendMessage("Damage", fireballInfo.Item1);
                 }
             }
             Destroy(this.gameObject);
