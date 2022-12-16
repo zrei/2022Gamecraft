@@ -13,7 +13,10 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
 
+    private Vector2 dashdir;
     private bool attacking = false;
+    private bool canAttack = true;
+
     private bool canPoison = true;
     private bool canStun = true;
     private bool canExplode = true;
@@ -56,7 +59,8 @@ public class PlayerControls : MonoBehaviour
         if (this.movementInput != Vector2.zero
             && (GameManager.GetStateEvent() == GameState.InGame
             || GameManager.GetStateEvent() == GameState.WinLevel
-            || GameManager.GetStateEvent() == GameState.Crafting))
+            || GameManager.GetStateEvent() == GameState.Crafting)
+            && attacking!=true)
         {
             int numCollisions = rb2D.Cast(
                 movementInput,
@@ -100,6 +104,18 @@ public class PlayerControls : MonoBehaviour
     {
         if (GameManager.GetStateEvent() != GameState.Crafting)
         {
+            dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // attack
+                Debug.Log("Space has been pressed");
+                if (canAttack) 
+                {
+                    Debug.Log("Attack able, attacking");
+                    StartCoroutine(Attack());
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 // explosion
@@ -189,6 +205,27 @@ public class PlayerControls : MonoBehaviour
                 this.canHeal = true;
                 break;
         }
+    }
+
+    private IEnumerator Attack() {
+        Debug.Log("Attack has been triggered");
+        float dashPower = 150;  
+        this.attacking = true;
+        this.canAttack = false;
+        //float dashPower = stats.GetAttackDashPower();
+        rb2D.velocity = dashdir * dashPower;
+        //stats.SetInvulnerable(true);
+        yield return new WaitForSeconds(0.2f);
+        this.attacking = false;
+        rb2D.velocity = new Vector2(0, 0);
+        //stats.ChangeMovementSpeedNoLimit(-1 * dashPower);
+        //stats.SetInvulnerable(false);
+        //yield return new WaitForSeconds(stats.GetAttackCooldown());
+        this.canAttack = true;
+    }
+
+    public bool getAttacking() {
+        return attacking;
     }
 
 }
