@@ -97,7 +97,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.DamageEvent += Damage;
         PlayerStats.ChangeAttackDamageEvent += ChangeAttackDamage;
         PlayerStats.RestoreHealthEvent += RestoreHealth;
-        PlayerStats.ChangeAttackSpeedEvent += ChangeAttackSpeed;
+        //PlayerStats.ChangeAttackSpeedEvent += ChangeAttackSpeed;
         PlayerStats.ChangeAttackDurationEvent += ChangeAttackDuration;
         PlayerStats.ChangeAttackCooldownEvent += ChangeAttackCooldown;
         PlayerStats.ChangeMovementSpeedEvent += ChangeMovementSpeed;
@@ -126,22 +126,15 @@ public class PlayerStats : MonoBehaviour
         if (!this.invulnerable)
         {
             this.health -= damageAmount;
-            healthBar.SetHealth(this.health);
-            StartCoroutine("FlashRedOnDamage"); // or have a more elaborate animation
+            HealthBar.SetHealthEvent(this.health);
             if (this.health <= 0)
             {
                 // some death animation
-                Destroy(this.gameObject);
-                SceneManager.LoadScene("LoseGame");
+                Destroy(GameObject.FindWithTag("Player"));
+                GameManager.ChangeStateEvent(GameState.LoseGame);
             }
+            SpriteChanger.FlashRedEvent();
         }
-    }
-
-    private IEnumerator FlashRedOnDamage() {
-        mySR.color = new Color(1, 0, 0, 1);
-        yield return new WaitForSeconds(0.15f);
-        mySR.color = new Color(1, 1, 1, 1);
-
     }
 
     public float GetMovementSpeed()
@@ -280,7 +273,7 @@ public class PlayerStats : MonoBehaviour
                 ChangeMaxHealth(skill.Item2 * 0.5f);
                 break;
             case Skill.AttackSpeedUp:
-                ChangeAttackSpeed(skill.Item2 * 0.5f);
+                ChangeAttackCooldown(skill.Item2 - 0.5f);
                 break;
             case Skill.AttackUp:
                 ChangeAttackDamage(skill.Item2 * 0.5f);
