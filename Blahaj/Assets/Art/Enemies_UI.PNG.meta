@@ -398,6 +398,90 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Pufferfish
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 1478
+        width: 370
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82172b10bc5c2b64ab8e643cc7ce1b9b
+      internalID: 1572835013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shrimp
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 1433
+        width: 231
+        height: 268
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b466ada73c105ba44ba109a15f8c64bd
+      internalID: -2026783107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bubble
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 1531
+        width: 101
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20b0e8991f65e064aa51d5445ac1191d
+      internalID: -1480180188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blank
+      rect:
+        serializedVersion: 2
+        x: 1757
+        y: 122
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5a4a053312f8b44bea535dd5f95784
+      internalID: -1519653108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -415,13 +499,17 @@ TextureImporter:
       Heal: -1751828761
       Heart: -470415302
       Poison: 751317301
+      Blank: -1519653108
       Turd: 670620394
       Purple_orb: -1711534393
       Enemies_UI_11: -652597016
       Red_orb: 1437164110
+      Shrimp: -2026783107
       Unknown: -225461105
       Yellow_orb: 2088846412
+      Pufferfish: 1572835013
       Portal: 43727579
+      Bubble: -1480180188
       Electric: -612544792
       Explode: 1630241973
   spritePackingTag: 
