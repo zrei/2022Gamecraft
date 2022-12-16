@@ -69,7 +69,7 @@ public class PlayerControls : MonoBehaviour
         //float playerSpeed  =  stats.GetMovementSpeed();
 
         //rb2D.velocity  = movementInput * playerSpeed;
-
+        rb2D.angularVelocity = 0f;
         rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
