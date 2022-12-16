@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5980288693557512921}
   m_Layer: 0
   m_Name: Pufferfish
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.2796684, y: 0.073597096}
@@ -118,7 +118,7 @@ MonoBehaviour:
   movementSpeed: 8
   attackSpeed: 1
   attackDamage: 1
-  attackRadius: 0
+  attackRadius: 1
   minMovementSpeed: 0
   numOrbsDropped: 1
   attackCooldown: 1
