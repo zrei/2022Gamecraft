@@ -72,6 +72,8 @@ namespace Constants
             "Game1",
             "DigestionScene",
             "Game2",
+            "DigestionScene", 
+            "Game3",
             };
     }
 }
