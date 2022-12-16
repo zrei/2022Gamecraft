@@ -80,10 +80,10 @@ public class PlayerControls : MonoBehaviour
             float y = transform.localScale.y;
             float z = transform.localScale.z;
             if (movementInput.x >= 0) {
-                transform.localScale = new Vector3(-x, y, z);
+                transform.localScale = new Vector3(x, y, z);
                 //mySR.flipX = true;
             } else if (movementInput.x < 0) {
-                transform.localScale = new Vector3(x, y, z);
+                transform.localScale = new Vector3(-x, y, z);
                 //mySR.flipX = false;
             }
 
@@ -113,7 +113,7 @@ public class PlayerControls : MonoBehaviour
         }
         if (GameManager.GetStateEvent() != GameState.Crafting)
         {
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.Y))
             {
                 if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
                 {
@@ -126,7 +126,7 @@ public class PlayerControls : MonoBehaviour
                 //Debug.Log("O has been pressed");
             }
         }
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             // explosion
             // check skill 1
@@ -138,7 +138,7 @@ public class PlayerControls : MonoBehaviour
             }
             //Debug.Log("Y has been pressed");
         }
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             if (canStun && stats.RetrieveSkillLevel(Skill.Stun) > 0)
             {
@@ -149,7 +149,7 @@ public class PlayerControls : MonoBehaviour
             // check skill 2
             //Debug.Log("U has been pressed");
         }
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             if (canPoison && stats.RetrieveSkillLevel(Skill.Poison) > 0)
             {
