@@ -102,10 +102,10 @@ MonoBehaviour:
   enemyBullet: {fileID: 3584169781540595317, guid: 774cf8a8f5e2f482195be345ab579cd9, type: 3}
   minShootCountdown: 5
   maxShootCountdown: 2
-  numOrbsDropped: 0
-  RedOrb: {fileID: 0}
-  YellowOrb: {fileID: 0}
-  PurpleOrb: {fileID: 0}
+  numOrbsDropped: 1
+  RedOrb: {fileID: 7100642399210993830, guid: c70983691c52d47809a4a5dd32c069d4, type: 3}
+  YellowOrb: {fileID: 7864985485559605410, guid: d801bebbb36f74a40ad3c7c2e8938f32, type: 3}
+  PurpleOrb: {fileID: 8265185047536792606, guid: d874f850e997043f0ab6dc703548e54c, type: 3}
 --- !u!61 &4986546403143960547
 BoxCollider2D:
   m_ObjectHideFlags: 0
