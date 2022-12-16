@@ -34,7 +34,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue) {
         animator.SetBool("isOpen", true);
         
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
 
         dialogueOpen = true;
 
@@ -90,6 +90,6 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue() {
         animator.SetBool("isOpen", false);
         dialogueOpen = false;
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
     }
 }

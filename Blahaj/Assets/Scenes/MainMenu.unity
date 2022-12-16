@@ -1260,8 +1260,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   baseAttackDamage: 5
-  baseAttackDuration: 0.1
-  baseAttackDashPower: 5
+  baseAttackDuration: 0.2
+  baseAttackDashPower: 15
   baseAttackCooldown: 0
   baseAttackSpeed: 15
   baseMovementSpeed: 10
@@ -1276,17 +1276,17 @@ MonoBehaviour:
   normalSprite: {fileID: 282400171, guid: a30332b36dced464fa1db63cab89c234, type: 3}
   explodeSprite: {fileID: -1805864678, guid: a30332b36dced464fa1db63cab89c234, type: 3}
   poisonSprite: {fileID: -2048975676, guid: a30332b36dced464fa1db63cab89c234, type: 3}
-  baseExplosionRadius: 2
+  baseFireballRadius: 0
   basePoisonRadius: 2
   baseStunRadius: 2
-  baseExplosionDamage: 2
+  baseFireballDamage: 0
   baseStunDamage: 2
   basePoisonDamage: 2
   basePoisonTime: 2
   baseStunTime: 2
-  baseExplosionSpeed: 0
+  baseFireballSpeed: 0
   baseHealAmount: 2
-  baseExplosionCooldown: 2
+  baseFireballCooldown: 0
   baseStunCooldown: 2
   basePoisonCooldown: 2
   baseHealCooldown: 2
