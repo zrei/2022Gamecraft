@@ -40,8 +40,8 @@ public class MainMenu : MonoBehaviour
 
     public void QuitButton()
     {
-        Debug.Log("ayy lmao quit");
-        //Application.Quit();
+        //Debug.Log("ayy lmao quit");
+        Application.Quit();
     }
    
     // Update is called once per frame
