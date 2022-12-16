@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShrimpController : MonoBehaviour
+public class ShrimpController : MonoBehaviour, EnemyController
 {
     #region Fields
     private GameObject player;
@@ -55,9 +55,9 @@ public class ShrimpController : MonoBehaviour
         this.shootCountdown = Random.Range(minShootCountdown, maxShootCountdown);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(float damageAmount)
     {
-        Debug.Log(damageAmount);
+        Debug.Log("Shrimp Damaged: " + damageAmount);
         health -= damageAmount;
         if (health <= 0) {
              for (int i = 0; i < numOrbsDropped; i++)

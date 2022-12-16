@@ -15,18 +15,18 @@ public class Attack : MonoBehaviour
     private void Awake()
     {
         this.controls = GetComponent<PlayerControls>();
-        this.stats = GetComponent<PlayerStats>();
+        this.stats  = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
     }
 
     private void OnTriggerEnter2D(Collider2D otherObject)
     {
-
         bool attacking = controls.getAttacking();
         float attackDamage = stats.GetAttackDamage();
+        Debug.Log("Collision detected with " + otherObject.tag + "! Attacking: " + attacking);
         if (otherObject.CompareTag("Enemy") && attacking)
         {
             Debug.Log("Attacking Enemy!");
-            otherObject.gameObject.GetComponent<OrcaController>().Damage(attackDamage);
+            otherObject.gameObject.GetComponent<EnemyController>().Damage(attackDamage);
         }
     }
 }

@@ -56,6 +56,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float basePoisonDamage;
     [SerializeField] private float basePoisonTime;
     [SerializeField] private float baseStunTime;
+    [SerializeField] private float baseExplosionSpeed;
     [SerializeField] private float baseHealAmount;
     [SerializeField] private float baseExplosionCooldown;
     [SerializeField] private float baseStunCooldown;
@@ -298,7 +299,7 @@ public class PlayerStats : MonoBehaviour
         if (skill == Skill.Explosion)
         {
             //scale the info based on the skill level somehow
-            return new Tuple<float, float, float>(this.baseExplosionDamage + 0.5f * (skillLevel - 1), this.baseExplosionRadius + 0.2f * (skillLevel - 1), 0f);
+            return new Tuple<float, float, float>(this.baseExplosionDamage + 0.5f * (skillLevel - 1), this.baseExplosionRadius + 0.2f * (skillLevel - 1), this.baseExplosionSpeed + 0.1f * (skillLevel - 1));
         } else if (skill == Skill.Poison)
         {
             return new Tuple<float, float, float>(this.basePoisonDamage + 0.5f * (skillLevel - 1), this.basePoisonRadius + 0.2f * (skillLevel - 1), this.basePoisonTime + 0.2f * (skillLevel - 1));
