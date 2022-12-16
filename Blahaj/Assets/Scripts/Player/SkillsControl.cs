@@ -54,8 +54,8 @@ public class SkillsControl : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
         //Debug.Log(mouth);
+        StartCoroutine(ChangeSprite(SpriteStates.Explosion, 0.3f));
         Instantiate(fireball, mouth.position, bulletRotation);
-        //StartCoroutine(ChangeSprite(SpriteStates.Explosion, 0.3f));
         //Debug.Log(skillInfo);
         /*Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, skillInfo.Item2);
         //Debug.Log(colliders.Length);

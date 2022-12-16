@@ -16,12 +16,12 @@ public class FireballController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(this.explosionInfo);
         transform.position += transform.up * Time.deltaTime * explosionInfo.Item3;
     }
 
     private void OnTriggerEnter2D(Collider2D otherObject)
     {
+        //Debug.Log("Hello!");
         if (otherObject.gameObject.CompareTag("Enemy"))
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionInfo.Item2);

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7272983846670014086}
   - component: {fileID: 1630299462961765369}
   - component: {fileID: 5980288693557512921}
+  - component: {fileID: 1623405349140440845}
   m_Layer: 0
   m_Name: Pufferfish
   m_TagString: Enemy
@@ -96,7 +97,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.2796684, y: 0.073597096}
@@ -125,3 +126,24 @@ MonoBehaviour:
   RedOrb: {fileID: 7100642399210993830, guid: c70983691c52d47809a4a5dd32c069d4, type: 3}
   YellowOrb: {fileID: 7864985485559605410, guid: d801bebbb36f74a40ad3c7c2e8938f32, type: 3}
   PurpleOrb: {fileID: 8265185047536792606, guid: d874f850e997043f0ab6dc703548e54c, type: 3}
+--- !u!50 &1623405349140440845
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7272983846670014081}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
