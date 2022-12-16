@@ -128,6 +128,13 @@ public class OrcaController : MonoBehaviour, EnemyController
             // death anim     
             Destroy(this.gameObject);
         }
+        StartCoroutine("FlashRedOnDamage");
+    }
+
+    private IEnumerator FlashRedOnDamage() {
+        mySR.color = new Color(1, 0, 0, 1);
+        yield return new WaitForSeconds(0.15f);
+        mySR.color = new Color(1, 1, 1, 1);
     }
 
     private void SlowDown(float slowAmount)
