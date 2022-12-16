@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShrimpController : MonoBehaviour
+public class ShrimpController : MonoBehaviour, EnemyController
 {
     #region Fields
     private GameObject player;
@@ -10,6 +10,10 @@ public class ShrimpController : MonoBehaviour
     [SerializeField] private GameObject enemyBullet;
     [SerializeField] private float minShootCountdown;
     [SerializeField] private float maxShootCountdown;
+    [SerializeField] private int numOrbsDropped;
+    [SerializeField] private GameObject RedOrb;
+    [SerializeField] private GameObject YellowOrb;
+    [SerializeField] public GameObject PurpleOrb;
     private float shootCountdown;
     private bool activated = false;
 
@@ -51,11 +55,30 @@ public class ShrimpController : MonoBehaviour
         this.shootCountdown = Random.Range(minShootCountdown, maxShootCountdown);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(float damageAmount)
     {
-        Debug.Log(damageAmount);
+        Debug.Log("Shrimp Damaged: " + damageAmount);
         health -= damageAmount;
         if (health <= 0) {
+             for (int i = 0; i < numOrbsDropped; i++)
+            {
+                int randomNumber = UnityEngine.Random.Range(0, 3);
+                Vector3 spawnPosition = new Vector3(transform.position.x + UnityEngine.Random.Range(-2.0f, 2.0f), 
+                    transform.position.y + UnityEngine.Random.Range(-2.0f, 2.0f), 
+                    transform.position.z + UnityEngine.Random.Range(-2.0f, 2.0f));
+                switch (randomNumber)
+                {
+                    case (0):
+                        Instantiate(RedOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
+                        break;
+                    case (1):
+                        Instantiate(YellowOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
+                        break;
+                    case (2):
+                        Instantiate(PurpleOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
+                        break;
+                }
+            }
             Destroy(this.gameObject);
         }
         StartCoroutine("FlashRedOnDamage");

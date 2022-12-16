@@ -16,8 +16,15 @@ public class PlayerStats : MonoBehaviour
         {Skill.Healing, 0}
     };
     private float health;
+    [SerializeField] private bool invulnerable;
     [SerializeField] private float baseAttackDamage;
     private float attackDamage;
+    [SerializeField] private float baseAttackDuration; 
+    private float attackDuration;
+    [SerializeField] private float baseAttackDashPower;
+    private float attackDashPower;
+    [SerializeField] private float baseAttackCooldown;
+    private float attackCooldown;
     [SerializeField] private float baseAttackSpeed; 
     private float attackSpeed;
     [SerializeField] private float baseMovementSpeed;
@@ -26,6 +33,12 @@ public class PlayerStats : MonoBehaviour
     private float maxHealth;
     [SerializeField] private float minAttackDamage;
     [SerializeField] private float maxAttackDamage;
+    [SerializeField] private float minAttackDuration;
+    [SerializeField] private float maxAttackDuration;
+    [SerializeField] private float minAttackCooldown;
+    [SerializeField] private float maxAttackCooldown;
+    [SerializeField] private float minAttackDashPower;
+    [SerializeField] private float maxAttackDashPower;
     [SerializeField] private float minAttackSpeed;
     [SerializeField] private float maxAttackSpeed;
     [SerializeField] private float minMovementSpeed;
@@ -43,6 +56,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float basePoisonDamage;
     [SerializeField] private float basePoisonTime;
     [SerializeField] private float baseStunTime;
+    [SerializeField] private float baseExplosionSpeed;
     [SerializeField] private float baseHealAmount;
     [SerializeField] private float baseExplosionCooldown;
     [SerializeField] private float baseStunCooldown;
@@ -62,6 +76,8 @@ public class PlayerStats : MonoBehaviour
     public static StatsChange ChangeMovementSpeedEvent;
     public static StatsChange ChangeAttackSpeedEvent;
     public static StatsChange ChangeMaxHealthEvent;
+    public static StatsChange ChangeAttackDurationEvent;
+    public static StatsChange ChangeAttackCooldownEvent;
  
     public delegate void OrbsChange(int red, int yellow, int purple);
     public static OrbsChange ChangeOrbsEvent;
@@ -82,7 +98,9 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.DamageEvent += Damage;
         PlayerStats.ChangeAttackDamageEvent += ChangeAttackDamage;
         PlayerStats.RestoreHealthEvent += RestoreHealth;
-        PlayerStats.ChangeAttackSpeedEvent += ChangeAttackSpeed;
+        //PlayerStats.ChangeAttackSpeedEvent += ChangeAttackSpeed;
+        PlayerStats.ChangeAttackDurationEvent += ChangeAttackDuration;
+        PlayerStats.ChangeAttackCooldownEvent += ChangeAttackCooldown;
         PlayerStats.ChangeMovementSpeedEvent += ChangeMovementSpeed;
         PlayerStats.ChangeOrbsEvent += ChangeOrbs;
         PlayerStats.GainSkillEvent += GainSkill;
@@ -106,16 +124,18 @@ public class PlayerStats : MonoBehaviour
     
     public void Damage(float damageAmount)
     {
-        //Debug.Log("Attack successful");
-        this.health -= damageAmount;
-        HealthBar.SetHealthEvent(this.health);
-        if (this.health <= 0)
+        if (!this.invulnerable)
         {
-            // some death animation
-            Destroy(GameObject.FindWithTag("Player"));
-            GameManager.ChangeStateEvent(GameState.LoseGame);
+            this.health -= damageAmount;
+            HealthBar.SetHealthEvent(this.health);
+            if (this.health <= 0)
+            {
+                // some death animation
+                Destroy(GameObject.FindWithTag("Player"));
+                GameManager.ChangeStateEvent(GameState.LoseGame);
+            }
+            SpriteChanger.FlashRedEvent();
         }
-        SpriteChanger.FlashRedEvent();// or have a more elaborate animation
     }
 
     public float GetMovementSpeed()
@@ -123,7 +143,7 @@ public class PlayerStats : MonoBehaviour
         return this.movementSpeed;
     }
 
-    private void ChangeMovementSpeed(float amount)
+    public void ChangeMovementSpeed(float amount)
     {
         if (amount < 0)
         {
@@ -135,15 +155,43 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    private void ChangeAttackSpeed(float amount)
+    public void ChangeMovementSpeedNoLimit(float amount)
+    {
+        this.movementSpeed = this.movementSpeed + amount;
+    }
+
+    public float GetAttackDuration()
+    {
+        return this.attackDuration;
+    }
+    private void ChangeAttackDuration(float amount)
     {
         if (amount < 0)
         {
-            this.attackSpeed = Mathf.Max(this.minAttackSpeed, this.attackSpeed - amount);
+            this.attackDuration = Mathf.Max(this.minAttackDuration, this.attackDuration - amount);
         } else 
         {
-            this.attackSpeed = Mathf.Min(this.maxAttackSpeed, this.attackSpeed + amount);
+            this.attackDuration = Mathf.Min(this.maxAttackDuration, this.attackDuration + amount);
         }
+    }
+
+    public float GetAttackCooldown()
+    {
+        return this.attackCooldown;
+    }
+    private void ChangeAttackCooldown(float amount)
+    {
+        if (amount < 0)
+        {
+            this.attackCooldown = Mathf.Max(this.minAttackCooldown, this.attackCooldown - amount);
+        } else 
+        {
+            this.attackCooldown = Mathf.Min(this.maxAttackCooldown, this.attackCooldown + amount);
+        }
+    }
+    public float GetAttackDamage()
+    {
+        return this.attackDamage;
     }
 
     private void ChangeAttackDamage(float amount)
@@ -155,6 +203,31 @@ public class PlayerStats : MonoBehaviour
         {
             this.attackDamage = Mathf.Min(this.maxAttackDamage, this.attackDamage + amount);
         }
+    }
+
+    public float GetAttackDashPower()
+    {
+        return this.attackDashPower;
+    }
+    private void ChangeAttackDashPower(float amount)
+    {
+        if (amount < 0)
+        {
+            this.attackDashPower = Mathf.Max(this.minAttackDashPower, this.attackDashPower - amount);
+        } else
+        {
+            this.attackDashPower = Mathf.Min(this.maxAttackDashPower, this.attackDashPower + amount);
+        }
+    }
+
+    public bool GetInvulnerable() 
+    {
+        return this.invulnerable;
+    }
+
+    public void SetInvulnerable(bool newInvul) 
+    {
+        this.invulnerable = newInvul;
     }
 
     private void RestoreHealth(float amountRestored)
@@ -201,7 +274,7 @@ public class PlayerStats : MonoBehaviour
                 ChangeMaxHealth(skill.Item2 * 0.5f);
                 break;
             case Skill.AttackSpeedUp:
-                ChangeAttackSpeed(skill.Item2 * 0.5f);
+                ChangeAttackCooldown(-skill.Item2 * 0.2f);
                 break;
             case Skill.AttackUp:
                 ChangeAttackDamage(skill.Item2 * 0.5f);
@@ -226,7 +299,7 @@ public class PlayerStats : MonoBehaviour
         if (skill == Skill.Explosion)
         {
             //scale the info based on the skill level somehow
-            return new Tuple<float, float, float>(this.baseExplosionDamage + 0.5f * (skillLevel - 1), this.baseExplosionRadius + 0.2f * (skillLevel - 1), 0f);
+            return new Tuple<float, float, float>(this.baseExplosionDamage + 0.5f * (skillLevel - 1), this.baseExplosionRadius + 0.2f * (skillLevel - 1), this.baseExplosionSpeed + 0.1f * (skillLevel - 1));
         } else if (skill == Skill.Poison)
         {
             return new Tuple<float, float, float>(this.basePoisonDamage + 0.5f * (skillLevel - 1), this.basePoisonRadius + 0.2f * (skillLevel - 1), this.basePoisonTime + 0.2f * (skillLevel - 1));
@@ -268,6 +341,8 @@ public class PlayerStats : MonoBehaviour
     {
         this.maxHealth = this.baseMaxHealth;
         this.attackDamage = this.baseAttackDamage;
+        this.attackDuration = this.baseAttackDuration;
+        this.attackCooldown = this.baseAttackCooldown;
         this.attackSpeed = this.baseAttackSpeed;
         this.movementSpeed = this.baseMovementSpeed;
         this.health = this.maxHealth;
@@ -315,7 +390,9 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.DamageEvent -= Damage;
         PlayerStats.ChangeAttackDamageEvent -= ChangeAttackDamage;
         PlayerStats.RestoreHealthEvent -= RestoreHealth;
-        PlayerStats.ChangeAttackSpeedEvent -= ChangeAttackSpeed;
+        PlayerStats.ChangeAttackDurationEvent -= ChangeAttackDuration;
+        PlayerStats.ChangeAttackCooldownEvent -= ChangeAttackCooldown;
+        //PlayerStats.ChangeAttackSpeedEvent -= ChangeAttackSpeed;
         PlayerStats.ChangeMovementSpeedEvent -= ChangeMovementSpeed;
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
