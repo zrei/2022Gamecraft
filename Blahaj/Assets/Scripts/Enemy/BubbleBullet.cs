@@ -8,7 +8,7 @@ public class BubbleBullet : MonoBehaviour
 
     [SerializeField] private float bulletSpeed;
 
-    [SerializeField] private int baseDamage;
+    [SerializeField] private float baseDamage;
 
     #endregion
 

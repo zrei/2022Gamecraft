@@ -143,7 +143,7 @@ public class DigestControls : MonoBehaviour
         else if (red > yellow && yellow > purple)
         {
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.AttackSpeedUp, skillValue));    
-            skillMade.text = $"Your attack speed has increased";
+            skillMade.text = $"Your attack cooldown has decreased";
             //return new Tuple<Skill, int>(Skill.AttackSpeedUp, skillValue);
         }
         else if (yellow > purple && purple > red)

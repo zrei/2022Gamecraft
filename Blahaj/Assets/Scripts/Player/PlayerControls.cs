@@ -100,30 +100,33 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameManager.GetStateEvent() != GameState.PauseGame)
         {
-            // attack
-            Debug.Log("Space has been pressed");
-            if (canAttack) 
+            dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("Attack able, attacking");
-                StartCoroutine(Attack());
-            }
-        }
-        if (GameManager.GetStateEvent() != GameState.Crafting)
-        {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
+                // attack
+                Debug.Log("Space has been pressed");
+                if (canAttack) 
                 {
-                    Debug.Log("Healing?");
-                    //Debug.Log("Have Skill, Cooldown okay");
-                    skills.UseSkill(Skill.Healing);
-                    StartCoroutine(SkillCooldown(Skill.Healing, stats.GetCooldown(Skill.Healing)));
+                    Debug.Log("Attack able, attacking");
+                    StartCoroutine(Attack());
                 }
-                // check skill 4
-                //Debug.Log("O has been pressed");
+            }
+            if (GameManager.GetStateEvent() != GameState.Crafting)
+            {
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
+                    {
+                        Debug.Log("Healing?");
+                        //Debug.Log("Have Skill, Cooldown okay");
+                        skills.UseSkill(Skill.Healing);
+                        StartCoroutine(SkillCooldown(Skill.Healing, stats.GetCooldown(Skill.Healing)));
+                    }
+                    // check skill 4
+                    //Debug.Log("O has been pressed");
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.I))
@@ -160,7 +163,6 @@ public class PlayerControls : MonoBehaviour
             // check skill 3
             //Debug.Log("I has been pressed");
         }
-        
     }
 
     private IEnumerator SkillCooldown(Skill skill, float cooldown)
