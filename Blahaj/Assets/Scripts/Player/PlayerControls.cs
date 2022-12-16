@@ -55,22 +55,27 @@ public class PlayerControls : MonoBehaviour
     {
         if (this.movementInput != Vector2.zero && attacking!=true)
         {
-        //     // int numCollisions = rb2D.Cast(
-        //     //     movementInput,
-        //     //     movementFilter,
-        //     //     castCollisions,
-        //     //     stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
-        //     //     );
+            
+            int numCollisions = rb2D.Cast(
+                movementInput,
+                movementFilter,
+                castCollisions,
+                stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
+                );
 
-        //     // if (numCollisions == 0)
-        //     // {
-        //         rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
-        //     // }
-        //float playerSpeed  =  stats.GetMovementSpeed();
+            
+            if (numCollisions == 0)
+            {
+                    rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+            }
+            
 
-        //rb2D.velocity  = movementInput * playerSpeed;
+            //float playerSpeed  =  stats.GetMovementSpeed();
 
-        rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+            //rb2D.velocity  = movementInput * playerSpeed;
+
+            //rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+            
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
             //Debug.Log(rotationZ);
