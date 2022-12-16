@@ -12,7 +12,7 @@ public class PlayerControls : MonoBehaviour
     
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
-
+    private Vector2 dashdir;
     private bool attacking = false;
     private bool canAttack = true;
     private bool canPoison = true;
@@ -53,7 +53,7 @@ public class PlayerControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.movementInput != Vector2.zero)
+        if (this.movementInput != Vector2.zero && attacking!=true)
         {
         //     // int numCollisions = rb2D.Cast(
         //     //     movementInput,
@@ -69,12 +69,13 @@ public class PlayerControls : MonoBehaviour
         //float playerSpeed  =  stats.GetMovementSpeed();
 
         //rb2D.velocity  = movementInput * playerSpeed;
+
         rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
             //Debug.Log(rotationZ);
             transform.rotation = rotationZ;
-            
+
             float x = Mathf.Abs(transform.localScale.x);
             float y = transform.localScale.y;
             float z = transform.localScale.z;
@@ -85,8 +86,9 @@ public class PlayerControls : MonoBehaviour
                 transform.localScale = new Vector3(x, y, z);
                 //mySR.flipX = false;
             }
-            
-        }    
+
+        }        
+
         //}
         /*if (this.attacking)
         {
@@ -98,6 +100,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
+        dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // attack
@@ -105,7 +108,7 @@ public class PlayerControls : MonoBehaviour
             if (canAttack) 
             {
                 Debug.Log("Attack able, attacking");
-                StartCoroutine("Attack");
+                StartCoroutine(Attack());
             }
         }
         if (Input.GetKeyDown(KeyCode.Y))
@@ -196,15 +199,18 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private IEnumerable Attack() {
+    private IEnumerator Attack() {
+        Debug.Log("Attack has been triggered");
+        float dashPower = 150;  
         this.attacking = true;
         this.canAttack = false;
-        float dashPower = stats.GetAttackDashPower();
-        rb2D.velocity = rb2D.velocity * dashPower;
+        //float dashPower = stats.GetAttackDashPower();
+        rb2D.velocity = dashdir * dashPower;
         stats.SetInvulnerable(true);
         yield return new WaitForSeconds(stats.GetAttackDuration());
         this.attacking = false;
-        stats.ChangeMovementSpeedNoLimit(-1 * dashPower);
+        rb2D.velocity = new Vector2(0, 0);
+        //stats.ChangeMovementSpeedNoLimit(-1 * dashPower);
         stats.SetInvulnerable(false);
         yield return new WaitForSeconds(stats.GetAttackCooldown());
         this.canAttack = true;
