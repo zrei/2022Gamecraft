@@ -12,8 +12,9 @@ public class PlayerControls : MonoBehaviour
     
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
-
+    private Vector2 dashdir;
     private bool attacking = false;
+    private bool canAttack = true;
     private bool canPoison = true;
     private bool canStun = true;
     private bool canExplode = true;
@@ -52,29 +53,29 @@ public class PlayerControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log("Movement speed is " + stats.GetMovementSpeed());
-        if (this.movementInput != Vector2.zero
-            && (GameManager.GetStateEvent() == GameState.InGame
-            || GameManager.GetStateEvent() == GameState.WinLevel
-            || GameManager.GetStateEvent() == GameState.Crafting))
+        if (this.movementInput != Vector2.zero && attacking!=true)
         {
-            int numCollisions = rb2D.Cast(
-                movementInput,
-                movementFilter,
-                castCollisions,
-                stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
-                );
+        //     // int numCollisions = rb2D.Cast(
+        //     //     movementInput,
+        //     //     movementFilter,
+        //     //     castCollisions,
+        //     //     stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
+        //     //     );
 
-            if (numCollisions == 0)
-            {
-                
-                rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
-            }
+        //     // if (numCollisions == 0)
+        //     // {
+        //         rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+        //     // }
+        //float playerSpeed  =  stats.GetMovementSpeed();
+
+        //rb2D.velocity  = movementInput * playerSpeed;
+
+        rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
             //Debug.Log(rotationZ);
             transform.rotation = rotationZ;
-            
+
             float x = Mathf.Abs(transform.localScale.x);
             float y = transform.localScale.y;
             float z = transform.localScale.z;
@@ -85,19 +86,31 @@ public class PlayerControls : MonoBehaviour
                 transform.localScale = new Vector3(x, y, z);
                 //mySR.flipX = false;
             }
-            
-            
-        }
-        if (this.attacking)
+
+        }        
+
+        //}
+        /*if (this.attacking)
         {
             // Attack! With cooldown
             //Debug.Log("Attack");
             this.attacking = false;
-        }
+        }*/
     }
 
     private void Update()
     {
+        dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // attack
+            Debug.Log("Space has been pressed");
+            if (canAttack) 
+            {
+                Debug.Log("Attack able, attacking");
+                StartCoroutine(Attack());
+            }
+        }
         if (GameManager.GetStateEvent() != GameState.Crafting)
         {
             if (Input.GetKeyDown(KeyCode.Y))
@@ -189,6 +202,27 @@ public class PlayerControls : MonoBehaviour
                 this.canHeal = true;
                 break;
         }
+    }
+
+    private IEnumerator Attack() {
+        Debug.Log("Attack has been triggered");
+        float dashPower = 150;  
+        this.attacking = true;
+        this.canAttack = false;
+        //float dashPower = stats.GetAttackDashPower();
+        rb2D.velocity = dashdir * dashPower;
+        stats.SetInvulnerable(true);
+        yield return new WaitForSeconds(stats.GetAttackDuration());
+        this.attacking = false;
+        rb2D.velocity = new Vector2(0, 0);
+        //stats.ChangeMovementSpeedNoLimit(-1 * dashPower);
+        stats.SetInvulnerable(false);
+        yield return new WaitForSeconds(stats.GetAttackCooldown());
+        this.canAttack = true;
+    }
+
+    public bool getAttacking() {
+        return attacking;
     }
 
 }

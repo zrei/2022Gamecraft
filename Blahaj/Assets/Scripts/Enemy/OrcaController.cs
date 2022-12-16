@@ -14,12 +14,12 @@ public class OrcaController : MonoBehaviour
     [SerializeField] private float minMovementSpeed;
     [SerializeField] private int numOrbsDropped;
     [SerializeField] private float attackCooldown;
-    [SerializeField] private float lastAttackDamageTime;
-
+    private float lastAttackDamageTime;
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
     private GameObject player;
-    public Collider2D objectCollider;
+    private PlayerStats playerStats;
+    private Collider2D objectCollider;
 
     public delegate void ChangeStats(float damageAmount);
     public static ChangeStats DamageEvent;
@@ -43,6 +43,7 @@ public class OrcaController : MonoBehaviour
         this.rb2D = GetComponent<Rigidbody2D>();
         this.mySR = GetComponent<SpriteRenderer>();
         this.player = GameObject.FindWithTag("Player");
+        this.objectCollider = GetComponent<Collider2D>();
         OrcaController.DamageEvent += Damage;
         OrcaController.SlowEvent += SlowDown;
         this.objectCollider = GetComponent<Collider2D>();
@@ -69,17 +70,24 @@ public class OrcaController : MonoBehaviour
                 //mySR.flipX = false;
             }
         }
-
         if ((Vector3.Distance(transform.position, player.transform.position) < attackRadius) && (Time.time >= lastAttackDamageTime + attackCooldown))
         {
             lastAttackDamageTime = Time.time;
-            //Debug.Log("Attack");
-            PlayerStats.DamageEvent(this.attackDamage);
+            Debug.Log("Attack");
+            player.GetComponent<PlayerStats>().Damage(this.attackDamage);
         }
+        /*
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+        if (Vector3.Distance(transform.position, player.transform.position) < attackRadius) 
+        {
+            //Debug.Log("Attack"); // must add countdown
+            //PlayerStats.Damage(this.attackDamage);
+        }*/
     }
 
-    private void Damage(float damageAmount)
+    public void Damage(float damageAmount)
     {
+        Debug.Log("Orca damaged");
         this.health -= damageAmount;
         if (this.health <= 0)
         {
