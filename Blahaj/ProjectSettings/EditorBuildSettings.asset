@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game2.unity
     guid: cf0b1bd4a296ddd4694b61406842ed3c
   - enabled: 1
+    path: Assets/Scenes/Game3.unity
+    guid: 1296930c7d55e4c438f04e7de8a31684
+  - enabled: 1
     path: Assets/Scenes/LoseGame.unity
     guid: 9bfdd7ad1f761a147b82d57de5f9c21b
   - enabled: 1

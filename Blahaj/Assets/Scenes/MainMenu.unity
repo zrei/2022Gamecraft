@@ -1265,7 +1265,7 @@ MonoBehaviour:
   baseAttackCooldown: 0.5
   baseAttackSpeed: 15
   baseMovementSpeed: 10
-  baseMaxHealth: 10
+  baseMaxHealth: 15
   maxAttackDamage: 20
   maxAttackDuration: 0
   maxAttackCooldown: 0
@@ -1279,17 +1279,17 @@ MonoBehaviour:
   baseFireballRadius: 0
   basePoisonRadius: 2
   baseStunRadius: 2
-  baseFireballDamage: 0
+  baseFireballDamage: 3
   baseStunDamage: 2
   basePoisonDamage: 2
   basePoisonTime: 2
   baseStunTime: 2
   baseFireballSpeed: 5
   baseHealAmount: 2
-  baseFireballCooldown: 0
-  baseStunCooldown: 2
-  basePoisonCooldown: 2
-  baseHealCooldown: 2
+  baseFireballCooldown: 0.5
+  baseStunCooldown: 0.5
+  basePoisonCooldown: 0.5
+  baseHealCooldown: 0.5
 --- !u!1 &1628771998
 GameObject:
   m_ObjectHideFlags: 0

@@ -139,7 +139,7 @@ MonoBehaviour:
   health: 20
   movementSpeed: 5
   attackSpeed: 2
-  attackDamage: 3
+  attackDamage: 2
   attackRadius: 2
   minMovementSpeed: 2
   numOrbsDropped: 3
