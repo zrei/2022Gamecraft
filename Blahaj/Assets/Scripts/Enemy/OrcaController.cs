@@ -34,6 +34,8 @@ public class OrcaController : MonoBehaviour, EnemyController
     [SerializeField] private GameObject YellowOrb;
     [SerializeField] public GameObject PurpleOrb;
 
+    private bool activated = false;
+
     #endregion
 
     #region Methods
@@ -54,28 +56,32 @@ public class OrcaController : MonoBehaviour, EnemyController
     // Update is called once per frame
     private void Update()
     {
-        var step =  this.movementSpeed * Time.deltaTime; // calculate distance to move
-        if (Time.time >= lastAttackDamageTime + attackCooldown)
+        if (activated)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+            var step =  this.movementSpeed * Time.deltaTime; // calculate distance to move
+            if (Time.time >= lastAttackDamageTime + attackCooldown)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
 
-            float x = Mathf.Abs(transform.localScale.x);
-            float y = transform.localScale.y;
-            float z = transform.localScale.z;
-            if (player.transform.position.x - transform.position.x >= 0) {
-                transform.localScale = new Vector3(-x, y, z);
-                //mySR.flipX = true;
-            } else if (player.transform.position.x - transform.position.x < 0) {
-                transform.localScale = new Vector3(x, y, z);
-                //mySR.flipX = false;
+                float x = Mathf.Abs(transform.localScale.x);
+                float y = transform.localScale.y;
+                float z = transform.localScale.z;
+                if (player.transform.position.x - transform.position.x >= 0) {
+                    transform.localScale = new Vector3(-x, y, z);
+                    //mySR.flipX = true;
+                } else if (player.transform.position.x - transform.position.x < 0) {
+                    transform.localScale = new Vector3(x, y, z);
+                    //mySR.flipX = false;
+                }
+            }
+            if ((Vector3.Distance(transform.position, player.transform.position) < attackRadius) && (Time.time >= lastAttackDamageTime + attackCooldown))
+            {
+                lastAttackDamageTime = Time.time;
+                Debug.Log("Attack");
+                PlayerStats.DamageEvent(this.attackDamage);
             }
         }
-        if ((Vector3.Distance(transform.position, player.transform.position) < attackRadius) && (Time.time >= lastAttackDamageTime + attackCooldown))
-        {
-            lastAttackDamageTime = Time.time;
-            Debug.Log("Attack");
-            PlayerStats.DamageEvent(this.attackDamage);
-        }
+        
         /*
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
         if (Vector3.Distance(transform.position, player.transform.position) < attackRadius) 
@@ -83,6 +89,15 @@ public class OrcaController : MonoBehaviour, EnemyController
             //Debug.Log("Attack"); // must add countdown
             //PlayerStats.Damage(this.attackDamage);
         }*/
+    }
+
+    private void OnBecameVisible()
+    {
+        if (!activated)
+        {
+            activated = true;
+            lastAttackDamageTime = Time.time;
+        }
     }
 
     public void Damage(float damageAmount)

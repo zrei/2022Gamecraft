@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Constants;
 public class DialogueTrigger : MonoBehaviour
 {
     private Dialogue dialogue = new Dialogue();
     private DialogueManager dialogueManager;
     private bool isOpen = false;
+    private PlayerStats stats;
 
+    private void Awake()
+    {
+        this.stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -49,8 +54,23 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue() {
         if (!isOpen) {
-            dialogueManager.StartDialogue(dialogue);
-            isOpen = true;
+            if (gameObject.CompareTag("Heal") && stats.RetrieveSkillLevel(Skill.Healing) > 0)
+            {
+                dialogueManager.StartDialogue(dialogue);
+                isOpen = true;
+            } else if (gameObject.CompareTag("Fireball") && stats.RetrieveSkillLevel(Skill.Fireball) > 0)
+            {
+                dialogueManager.StartDialogue(dialogue);
+                isOpen = true;
+            } else if (gameObject.CompareTag("Poison") && stats.RetrieveSkillLevel(Skill.Poison) > 0)
+            {
+                dialogueManager.StartDialogue(dialogue);
+                isOpen = true;
+            } else if (gameObject.CompareTag("Stun") && stats.RetrieveSkillLevel(Skill.Stun) > 0)
+            {
+                dialogueManager.StartDialogue(dialogue);
+                isOpen = true;
+            }
         } else {
             dialogueManager.EndDialogue();
             isOpen = false;
