@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 873477143388361338}
   - component: {fileID: 873477143388361336}
   - component: {fileID: 873477143388361337}
-  - component: {fileID: 873477143388361334}
   - component: {fileID: 8541291039365648131}
   - component: {fileID: 6828200388785921852}
+  - component: {fileID: 6789477028741738518}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -197,46 +197,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.3356075, y: 4.527539}
   m_EdgeRadius: 0
---- !u!114 &873477143388361334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873477143388361343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891c7b16a14c94859b95a6aeb0eed1bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseAttackDamage: 0
-  baseAttackSpeed: 0
-  baseMovementSpeed: 10
-  baseMaxHealth: 10
-  minAttackDamage: 0
-  maxAttackDamage: 0
-  minAttackSpeed: 0
-  maxAttackSpeed: 0
-  minMovementSpeed: 1
-  maxMovementSpeed: 15
-  stunSprite: {fileID: 758256201, guid: a30332b36dced464fa1db63cab89c234, type: 3}
-  normalSprite: {fileID: 282400171, guid: a30332b36dced464fa1db63cab89c234, type: 3}
-  explodeSprite: {fileID: -1805864678, guid: a30332b36dced464fa1db63cab89c234, type: 3}
-  poisonSprite: {fileID: -2048975676, guid: a30332b36dced464fa1db63cab89c234, type: 3}
-  baseExplosionRadius: 0
-  basePoisonRadius: 0
-  baseStunRadius: 0
-  baseExplosionDamage: 0
-  baseStunDamage: 0
-  basePoisonDamage: 0
-  basePoisonTime: 0
-  baseStunTime: 0
-  baseHealAmount: 0
-  baseExplosionCooldown: 0
-  baseStunCooldown: 0
-  basePoisonCooldown: 0
-  baseHealCooldown: 0
-  healthBar: {fileID: 0}
 --- !u!70 &8541291039365648131
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -265,6 +225,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b52430078f84172a00280bdc795a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6789477028741738518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873477143388361343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e8aa356cf1e4517891ef4b79d4c7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1518267791123466034
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +249,7 @@ GameObject:
   - component: {fileID: 5604942289288021073}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,7 +298,7 @@ GameObject:
   - component: {fileID: 2059552259044713154}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

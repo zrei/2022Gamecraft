@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Constants;
-using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -11,9 +10,9 @@ public class PlayerStats : MonoBehaviour
     #region Fields
 
     private Dictionary<Skill, int> skills = new Dictionary<Skill, int>{
-        {Skill.Explosion, 1},
-        {Skill.Poison, 1},
-        {Skill.Stun, 1},
+        {Skill.Explosion, 0},
+        {Skill.Poison, 0},
+        {Skill.Stun, 0},
         {Skill.Healing, 0}
     };
     private float health;
@@ -62,9 +61,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseStunCooldown;
     [SerializeField] private float basePoisonCooldown;
     [SerializeField] private float baseHealCooldown;
-    private Vector3 initialPosition;
-
-    [SerializeField] HealthBar healthBar; 
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
         {Orbs.Red, 0},
@@ -91,8 +87,6 @@ public class PlayerStats : MonoBehaviour
     public delegate void StatsReset();
     public static StatsReset ResetStatsEvent;
 
-    private SpriteRenderer mySR;
-
     #endregion
     
     #region Methods
@@ -103,7 +97,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.DamageEvent += Damage;
         PlayerStats.ChangeAttackDamageEvent += ChangeAttackDamage;
         PlayerStats.RestoreHealthEvent += RestoreHealth;
-        //PlayerStats.ChangeAttackSpeedEvent += ChangeAttackSpeed;
+        PlayerStats.ChangeAttackSpeedEvent += ChangeAttackSpeed;
         PlayerStats.ChangeAttackDurationEvent += ChangeAttackDuration;
         PlayerStats.ChangeAttackCooldownEvent += ChangeAttackCooldown;
         PlayerStats.ChangeMovementSpeedEvent += ChangeMovementSpeed;
@@ -111,26 +105,20 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent += GainSkill;
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
         PlayerStats.ResetStatsEvent += ResetStats;
-        ResetStats();
-        this.initialPosition = transform.position;
-        healthBar.SetMaxHealth(baseMaxHealth);
-        
-    }
-
-    private void Awake()
-    {
-        this.mySR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        /*
+        if (GameManager.GetStateEvent() == GameState.NewGame)
+        {
+            GameManager.ChangeStateEvent(GameState.InGame);
+        }
+        /* Debug health bar
         if (Input.GetKeyDown(KeyCode.Space)) {
             Damage(2f);
-        }*/
-        
-        
+        }
+        */
     }
     
     public void Damage(float damageAmount)
@@ -169,6 +157,7 @@ public class PlayerStats : MonoBehaviour
         } else
         {
             this.movementSpeed = Mathf.Min(this.maxMovementSpeed, this.movementSpeed + amount);
+            //Debug.Log("Movement speed is "  + this.movementSpeed);
         }
     }
 
@@ -249,8 +238,10 @@ public class PlayerStats : MonoBehaviour
 
     private void RestoreHealth(float amountRestored)
     {
+        //Debug.Log("Heal amount " + amountRestored);
         this.health = Mathf.Min(this.maxHealth, this.health + amountRestored);
-        healthBar.SetHealth(this.health);
+        //Debug.Log("Health now " + this.health);
+        HealthBar.SetHealthEvent(this.health);
     }
 
     private void ChangeMaxHealth(float amount)
@@ -258,7 +249,6 @@ public class PlayerStats : MonoBehaviour
         float ratio = this.health / this.maxHealth;
         this.maxHealth += amount;
         this.health = ratio * this.maxHealth;
-        healthBar.SetMaxHealth(this.maxHealth);
     }
 
     private void ChangeOrbs(int red, int yellow, int purple)
@@ -271,13 +261,41 @@ public class PlayerStats : MonoBehaviour
     
     private void GainSkill(Tuple<Skill, int> skill)
     {
-        this.skills[skill.Item1] += skill.Item2;
-        Debug.Log(this.skills[skill.Item1]);
+
+        switch (skill.Item1)
+        {
+            case Skill.Explosion:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Stun:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Poison:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.Healing:
+                this.skills[skill.Item1] += skill.Item2;
+                break;
+            case Skill.HpUp:
+                ChangeMaxHealth(skill.Item2 * 0.5f);
+                break;
+            case Skill.AttackSpeedUp:
+                ChangeAttackSpeed(skill.Item2 * 0.5f);
+                break;
+            case Skill.AttackUp:
+                ChangeAttackDamage(skill.Item2 * 0.5f);
+                break;
+            case Skill.MovementSpeedUp:
+                ChangeMovementSpeed(skill.Item2 * 0.5f);
+                break;
+        }
+        //this.skills[skill.Item1] += skill.Item2;
+
     }
     
     public int RetrieveSkillLevel(Skill skill)
     {   
-        Debug.Log(skills);
+        //Debug.Log(skills);
         return skills[skill];   
     }
 
@@ -287,16 +305,16 @@ public class PlayerStats : MonoBehaviour
         if (skill == Skill.Explosion)
         {
             //scale the info based on the skill level somehow
-            return new Tuple<float, float, float>(this.baseExplosionDamage, this.baseExplosionRadius, 0f);
+            return new Tuple<float, float, float>(this.baseExplosionDamage + 0.5f * (skillLevel - 1), this.baseExplosionRadius + 0.2f * (skillLevel - 1), 0f);
         } else if (skill == Skill.Poison)
         {
-            return new Tuple<float, float, float>(this.basePoisonDamage, this.basePoisonRadius, this.basePoisonTime);
+            return new Tuple<float, float, float>(this.basePoisonDamage + 0.5f * (skillLevel - 1), this.basePoisonRadius + 0.2f * (skillLevel - 1), this.basePoisonTime + 0.2f * (skillLevel - 1));
         } else if (skill == Skill.Stun)
         {
-            return new Tuple<float, float, float>(this.baseStunDamage, this.baseStunRadius, this.baseStunTime);
+            return new Tuple<float, float, float>(this.baseStunDamage + 0.5f * (skillLevel - 1), this.baseStunRadius + 0.2f * (skillLevel - 1), this.baseStunTime + 0.2f * (skillLevel - 1));
         } else if (skill == Skill.Healing) 
         {
-            return new Tuple<float, float, float>(this.baseHealAmount, 0f, 0f);
+            return new Tuple<float, float, float>(this.baseHealAmount + 0.2f * (skillLevel - 1), 0f, 0f);
         } else 
         {
             return new Tuple<float, float, float>(0f, 0f, 0f);
@@ -309,16 +327,16 @@ public class PlayerStats : MonoBehaviour
         //use to factor cooldown
         if (skill == Skill.Stun) 
         {
-            return this.baseStunCooldown;    
+            return this.baseStunCooldown - 0.1f * (skillLevel - 1);    
         } else if (skill == Skill.Poison)
         {
-            return this.basePoisonCooldown;
+            return this.basePoisonCooldown - 0.1f * (skillLevel - 1);
         } else if (skill == Skill.Explosion)
         {
-            return this.baseExplosionCooldown;
+            return this.baseExplosionCooldown - 0.1f * (skillLevel - 1);
         } else if (skill == Skill.Healing)
         {
-            return this.baseHealCooldown;
+            return this.baseHealCooldown - 0.1f * (skillLevel - 1);
         } else 
         {
             return 0f;
@@ -334,8 +352,24 @@ public class PlayerStats : MonoBehaviour
         this.attackSpeed = this.baseAttackSpeed;
         this.movementSpeed = this.baseMovementSpeed;
         this.health = this.maxHealth;
+        ResetOrbs();
+        ResetSkills();
         ChangeSprite(SpriteStates.Normal);
-        transform.position = this.initialPosition;
+    }
+
+    private void ResetOrbs()
+    {
+        orbs[Orbs.Purple] = 0;
+        orbs[Orbs.Red] = 0;
+        orbs[Orbs.Yellow] = 0;
+    }
+
+    private void ResetSkills()
+    {
+        skills[Skill.Explosion] = 0;
+        skills[Skill.Stun] = 0;
+        skills[Skill.Poison] = 0;
+        skills[Skill.Healing] = 0;
     }
 
     public void ChangeSprite(SpriteStates state)
@@ -343,16 +377,16 @@ public class PlayerStats : MonoBehaviour
         switch (state)
         {
             case (SpriteStates.Normal):
-                mySR.sprite = normalSprite;
+                SpriteChanger.SpriteChangeEvent(normalSprite);
                 break;
             case (SpriteStates.Stun):
-                mySR.sprite = stunSprite;
+                SpriteChanger.SpriteChangeEvent(stunSprite);
                 break;
             case (SpriteStates.Poison):
-                mySR.sprite = poisonSprite;
+                SpriteChanger.SpriteChangeEvent(poisonSprite);
                 break;
             case (SpriteStates.Explosion):
-                mySR.sprite = explodeSprite;
+                SpriteChanger.SpriteChangeEvent(explodeSprite);
                 break;
         }
     }
@@ -369,6 +403,28 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
         PlayerStats.ResetStatsEvent -= ResetStats;
+    }
+
+    public int getRedOrbs() {
+        return this.orbs[Orbs.Red];
+    }
+
+    public int getYellowOrbs() {
+        return this.orbs[Orbs.Yellow];
+    }
+
+    public int getPurpleOrbs() {
+        return this.orbs[Orbs.Purple];
+    }
+
+    public float getHealth()
+    {
+        return this.health;
+    }
+
+    public float getMaxHealth()
+    {
+        return this.maxHealth;
     }
     
     #endregion

@@ -7,6 +7,10 @@ TagManager:
   - PurpleOrb
   - RedOrb
   - YellowOrb
+  - Enemy
+  - Healthbar
+  - WinPortal
+  - SkillDisplay
   layers:
   - Default
   - TransparentFX

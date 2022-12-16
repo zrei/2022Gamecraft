@@ -11,7 +11,7 @@ public class OrcaController : MonoBehaviour
     [SerializeField] private float attackSpeed;
     [SerializeField] private float attackDamage;
     [SerializeField] private float attackRadius;
-    [SerializeField]private float minMovementSpeed;
+    [SerializeField] private float minMovementSpeed;
     [SerializeField] private int numOrbsDropped;
     [SerializeField] private float attackCooldown;
     private float lastAttackDamageTime;
@@ -46,6 +46,7 @@ public class OrcaController : MonoBehaviour
         this.objectCollider = GetComponent<Collider2D>();
         OrcaController.DamageEvent += Damage;
         OrcaController.SlowEvent += SlowDown;
+        this.objectCollider = GetComponent<Collider2D>();
         OrcaController.StunEvent += Stun;
         OrcaController.PoisonEvent += Poison;
     }
