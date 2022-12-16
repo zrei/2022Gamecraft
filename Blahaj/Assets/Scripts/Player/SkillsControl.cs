@@ -7,6 +7,8 @@ using Constants;
 public class SkillsControl : MonoBehaviour
 {
     private PlayerStats stats;
+
+    private int timesHealedInLevel = 0;
     [SerializeField] private GameObject fireball;
     private Transform mouth = null;
     
@@ -34,8 +36,8 @@ public class SkillsControl : MonoBehaviour
     {
         switch (skill)
         {
-            case Skill.Explosion:
-                Explosion(stats.GetSkillInfo(Skill.Explosion));
+            case Skill.Fireball:
+                Fireball(stats.GetSkillInfo(Skill.Fireball));
                 break;
             case Skill.Stun:
                 Stun(stats.GetSkillInfo(Skill.Stun));
@@ -44,17 +46,21 @@ public class SkillsControl : MonoBehaviour
                 Poison(stats.GetSkillInfo(Skill.Poison));
                 break;
             case Skill.Healing:
-                Heal(stats.GetSkillInfo(Skill.Healing));
+                if (timesHealedInLevel < 1)
+                {
+                    Heal(stats.GetSkillInfo(Skill.Healing));
+                    timesHealedInLevel += 1;
+                }
                 break;
         }
     }
 
-    private void Explosion(Tuple<float, float, float> skillInfo)
+    private void Fireball(Tuple<float, float, float> skillInfo)
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
         //Debug.Log(mouth);
-        StartCoroutine(ChangeSprite(SpriteStates.Explosion, 0.3f));
+        StartCoroutine(ChangeSprite(SpriteStates.Fireball, 0.3f));
         Instantiate(fireball, mouth.position, bulletRotation);
         //Debug.Log(skillInfo);
         /*Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, skillInfo.Item2);

@@ -53,9 +53,10 @@ GameObject:
   - component: {fileID: 7449786257442130779}
   - component: {fileID: 2480166851155892070}
   - component: {fileID: 1482732436463461223}
+  - component: {fileID: 243090315598417612}
   m_Layer: 5
   m_Name: Poison
-  m_TagString: Untagged
+  m_TagString: Poison
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +162,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7449786257442130779}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 243090315598417612}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1482732436463461223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +189,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSprite: {fileID: 751317301, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
   skill: 5
+--- !u!114 &243090315598417612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830514228257730289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2a9ffa437f66e43aba5e83c26de692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6392618735957466361
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,9 +214,10 @@ GameObject:
   - component: {fileID: 8014123384147790298}
   - component: {fileID: 7225898534535647486}
   - component: {fileID: 8577674154938401425}
+  - component: {fileID: 6783977317878614217}
   m_Layer: 5
-  m_Name: Explode
-  m_TagString: Untagged
+  m_Name: Fireball
+  m_TagString: Fireball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +323,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8014123384147790298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6783977317878614217}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8577674154938401425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +350,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSprite: {fileID: 1630241973, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
   skill: 6
+--- !u!114 &6783977317878614217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392618735957466361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2a9ffa437f66e43aba5e83c26de692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7276424160486794508
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,9 +375,10 @@ GameObject:
   - component: {fileID: 2157057021889409014}
   - component: {fileID: 4298360930486448535}
   - component: {fileID: 8929903075734252210}
+  - component: {fileID: 3790536665144664463}
   m_Layer: 5
   m_Name: Heal
-  m_TagString: Untagged
+  m_TagString: Heal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -433,7 +484,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2157057021889409014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3790536665144664463}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8929903075734252210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +511,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSprite: {fileID: -1751828761, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
   skill: 7
+--- !u!114 &3790536665144664463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276424160486794508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2a9ffa437f66e43aba5e83c26de692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8585240149026556939
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,9 +536,10 @@ GameObject:
   - component: {fileID: 6056345278080494449}
   - component: {fileID: 5795629947950979372}
   - component: {fileID: 4869469309683511742}
+  - component: {fileID: 2116739120553284361}
   m_Layer: 5
-  m_Name: Electric
-  m_TagString: Untagged
+  m_Name: Stun
+  m_TagString: Stun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -569,7 +645,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6056345278080494449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2116739120553284361}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4869469309683511742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,3 +672,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSprite: {fileID: -612544792, guid: 4d3f516c03fdb054698197bfe16b75db, type: 3}
   skill: 4
+--- !u!114 &2116739120553284361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8585240149026556939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2a9ffa437f66e43aba5e83c26de692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

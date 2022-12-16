@@ -46,31 +46,31 @@ public class PlayerControls : MonoBehaviour
         this.movementInput = movementValue.Get<Vector2>();
     }
 
-    private void OnFire()
-    {
-        this.attacking = true;
-    }
-
     private void FixedUpdate()
     {
         if (this.movementInput != Vector2.zero && attacking!=true)
         {
-        //     // int numCollisions = rb2D.Cast(
-        //     //     movementInput,
-        //     //     movementFilter,
-        //     //     castCollisions,
-        //     //     stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
-        //     //     );
+            
+            int numCollisions = rb2D.Cast(
+                movementInput,
+                movementFilter,
+                castCollisions,
+                stats.GetMovementSpeed() * Time.fixedDeltaTime + collisionOffset
+                );
 
-        //     // if (numCollisions == 0)
-        //     // {
-        //         rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
-        //     // }
-        //float playerSpeed  =  stats.GetMovementSpeed();
+            
+            if (numCollisions == 0)
+            {
+                rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+            }
+            
 
-        //rb2D.velocity  = movementInput * playerSpeed;
+            //float playerSpeed  =  stats.GetMovementSpeed();
 
-        rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+            //rb2D.velocity  = movementInput * playerSpeed;
+
+            //rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+            
             //Debug.Log(movementInput);
             Quaternion rotationZ = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg*Mathf.Atan(this.movementInput.y / this.movementInput.x));                
             //Debug.Log(rotationZ);
@@ -100,7 +100,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.GetStateEvent() != GameState.PauseGame)
+        if (GameManager.GetStateEvent() != GameState.PauseGame && GameManager.GetStateEvent() != GameState.Crafting)
         {
             dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
             if (Input.GetKeyDown(KeyCode.Space))
@@ -113,30 +113,27 @@ public class PlayerControls : MonoBehaviour
                     StartCoroutine(Attack());
                 }
             }
-            if (GameManager.GetStateEvent() != GameState.Crafting)
+            if (Input.GetKeyDown(KeyCode.Y))
             {
-                if (Input.GetKeyDown(KeyCode.Y))
+                if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
                 {
-                    if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
-                    {
-                        Debug.Log("Healing?");
-                        //Debug.Log("Have Skill, Cooldown okay");
-                        skills.UseSkill(Skill.Healing);
-                        StartCoroutine(SkillCooldown(Skill.Healing, stats.GetCooldown(Skill.Healing)));
-                    }
-                    // check skill 4
-                    //Debug.Log("O has been pressed");
+                    Debug.Log("Healing?");
+                    //Debug.Log("Have Skill, Cooldown okay");
+                    skills.UseSkill(Skill.Healing);
+                    StartCoroutine(SkillCooldown(Skill.Healing, stats.GetCooldown(Skill.Healing)));
                 }
+                // check skill 4
+                //Debug.Log("O has been pressed");
             }
             if (Input.GetKeyDown(KeyCode.I))
             {
-                // explosion
+                // Fireball
                 // check skill 1
-                if (canExplode && stats.RetrieveSkillLevel(Skill.Explosion) > 0)
+                if (canExplode && stats.RetrieveSkillLevel(Skill.Fireball) > 0)
                 {
                     //Debug.Log("Have Skill, Cooldown okay");
-                    skills.UseSkill(Skill.Explosion);
-                    StartCoroutine(SkillCooldown(Skill.Explosion, stats.GetCooldown(Skill.Explosion)));
+                    skills.UseSkill(Skill.Fireball);
+                    StartCoroutine(SkillCooldown(Skill.Fireball, stats.GetCooldown(Skill.Fireball)));
                 }
                 //Debug.Log("Y has been pressed");
             }
@@ -171,7 +168,7 @@ public class PlayerControls : MonoBehaviour
         float interval = 0.3f;
         switch (skill)
         {
-            case (Skill.Explosion):
+            case (Skill.Fireball):
                 this.canExplode = false;
                 break;
             case (Skill.Poison):
@@ -191,7 +188,7 @@ public class PlayerControls : MonoBehaviour
         }
         switch (skill)
         {
-            case (Skill.Explosion):
+            case (Skill.Fireball):
                 this.canExplode = true;
                 break;
             case (Skill.Poison):
@@ -208,11 +205,11 @@ public class PlayerControls : MonoBehaviour
 
     private IEnumerator Attack() {
         Debug.Log("Attack has been triggered");
-        float dashPower = 150;  
+        //float dashPower = 150;  
         this.attacking = true;
         this.canAttack = false;
         //float dashPower = stats.GetAttackDashPower();
-        rb2D.velocity = dashdir * dashPower;
+        rb2D.velocity = dashdir * stats.GetAttackDashPower();
         stats.SetInvulnerable(true);
         yield return new WaitForSeconds(stats.GetAttackDuration());
         this.attacking = false;

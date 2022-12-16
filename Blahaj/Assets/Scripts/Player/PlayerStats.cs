@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     #region Fields
 
     private Dictionary<Skill, int> skills = new Dictionary<Skill, int>{
-        {Skill.Explosion, 0},
+        {Skill.Fireball, 0},
         {Skill.Poison, 0},
         {Skill.Stun, 0},
         {Skill.Healing, 0}
@@ -31,34 +31,34 @@ public class PlayerStats : MonoBehaviour
     private float movementSpeed;
     [SerializeField] private float baseMaxHealth;
     private float maxHealth;
-    [SerializeField] private float minAttackDamage;
+    private float minAttackDamage;
     [SerializeField] private float maxAttackDamage;
-    [SerializeField] private float minAttackDuration;
+    private float minAttackDuration;
     [SerializeField] private float maxAttackDuration;
-    [SerializeField] private float minAttackCooldown;
+    private float minAttackCooldown;
     [SerializeField] private float maxAttackCooldown;
-    [SerializeField] private float minAttackDashPower;
+    private float minAttackDashPower;
     [SerializeField] private float maxAttackDashPower;
-    [SerializeField] private float minAttackSpeed;
+    private float minAttackSpeed;
     [SerializeField] private float maxAttackSpeed;
-    [SerializeField] private float minMovementSpeed;
+    private float minMovementSpeed;
     [SerializeField] private float maxMovementSpeed;
     [SerializeField] private Sprite stunSprite;
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite explodeSprite;
     [SerializeField] private Sprite poisonSprite;
 
-    [SerializeField] private float baseExplosionRadius;
+    [SerializeField] private float baseFireballRadius;
     [SerializeField] private float basePoisonRadius;
     [SerializeField] private float baseStunRadius;
-    [SerializeField] private float baseExplosionDamage;
+    [SerializeField] private float baseFireballDamage;
     [SerializeField] private float baseStunDamage;
     [SerializeField] private float basePoisonDamage;
     [SerializeField] private float basePoisonTime;
     [SerializeField] private float baseStunTime;
-    [SerializeField] private float baseExplosionSpeed;
+    [SerializeField] private float baseFireballSpeed;
     [SerializeField] private float baseHealAmount;
-    [SerializeField] private float baseExplosionCooldown;
+    [SerializeField] private float baseFireballCooldown;
     [SerializeField] private float baseStunCooldown;
     [SerializeField] private float basePoisonCooldown;
     [SerializeField] private float baseHealCooldown;
@@ -207,7 +207,7 @@ public class PlayerStats : MonoBehaviour
 
     public float GetAttackDashPower()
     {
-        return this.attackDashPower;
+        return this.baseAttackDashPower;
     }
     private void ChangeAttackDashPower(float amount)
     {
@@ -258,7 +258,7 @@ public class PlayerStats : MonoBehaviour
 
         switch (skill.Item1)
         {
-            case Skill.Explosion:
+            case Skill.Fireball:
                 this.skills[skill.Item1] += skill.Item2;
                 break;
             case Skill.Stun:
@@ -296,10 +296,10 @@ public class PlayerStats : MonoBehaviour
     public Tuple<float, float, float> GetSkillInfo(Skill skill)
     {
         int skillLevel = RetrieveSkillLevel(skill);
-        if (skill == Skill.Explosion)
+        if (skill == Skill.Fireball)
         {
             //scale the info based on the skill level somehow
-            return new Tuple<float, float, float>(this.baseExplosionDamage + 0.5f * (skillLevel - 1), this.baseExplosionRadius + 0.2f * (skillLevel - 1), this.baseExplosionSpeed + 0.1f * (skillLevel - 1));
+            return new Tuple<float, float, float>(this.baseFireballDamage + 0.5f * (skillLevel - 1), this.baseFireballRadius + 0.2f * (skillLevel - 1), this.baseFireballSpeed + 0.1f * (skillLevel - 1));
         } else if (skill == Skill.Poison)
         {
             return new Tuple<float, float, float>(this.basePoisonDamage + 0.5f * (skillLevel - 1), this.basePoisonRadius + 0.2f * (skillLevel - 1), this.basePoisonTime + 0.2f * (skillLevel - 1));
@@ -325,9 +325,9 @@ public class PlayerStats : MonoBehaviour
         } else if (skill == Skill.Poison)
         {
             return this.basePoisonCooldown - 0.1f * (skillLevel - 1);
-        } else if (skill == Skill.Explosion)
+        } else if (skill == Skill.Fireball)
         {
-            return this.baseExplosionCooldown - 0.1f * (skillLevel - 1);
+            return this.baseFireballCooldown - 0.1f * (skillLevel - 1);
         } else if (skill == Skill.Healing)
         {
             return this.baseHealCooldown - 0.1f * (skillLevel - 1);
@@ -360,7 +360,7 @@ public class PlayerStats : MonoBehaviour
 
     private void ResetSkills()
     {
-        skills[Skill.Explosion] = 0;
+        skills[Skill.Fireball] = 0;
         skills[Skill.Stun] = 0;
         skills[Skill.Poison] = 0;
         skills[Skill.Healing] = 0;
@@ -379,7 +379,7 @@ public class PlayerStats : MonoBehaviour
             case (SpriteStates.Poison):
                 SpriteChanger.SpriteChangeEvent(poisonSprite);
                 break;
-            case (SpriteStates.Explosion):
+            case (SpriteStates.Fireball):
                 SpriteChanger.SpriteChangeEvent(explodeSprite);
                 break;
         }
