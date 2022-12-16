@@ -1258,12 +1258,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891c7b16a14c94859b95a6aeb0eed1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invulnerable: 0
   baseAttackDamage: 10
+  baseAttackDuration: 0
+  baseAttackDashPower: 0
+  baseAttackCooldown: 0
   baseAttackSpeed: 2
-  baseMovementSpeed: 2
+  baseMovementSpeed: 20
   baseMaxHealth: 5
   minAttackDamage: 2
   maxAttackDamage: 20
+  minAttackDuration: 0
+  maxAttackDuration: 0
+  minAttackCooldown: 0
+  maxAttackCooldown: 0
+  minAttackDashPower: 0
+  maxAttackDashPower: 0
   minAttackSpeed: 2
   maxAttackSpeed: 20
   minMovementSpeed: 2
