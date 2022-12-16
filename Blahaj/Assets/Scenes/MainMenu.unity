@@ -1260,9 +1260,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   baseAttackDamage: 5
-  baseAttackDuration: 0.2
-  baseAttackDashPower: 15
-  baseAttackCooldown: 0
+  baseAttackDuration: 0.3
+  baseAttackDashPower: 20
+  baseAttackCooldown: 0.5
   baseAttackSpeed: 15
   baseMovementSpeed: 10
   baseMaxHealth: 10
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   basePoisonDamage: 2
   basePoisonTime: 2
   baseStunTime: 2
-  baseFireballSpeed: 0
+  baseFireballSpeed: 5
   baseHealAmount: 2
   baseFireballCooldown: 0
   baseStunCooldown: 2
