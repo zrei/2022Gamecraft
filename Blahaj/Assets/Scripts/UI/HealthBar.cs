@@ -28,6 +28,7 @@ public class HealthBar : MonoBehaviour
         SetHealth(stats.getHealth());
     }
     private void SetMaxHealth(float health) {
+        //Debug.Log("Max health is " + health);
         slider.maxValue = health; 
         slider.value = health; 
         fill.color = gradient.Evaluate(1f);

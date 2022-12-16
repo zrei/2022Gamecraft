@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.LoseGame:
-                Debug.Log("LoseGame");
+                //Debug.Log("LoseGame");
                 if (SceneManager.GetActiveScene().name != GameScenes.LoseGame)
                 {
                     SceneManager.LoadScene(GameScenes.LoseGame);

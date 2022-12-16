@@ -106,7 +106,7 @@ public class PlayerStats : MonoBehaviour
     
     public void Damage(float damageAmount)
     {
-        Debug.Log("Attack successful");
+        //Debug.Log("Attack successful");
         this.health -= damageAmount;
         HealthBar.SetHealthEvent(this.health);
         if (this.health <= 0)
@@ -131,6 +131,7 @@ public class PlayerStats : MonoBehaviour
         } else
         {
             this.movementSpeed = Mathf.Min(this.maxMovementSpeed, this.movementSpeed + amount);
+            //Debug.Log("Movement speed is "  + this.movementSpeed);
         }
     }
 
@@ -158,7 +159,9 @@ public class PlayerStats : MonoBehaviour
 
     private void RestoreHealth(float amountRestored)
     {
+        //Debug.Log("Heal amount " + amountRestored);
         this.health = Mathf.Min(this.maxHealth, this.health + amountRestored);
+        //Debug.Log("Health now " + this.health);
         HealthBar.SetHealthEvent(this.health);
     }
 
@@ -195,16 +198,16 @@ public class PlayerStats : MonoBehaviour
                 this.skills[skill.Item1] += skill.Item2;
                 break;
             case Skill.HpUp:
-                ChangeMaxHealth(skill.Item2);
+                ChangeMaxHealth(skill.Item2 * 0.5f);
                 break;
             case Skill.AttackSpeedUp:
-                ChangeAttackSpeed(skill.Item2);
+                ChangeAttackSpeed(skill.Item2 * 0.5f);
                 break;
             case Skill.AttackUp:
-                ChangeAttackDamage(skill.Item2);
+                ChangeAttackDamage(skill.Item2 * 0.5f);
                 break;
             case Skill.MovementSpeedUp:
-                ChangeMovementSpeed(skill.Item2);
+                ChangeMovementSpeed(skill.Item2 * 0.5f);
                 break;
         }
         //this.skills[skill.Item1] += skill.Item2;
@@ -213,7 +216,7 @@ public class PlayerStats : MonoBehaviour
     
     public int RetrieveSkillLevel(Skill skill)
     {   
-        Debug.Log(skills);
+        //Debug.Log(skills);
         return skills[skill];   
     }
 
@@ -223,16 +226,16 @@ public class PlayerStats : MonoBehaviour
         if (skill == Skill.Explosion)
         {
             //scale the info based on the skill level somehow
-            return new Tuple<float, float, float>(this.baseExplosionDamage, this.baseExplosionRadius, 0f);
+            return new Tuple<float, float, float>(this.baseExplosionDamage + 0.5f * (skillLevel - 1), this.baseExplosionRadius + 0.2f * (skillLevel - 1), 0f);
         } else if (skill == Skill.Poison)
         {
-            return new Tuple<float, float, float>(this.basePoisonDamage, this.basePoisonRadius, this.basePoisonTime);
+            return new Tuple<float, float, float>(this.basePoisonDamage + 0.5f * (skillLevel - 1), this.basePoisonRadius + 0.2f * (skillLevel - 1), this.basePoisonTime + 0.2f * (skillLevel - 1));
         } else if (skill == Skill.Stun)
         {
-            return new Tuple<float, float, float>(this.baseStunDamage, this.baseStunRadius, this.baseStunTime);
+            return new Tuple<float, float, float>(this.baseStunDamage + 0.5f * (skillLevel - 1), this.baseStunRadius + 0.2f * (skillLevel - 1), this.baseStunTime + 0.2f * (skillLevel - 1));
         } else if (skill == Skill.Healing) 
         {
-            return new Tuple<float, float, float>(this.baseHealAmount, 0f, 0f);
+            return new Tuple<float, float, float>(this.baseHealAmount + 0.2f * (skillLevel - 1), 0f, 0f);
         } else 
         {
             return new Tuple<float, float, float>(0f, 0f, 0f);
@@ -245,16 +248,16 @@ public class PlayerStats : MonoBehaviour
         //use to factor cooldown
         if (skill == Skill.Stun) 
         {
-            return this.baseStunCooldown;    
+            return this.baseStunCooldown - 0.1f * (skillLevel - 1);    
         } else if (skill == Skill.Poison)
         {
-            return this.basePoisonCooldown;
+            return this.basePoisonCooldown - 0.1f * (skillLevel - 1);
         } else if (skill == Skill.Explosion)
         {
-            return this.baseExplosionCooldown;
+            return this.baseExplosionCooldown - 0.1f * (skillLevel - 1);
         } else if (skill == Skill.Healing)
         {
-            return this.baseHealCooldown;
+            return this.baseHealCooldown - 0.1f * (skillLevel - 1);
         } else 
         {
             return 0f;

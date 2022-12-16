@@ -95,9 +95,9 @@ public class DigestControls : MonoBehaviour
 
     public void Digest(int red, int purple, int yellow)
     {
-        Debug.Log(red);
+        //Debug.Log(red);
         PlayerStats.ChangeOrbsEvent(-red, -yellow, -purple);
-        Debug.Log(stats.getPurpleOrbs());
+        //Debug.Log(stats.getPurpleOrbs());
         int skillValue = (int)Math.Round((red + purple + yellow) * scaleFactor);
 
         if (red == 0 && purple == 0 && yellow == 0 ) {
@@ -148,6 +148,7 @@ public class DigestControls : MonoBehaviour
         }
         else if (yellow > purple && purple > red)
         {
+            //Debug.Log("Skill value is " + skillValue);
             PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.MovementSpeedUp, skillValue));
             skillMade.text = $"Your movement speed has increased";
             //return new Tuple<Skill, int>(Skill.MovementSpeedUp, skillValue);
