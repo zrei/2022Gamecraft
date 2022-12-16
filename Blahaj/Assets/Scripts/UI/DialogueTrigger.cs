@@ -21,11 +21,11 @@ public class DialogueTrigger : MonoBehaviour
         "You can only use the skill once per level.", };
 
         string[] fireball = new string[2] {
-        "This is the fireball skill. Press the U key to use it.", 
+        "This is the fireball skill. Press the I key to use it.", 
         "Ever eaten something just a little too spicy? Yeah."};
 
         string[] poison = new string[2] {
-        "This is the poison skill. Press the I key to use it.",
+        "This is the poison skill. Press the U key to use it.",
         "Think of it like a fart so bad it's poisonous.", };
 
         string[] stun = new string[2] {
