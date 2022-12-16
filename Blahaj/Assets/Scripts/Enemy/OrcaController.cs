@@ -74,7 +74,7 @@ public class OrcaController : MonoBehaviour
         {
             lastAttackDamageTime = Time.time;
             Debug.Log("Attack");
-            player.GetComponent<PlayerStats>().Damage(this.attackDamage);
+            PlayerStats.DamageEvent(this.attackDamage);
         }
         /*
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
