@@ -128,13 +128,13 @@ public class PlayerControls : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            // explosion
+            // Fireball
             // check skill 1
-            if (canExplode && stats.RetrieveSkillLevel(Skill.Explosion) > 0)
+            if (canExplode && stats.RetrieveSkillLevel(Skill.Fireball) > 0)
             {
                 //Debug.Log("Have Skill, Cooldown okay");
-                skills.UseSkill(Skill.Explosion);
-                StartCoroutine(SkillCooldown(Skill.Explosion, stats.GetCooldown(Skill.Explosion)));
+                skills.UseSkill(Skill.Fireball);
+                StartCoroutine(SkillCooldown(Skill.Fireball, stats.GetCooldown(Skill.Fireball)));
             }
             //Debug.Log("Y has been pressed");
         }
@@ -169,7 +169,7 @@ public class PlayerControls : MonoBehaviour
         float interval = 0.3f;
         switch (skill)
         {
-            case (Skill.Explosion):
+            case (Skill.Fireball):
                 this.canExplode = false;
                 break;
             case (Skill.Poison):
@@ -189,7 +189,7 @@ public class PlayerControls : MonoBehaviour
         }
         switch (skill)
         {
-            case (Skill.Explosion):
+            case (Skill.Fireball):
                 this.canExplode = true;
                 break;
             case (Skill.Poison):

@@ -112,9 +112,9 @@ public class DigestControls : MonoBehaviour
         }
         else if (yellow == 0 && purple == 0 && red > 0)
         {
-            PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Explosion, skillValue));
-            skillMade.text = $"You have gained the skill: \n" + "Explosion";
-            //return new Tuple<Skill, int>(Skill.Explosion, skillValue);
+            PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Fireball, skillValue));
+            skillMade.text = $"You have gained the skill: \n" + "Fireball";
+            //return new Tuple<Skill, int>(Skill.Fireball, skillValue);
         }
         else if (yellow == 0 && red == 0 && purple > 0)
         {

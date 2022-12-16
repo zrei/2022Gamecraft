@@ -35,8 +35,8 @@ public class DigestLogic : MonoBehaviour
         }
         else if (yellow == 0 && purple == 0 && red > 0)
         {
-            PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Explosion, skillValue));
-            //return new Tuple<Skill, int>(Skill.Explosion, skillValue);
+            PlayerStats.GainSkillEvent(new Tuple<Skill, int>(Skill.Fireball, skillValue));
+            //return new Tuple<Skill, int>(Skill.Fireball, skillValue);
         }
         else if (yellow == 0 && red == 0 && purple > 0)
         {
