@@ -82,7 +82,7 @@ public class ShrimpController : MonoBehaviour, EnemyController
             }
             Destroy(this.gameObject);
         }
-        //StartCoroutine("FlashRedOnDamage");
+        StartCoroutine("FlashRedOnDamage");
     }
 
     private IEnumerator FlashRedOnDamage() {
