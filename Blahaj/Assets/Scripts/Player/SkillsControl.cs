@@ -7,10 +7,22 @@ using Constants;
 public class SkillsControl : MonoBehaviour
 {
     private PlayerStats stats;
+    [SerializeField] private GameObject fireball;
+    private Transform mouth = null;
     
     // Start is called before the first frame update
     void Start()
     {
+        //Debug.Log(transform);
+        foreach (Transform child in transform) 
+        {
+            //Debug.Log("Hello!");
+            if (mouth == null)
+            {
+                mouth = child;
+                //Debug.Log(mouth);
+            }
+        }
     }
 
     private void Awake()
@@ -39,9 +51,13 @@ public class SkillsControl : MonoBehaviour
 
     private void Explosion(Tuple<float, float, float> skillInfo)
     {
-        StartCoroutine(ChangeSprite(SpriteStates.Explosion, 0.3f));
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+        //Debug.Log(mouth);
+        Instantiate(fireball, mouth.position, bulletRotation);
+        //StartCoroutine(ChangeSprite(SpriteStates.Explosion, 0.3f));
         //Debug.Log(skillInfo);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, skillInfo.Item2);
+        /*Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, skillInfo.Item2);
         //Debug.Log(colliders.Length);
         foreach (var hitCollider in colliders)
         {
@@ -50,7 +66,7 @@ public class SkillsControl : MonoBehaviour
                 //Debug.Log("?");
                 hitCollider.SendMessage("Damage", skillInfo.Item1);
             }
-        }
+        }*/
     }
 
     private void Stun(Tuple<float, float, float> skillInfo)
