@@ -100,67 +100,69 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameManager.GetStateEvent() != GameState.PauseGame)
         {
-            // attack
-            Debug.Log("Space has been pressed");
-            if (canAttack) 
+            dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("Attack able, attacking");
-                StartCoroutine(Attack());
-            }
-        }
-        if (GameManager.GetStateEvent() != GameState.Crafting)
-        {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
+                // attack
+                Debug.Log("Space has been pressed");
+                if (canAttack) 
                 {
-                    Debug.Log("Healing?");
-                    //Debug.Log("Have Skill, Cooldown okay");
-                    skills.UseSkill(Skill.Healing);
-                    StartCoroutine(SkillCooldown(Skill.Healing, stats.GetCooldown(Skill.Healing)));
+                    Debug.Log("Attack able, attacking");
+                    StartCoroutine(Attack());
                 }
-                // check skill 4
-                //Debug.Log("O has been pressed");
             }
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            // explosion
-            // check skill 1
-            if (canExplode && stats.RetrieveSkillLevel(Skill.Explosion) > 0)
+            if (GameManager.GetStateEvent() != GameState.Crafting)
             {
-                //Debug.Log("Have Skill, Cooldown okay");
-                skills.UseSkill(Skill.Explosion);
-                StartCoroutine(SkillCooldown(Skill.Explosion, stats.GetCooldown(Skill.Explosion)));
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    if (canHeal && stats.RetrieveSkillLevel(Skill.Healing) > 0)
+                    {
+                        Debug.Log("Healing?");
+                        //Debug.Log("Have Skill, Cooldown okay");
+                        skills.UseSkill(Skill.Healing);
+                        StartCoroutine(SkillCooldown(Skill.Healing, stats.GetCooldown(Skill.Healing)));
+                    }
+                    // check skill 4
+                    //Debug.Log("O has been pressed");
+                }
             }
-            //Debug.Log("Y has been pressed");
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            if (canStun && stats.RetrieveSkillLevel(Skill.Stun) > 0)
+            if (Input.GetKeyDown(KeyCode.I))
             {
-            // Debug.Log("Have Skill, Cooldown okay");
-                skills.UseSkill(Skill.Stun);
-                StartCoroutine(SkillCooldown(Skill.Stun, stats.GetCooldown(Skill.Stun)));
+                // explosion
+                // check skill 1
+                if (canExplode && stats.RetrieveSkillLevel(Skill.Explosion) > 0)
+                {
+                    //Debug.Log("Have Skill, Cooldown okay");
+                    skills.UseSkill(Skill.Explosion);
+                    StartCoroutine(SkillCooldown(Skill.Explosion, stats.GetCooldown(Skill.Explosion)));
+                }
+                //Debug.Log("Y has been pressed");
             }
-            // check skill 2
-            //Debug.Log("U has been pressed");
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            if (canPoison && stats.RetrieveSkillLevel(Skill.Poison) > 0)
+            if (Input.GetKeyDown(KeyCode.O))
             {
-                //Debug.Log("Have Skill, Cooldown okay");
-                skills.UseSkill(Skill.Poison);
-                StartCoroutine(SkillCooldown(Skill.Poison, stats.GetCooldown(Skill.Poison)));
+                if (canStun && stats.RetrieveSkillLevel(Skill.Stun) > 0)
+                {
+                // Debug.Log("Have Skill, Cooldown okay");
+                    skills.UseSkill(Skill.Stun);
+                    StartCoroutine(SkillCooldown(Skill.Stun, stats.GetCooldown(Skill.Stun)));
+                }
+                // check skill 2
+                //Debug.Log("U has been pressed");
             }
-            // check skill 3
-            //Debug.Log("I has been pressed");
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                if (canPoison && stats.RetrieveSkillLevel(Skill.Poison) > 0)
+                {
+                    //Debug.Log("Have Skill, Cooldown okay");
+                    skills.UseSkill(Skill.Poison);
+                    StartCoroutine(SkillCooldown(Skill.Poison, stats.GetCooldown(Skill.Poison)));
+                }
+                // check skill 3
+                //Debug.Log("I has been pressed");
+            }
         }
-        
     }
 
     private IEnumerator SkillCooldown(Skill skill, float cooldown)

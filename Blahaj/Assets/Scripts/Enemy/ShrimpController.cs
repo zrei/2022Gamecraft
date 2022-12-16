@@ -6,7 +6,7 @@ public class ShrimpController : MonoBehaviour, EnemyController
 {
     #region Fields
     private GameObject player;
-    [SerializeField] private int health;
+    [SerializeField] private float health;
     [SerializeField] private GameObject enemyBullet;
     [SerializeField] private float minShootCountdown;
     [SerializeField] private float maxShootCountdown;
