@@ -55,9 +55,9 @@ public class ShrimpController : MonoBehaviour, EnemyController
         this.shootCountdown = Random.Range(minShootCountdown, maxShootCountdown);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(float damageAmount)
     {
-        Debug.Log(damageAmount);
+        Debug.Log("Shrimp Damaged: " + damageAmount);
         health -= damageAmount;
         if (health <= 0) {
              for (int i = 0; i < numOrbsDropped; i++)
