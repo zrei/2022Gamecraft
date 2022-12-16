@@ -11,6 +11,7 @@ TagManager:
   - Healthbar
   - WinPortal
   - SkillDisplay
+  - Wall
   layers:
   - Default
   - TransparentFX
