@@ -24,6 +24,7 @@ public class PlayerControls : MonoBehaviour
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     private PlayerStats stats;
     private SkillsControl skills;
+    private Cooldown attackCooldown;
 
     #endregion
 
@@ -33,6 +34,7 @@ public class PlayerControls : MonoBehaviour
         this.mySR = GetComponent<SpriteRenderer>();
         this.stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
         this.skills = GetComponent<SkillsControl>();
+        this.attackCooldown = GetComponent<Cooldown>();
     }
 
     // Start is called before the first frame update
@@ -209,6 +211,8 @@ public class PlayerControls : MonoBehaviour
         this.attacking = true;
         this.canAttack = false;
         //float dashPower = stats.GetAttackDashPower();
+        attackCooldown.setCooldown(stats.GetAttackDuration() + stats.GetAttackCooldown());
+        attackCooldown.useAttack();
         rb2D.velocity = dashdir * stats.GetAttackDashPower();
         stats.SetInvulnerable(true);
         yield return new WaitForSeconds(stats.GetAttackDuration());
