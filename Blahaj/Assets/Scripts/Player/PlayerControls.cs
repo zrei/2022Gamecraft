@@ -46,11 +46,6 @@ public class PlayerControls : MonoBehaviour
         this.movementInput = movementValue.Get<Vector2>();
     }
 
-    private void OnFire()
-    {
-        this.attacking = true;
-    }
-
     private void FixedUpdate()
     {
         if (this.movementInput != Vector2.zero && attacking!=true)
@@ -66,7 +61,7 @@ public class PlayerControls : MonoBehaviour
             
             if (numCollisions == 0)
             {
-                    rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
+                rb2D.MovePosition(rb2D.position + movementInput * stats.GetMovementSpeed() * Time.fixedDeltaTime);
             }
             
 
@@ -211,11 +206,11 @@ public class PlayerControls : MonoBehaviour
 
     private IEnumerator Attack() {
         Debug.Log("Attack has been triggered");
-        float dashPower = 150;  
+        //float dashPower = 150;  
         this.attacking = true;
         this.canAttack = false;
         //float dashPower = stats.GetAttackDashPower();
-        rb2D.velocity = dashdir * dashPower;
+        rb2D.velocity = dashdir * stats.GetAttackDashPower();
         stats.SetInvulnerable(true);
         yield return new WaitForSeconds(stats.GetAttackDuration());
         this.attacking = false;

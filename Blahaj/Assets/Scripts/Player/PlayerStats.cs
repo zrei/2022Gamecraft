@@ -207,7 +207,7 @@ public class PlayerStats : MonoBehaviour
 
     public float GetAttackDashPower()
     {
-        return this.attackDashPower;
+        return this.baseAttackDashPower;
     }
     private void ChangeAttackDashPower(float amount)
     {
