@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShrimpController : MonoBehaviour
+public class ShrimpController : MonoBehaviour, EnemyController
 {
     #region Fields
     private GameObject player;
