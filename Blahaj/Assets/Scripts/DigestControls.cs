@@ -165,6 +165,7 @@ public class DigestControls : MonoBehaviour
         else
         {
             //return null;
+            PlayerStats.ChangeOrbsEvent(red, yellow, purple);
             skillMade.text = $"You have given your shark indigestion >:(";
         }
     }
