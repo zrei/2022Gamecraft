@@ -348,7 +348,7 @@ public class PlayerStats : MonoBehaviour
         this.health = this.maxHealth;
         ResetOrbs();
         ResetSkills();
-        ChangeSprite(SpriteStates.Normal);
+        //ChangeSprite(SpriteStates.Normal);
     }
 
     private void ResetOrbs()
