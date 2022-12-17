@@ -35,6 +35,7 @@ public class OrcaController : MonoBehaviour, EnemyController
     [SerializeField] public GameObject PurpleOrb;
 
     private bool activated = false;
+    private bool attacking = false;
 
     #endregion
 
@@ -73,13 +74,17 @@ public class OrcaController : MonoBehaviour, EnemyController
                     transform.localScale = new Vector3(x, y, z);
                     //mySR.flipX = false;
                 }
-            }
-            if ((Vector3.Distance(transform.position, player.transform.position) < attackRadius) && (Time.time >= lastAttackDamageTime + attackCooldown))
+                attacking = true;
+            } else
             {
-                lastAttackDamageTime = Time.time;
-                Debug.Log("Attack");
-                PlayerStats.DamageEvent(this.attackDamage);
+                attacking = false;
             }
+            // if ((Vector3.Distance(transform.position, player.transform.position) < attackRadius) && (Time.time >= lastAttackDamageTime + attackCooldown))
+            // {
+            //     lastAttackDamageTime = Time.time;
+            //     Debug.Log("Attack");
+            //     PlayerStats.DamageEvent(this.attackDamage);
+            // }
         }
         
         /*
@@ -89,6 +94,30 @@ public class OrcaController : MonoBehaviour, EnemyController
             //Debug.Log("Attack"); // must add countdown
             //PlayerStats.Damage(this.attackDamage);
         }*/
+    }
+
+    public void setAttackTime(float time)
+    {
+        this.lastAttackDamageTime = time;
+    }
+
+    public bool isAttacking()
+    {
+        return this.attacking;
+    }
+
+    public float getAttackDamage()
+    {
+        return this.attackDamage;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player hit");
+            lastAttackDamageTime = Time.time;
+        }
     }
 
     private void OnBecameVisible()

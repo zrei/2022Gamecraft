@@ -64,9 +64,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float baseHealCooldown;
     
     private Dictionary<Orbs, int> orbs = new Dictionary<Orbs, int>(){
-        {Orbs.Red, 0},
-        {Orbs.Yellow, 0},
-        {Orbs.Purple, 0}
+        {Orbs.RedOrb, 0},
+        {Orbs.YellowOrb, 0},
+        {Orbs.PurpleOrb, 0}
     };
 
     public delegate void StatsChange(float changeAmount);
@@ -248,9 +248,9 @@ public class PlayerStats : MonoBehaviour
     private void ChangeOrbs(int red, int yellow, int purple)
     {
         // assuming that the value stored can never go below 0
-        this.orbs[Orbs.Red] += red;
-        this.orbs[Orbs.Yellow] += yellow;
-        this.orbs[Orbs.Purple] += purple;
+        this.orbs[Orbs.RedOrb] += red;
+        this.orbs[Orbs.YellowOrb] += yellow;
+        this.orbs[Orbs.PurpleOrb] += purple;
     }
     
     private void GainSkill(Tuple<Skill, int> skill)
@@ -353,9 +353,9 @@ public class PlayerStats : MonoBehaviour
 
     private void ResetOrbs()
     {
-        orbs[Orbs.Purple] = 0;
-        orbs[Orbs.Red] = 0;
-        orbs[Orbs.Yellow] = 0;
+        orbs[Orbs.PurpleOrb] = 0;
+        orbs[Orbs.RedOrb] = 0;
+        orbs[Orbs.YellowOrb] = 0;
     }
 
     private void ResetSkills()
@@ -400,15 +400,15 @@ public class PlayerStats : MonoBehaviour
     }
 
     public int getRedOrbs() {
-        return this.orbs[Orbs.Red];
+        return this.orbs[Orbs.RedOrb];
     }
 
     public int getYellowOrbs() {
-        return this.orbs[Orbs.Yellow];
+        return this.orbs[Orbs.YellowOrb];
     }
 
     public int getPurpleOrbs() {
-        return this.orbs[Orbs.Purple];
+        return this.orbs[Orbs.PurpleOrb];
     }
 
     public float getHealth()

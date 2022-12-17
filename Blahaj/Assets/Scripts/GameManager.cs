@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private static GameState state = GameState.StartMenu;
+    private static GameState cachedState;
     private static int level = 0;
     private static int enemiesLeft = 0;
+    private static List<Tuple<Orbs, Vector2>> cachedOrbs;
+    private static Vector2 cachedPlayerPosition;
+    private static Quaternion cachedPlayerRotation;
 
     // Delegates and events
     public delegate void ChangeStateDelegate(GameState newState);
@@ -32,6 +36,14 @@ public class GameManager : MonoBehaviour
         }
         ChangeStateEvent += ChangeState;
         GetStateEvent += GetState;
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void onDestory()
+    {
+        ChangeStateEvent -= ChangeState;
+        GetStateEvent -= GetState;
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
 
     public void ChangeState(GameState newState) {
@@ -85,6 +97,13 @@ public class GameManager : MonoBehaviour
                     }
                 // }
                 break;
+            case GameState.WinLevel:
+                // Win Level
+                if (SceneManager.GetActiveScene().name != GameStages.stages[level])
+                {
+                    SceneManager.LoadScene(GameStages.stages[level]);
+                }
+                break;
             case GameState.NextLevel:
                 // Next Level
                 level++;
@@ -110,6 +129,23 @@ public class GameManager : MonoBehaviour
                 // Digestion State
                 if (SceneManager.GetActiveScene().name != GameScenes.DigestionScene)
                 {
+                    Debug.Log("DigestionState");
+                    cachedOrbs = new List<Tuple<Orbs, Vector2>>();
+                    foreach (GameObject orb in GameObject.FindGameObjectsWithTag(GameTags.RedOrb))
+                    {
+                        cachedOrbs.Add(new Tuple<Orbs, Vector2>(Orbs.RedOrb, orb.transform.position));
+                    }
+                    foreach (GameObject orb in GameObject.FindGameObjectsWithTag(GameTags.PurpleOrb))
+                    {
+                        cachedOrbs.Add(new Tuple<Orbs, Vector2>(Orbs.PurpleOrb, orb.transform.position));
+                    }
+                    foreach (GameObject orb in GameObject.FindGameObjectsWithTag(GameTags.YellowOrb))
+                    {
+                        cachedOrbs.Add(new Tuple<Orbs, Vector2>(Orbs.YellowOrb, orb.transform.position));
+                    }
+                    Transform cachedPlayerTransform = GameObject.FindGameObjectWithTag(GameTags.Player).transform;
+                    cachedPlayerPosition = cachedPlayerTransform.position;
+                    cachedPlayerRotation = cachedPlayerTransform.rotation;
                     SceneManager.LoadScene(GameScenes.DigestionScene);
                 }
                 break;
@@ -121,7 +157,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.WinGame:
-                Debug.Log("WinGame");
+                // Debug.Log("WinGame");
                 if (SceneManager.GetActiveScene().name != GameScenes.WinGame)
                 {
                     SceneManager.LoadScene(GameScenes.WinGame);
@@ -137,6 +173,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        if (state == GameState.WinLevel)
+        {
+            Debug.Log("WinLevelNext");
+            Debug.Log(cachedOrbs);
+            GameObject player = GameObject.FindWithTag(GameTags.Player);
+            player.transform.position = cachedPlayerPosition;
+            player.transform.rotation = cachedPlayerRotation;
+            foreach (Tuple<Orbs, Vector2> orb in cachedOrbs)
+            {
+                Instantiate(Resources.Load<GameObject>("Prefabs/Orbs/" + orb.Item1.ToString()), orb.Item2, Quaternion.identity);
+            }
+            GameObject enemies = GameObject.FindWithTag(GameTags.Enemies);
+            foreach (Transform enemy in enemies.transform)
+            {
+                Destroy(enemy.gameObject);
+            }
+        }
+    }
+
     public GameState GetState()
     {
         return state;
@@ -144,6 +201,14 @@ public class GameManager : MonoBehaviour
 
     public void SetGameState(GameState newState) {
         state = newState;
+    }
+
+    public static void SetCachedState(GameState newState) {
+        cachedState = newState;
+    }
+
+    public static GameState GetCachedState() {
+        return cachedState;
     }
 
     /*public void RestartButton()

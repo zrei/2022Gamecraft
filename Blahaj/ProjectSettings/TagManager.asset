@@ -17,6 +17,7 @@ TagManager:
   - Poison
   - Heal
   - Stun
+  - Enemies
   layers:
   - Default
   - TransparentFX

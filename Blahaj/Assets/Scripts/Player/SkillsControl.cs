@@ -57,8 +57,8 @@ public class SkillsControl : MonoBehaviour
 
     private void Fireball(Tuple<float, float, float> skillInfo)
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+        PlayerControls controls = gameObject.GetComponent<PlayerControls>();
+        Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, controls.getDirection());
         //Debug.Log(mouth);
         StartCoroutine(ChangeSprite(SpriteStates.Fireball, 0.3f));
         Instantiate(fireball, mouth.position, bulletRotation);

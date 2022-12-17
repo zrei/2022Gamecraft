@@ -56,6 +56,17 @@ public class ShrimpController : MonoBehaviour, EnemyController
         this.shootCountdown = UnityEngine.Random.Range(minShootCountdown, maxShootCountdown);
     }
 
+    public float getAttackDamage()
+    {
+        // uses bullet
+        return 0f;
+    }
+
+    public bool isAttacking()
+    {
+        return true;
+    }
+
     public void Damage(float damageAmount)
     {
         Debug.Log("Shrimp Damaged: " + damageAmount);
