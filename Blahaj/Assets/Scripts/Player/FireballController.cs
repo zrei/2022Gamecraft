@@ -7,7 +7,7 @@ using System;
 public class FireballController : MonoBehaviour
 {
     private Tuple<float, float, float> fireballInfo;
-
+    private float movingLeft = 1f;
     private void Awake()
     {
         PlayerStats stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
@@ -16,7 +16,12 @@ public class FireballController : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.up * Time.deltaTime * fireballInfo.Item3;
+       transform.position += transform.right * this.movingLeft * Time.deltaTime * fireballInfo.Item3;
+    }
+
+    public void SetMovingLeft()
+    {
+        this.movingLeft = -1f;
     }
 
     private void OnTriggerEnter2D(Collider2D otherObject)

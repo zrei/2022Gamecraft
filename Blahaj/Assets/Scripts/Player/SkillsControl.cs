@@ -57,11 +57,16 @@ public class SkillsControl : MonoBehaviour
 
     private void Fireball(Tuple<float, float, float> skillInfo)
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Quaternion testRotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+        Quaternion bulletRotation = transform.rotation;
         //Debug.Log(mouth);
         StartCoroutine(ChangeSprite(SpriteStates.Fireball, 0.3f));
-        Instantiate(fireball, mouth.position, bulletRotation);
+        GameObject bullet = Instantiate(fireball, mouth.position, bulletRotation);
+        if (transform.localScale.x < 0)
+        {
+            bullet.GetComponent<FireballController>().SetMovingLeft();
+        }
         //Debug.Log(skillInfo);
         /*Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, skillInfo.Item2);
         //Debug.Log(colliders.Length);
