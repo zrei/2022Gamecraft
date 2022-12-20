@@ -1807,7 +1807,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746689924}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.5485735, y: -0.00345, z: 0}
+  m_LocalPosition: {x: -13.546186, y: -0.0034497615, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1875,6 +1875,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 474118247}
     m_Modifications:
+    - target: {fileID: 6978988023948874628, guid: c39681cfec0c24d0e99d2704411bf0e9, type: 3}
+      propertyPath: m_TagString
+      value: Digestion
+      objectReference: {fileID: 0}
     - target: {fileID: 8527771128965615754, guid: c39681cfec0c24d0e99d2704411bf0e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1961,7 +1965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8527771128965615757, guid: c39681cfec0c24d0e99d2704411bf0e9, type: 3}
       propertyPath: m_Name
-      value: CraftingMenu
+      value: DigestionAndCraftingMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c39681cfec0c24d0e99d2704411bf0e9, type: 3}
@@ -2116,7 +2120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841731986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2114258, y: 0.00345, z: -10}
+  m_LocalPosition: {x: -2.2138138, y: 0.00345, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

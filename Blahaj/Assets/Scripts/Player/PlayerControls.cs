@@ -102,7 +102,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.GetStateEvent() != GameState.PauseGame && GameManager.GetStateEvent() != GameState.Crafting)
+        if (GameManager.GetStateEvent() != GameState.PauseGame && GameManager.GetStateEvent() != GameState.DigestionState)
         {
             dashdir = movementInput.x == 0 && movementInput.y == 0
                 ? dashdir

@@ -18,6 +18,7 @@ TagManager:
   - Heal
   - Stun
   - Enemies
+  - Digestion
   layers:
   - Default
   - TransparentFX

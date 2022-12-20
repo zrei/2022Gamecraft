@@ -13,6 +13,10 @@ public class SkillSprite : MonoBehaviour
     {
         this.image = GetComponent<Image>();
         this.stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
+    }
+
+    private void Update()
+    {
         if (stats.RetrieveSkillLevel(skill) > 0) {
             this.image.sprite = skillSprite;
         }
