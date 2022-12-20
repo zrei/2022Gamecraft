@@ -12,7 +12,7 @@ public class PlayerControls : MonoBehaviour
     
     private Rigidbody2D rb2D;
     private SpriteRenderer mySR;
-    private Vector2 dashdir;
+    private Vector2 dashdir = new Vector2(1f, 0f).normalized;
     private bool attacking = false;
     private bool canAttack = true;
     private bool canPoison = true;
@@ -104,7 +104,9 @@ public class PlayerControls : MonoBehaviour
     {
         if (GameManager.GetStateEvent() != GameState.PauseGame && GameManager.GetStateEvent() != GameState.Crafting)
         {
-            dashdir = new Vector2(movementInput.x, movementInput.y).normalized;
+            dashdir = movementInput.x == 0 && movementInput.y == 0
+                ? dashdir
+                : new Vector2(movementInput.x, movementInput.y).normalized;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 // attack
@@ -222,6 +224,11 @@ public class PlayerControls : MonoBehaviour
         stats.SetInvulnerable(false);
         yield return new WaitForSeconds(stats.GetAttackCooldown());
         this.canAttack = true;
+    }
+
+    public Vector2 getDirection() 
+    {
+        return dashdir;
     }
 
     public bool getAttacking() {

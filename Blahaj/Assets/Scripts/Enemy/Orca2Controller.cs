@@ -66,6 +66,11 @@ public class Orca2Controller : MonoBehaviour
         }
     }
 
+    public float getAttackDamage()
+    {
+        return this.attackDamage;
+    }
+
     private void Damage(float damageAmount)
     {
         this.health -= damageAmount;

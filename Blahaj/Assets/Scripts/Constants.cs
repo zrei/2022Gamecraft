@@ -31,9 +31,9 @@ namespace Constants
 
     public enum Orbs
     {
-        Red,
-        Purple,
-        Yellow,
+        RedOrb,
+        PurpleOrb,
+        YellowOrb,
     }
 
     public enum SpriteStates
@@ -63,6 +63,7 @@ namespace Constants
         public const String YellowOrb = "YellowOrb";
         public const String RedOrb = "RedOrb";
         public const String WinPortal = "WinPortal";
+        public const String Enemies = "Enemies";
 
     }
 
@@ -70,9 +71,7 @@ namespace Constants
     {
         public static String[] stages = new String[] { 
             "Game1",
-            "DigestionScene",
             "Game2",
-            "DigestionScene", 
             "Game3",
             };
     }

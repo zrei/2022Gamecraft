@@ -29,17 +29,19 @@ public class FireballController : MonoBehaviour
         //Debug.Log("Hello!");
         if (otherObject.gameObject.CompareTag("Enemy"))
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireballInfo.Item2);
-            //Debug.Log(colliders.Length);
-            foreach (var hitCollider in colliders)
-            {
-                if (hitCollider.CompareTag("Enemy"))
-                {
-                    //Debug.Log("?");
-                    hitCollider.SendMessage("Damage", fireballInfo.Item1);
-                }
-            }
-            Destroy(this.gameObject);
+            Debug.Log("fireballenemyhit");
+            otherObject.GetComponent<EnemyController>().Damage(fireballInfo.Item1);
+            // Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireballInfo.Item2);
+            // //Debug.Log(colliders.Length);
+            // foreach (var hitCollider in colliders)
+            // {
+            //     if (hitCollider.CompareTag("Enemy"))
+            //     {
+            //         Debug.Log("?");
+            //         hitCollider.GetComponent<EnemyController>().Damage(fireballInfo.Item1);
+            //     }
+            // }
+            // Destroy(this.gameObject);
         } else if (otherObject.gameObject.CompareTag("Wall"))
         {
             Destroy(this.gameObject);

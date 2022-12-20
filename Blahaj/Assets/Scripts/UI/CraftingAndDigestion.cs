@@ -5,6 +5,7 @@ using Constants;
 
 public class CraftingAndDigestion : MonoBehaviour
 {
+    private 
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +19,13 @@ public class CraftingAndDigestion : MonoBehaviour
     }
 
     public void BackButton() {
-        GameManager.ChangeStateEvent(GameState.Crafting);
+        Debug.Log("BackButton");
+        Debug.Log(GameManager.GetCachedState());
+        GameManager.ChangeStateEvent(GameManager.GetCachedState());
     }
 
     public void StomachButton() {
+        GameManager.SetCachedState(GameManager.GetStateEvent());
         GameManager.ChangeStateEvent(GameState.DigestionState);
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1388506877779934317}
   - component: {fileID: 5177245530200288355}
   - component: {fileID: 4986546403143960547}
-  - component: {fileID: 8528098193241118357}
+  - component: {fileID: 6280519762810976039}
   m_Layer: 0
   m_Name: Shrimp
   m_TagString: Enemy
@@ -133,7 +133,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &8528098193241118357
+--- !u!50 &6280519762810976039
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
