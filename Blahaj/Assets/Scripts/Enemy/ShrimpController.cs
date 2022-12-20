@@ -19,6 +19,7 @@ public class ShrimpController : MonoBehaviour, EnemyController
     private bool activated = false;
 
     private SpriteRenderer mySR;
+    private OrbSpawner spawner;
     //private new CircleCollider2D collider;
     #endregion
 
@@ -26,6 +27,7 @@ public class ShrimpController : MonoBehaviour, EnemyController
     private void Awake()
     {
         mySR = GetComponent<SpriteRenderer>();
+        this.spawner = GetComponent<OrbSpawner>();
         //collider = GetComponent<CircleCollider2D>();
     }
 
@@ -72,7 +74,7 @@ public class ShrimpController : MonoBehaviour, EnemyController
         Debug.Log("Shrimp Damaged: " + damageAmount);
         health -= damageAmount;
         if (health <= 0) {
-             for (int i = 0; i < numOrbsDropped; i++)
+            /*for (int i = 0; i < numOrbsDropped; i++)
             {
                 int randomNumber = UnityEngine.Random.Range(0, 3);
                 Vector3 spawnPosition = new Vector3(transform.position.x + UnityEngine.Random.Range(-2.0f, 2.0f), 
@@ -90,7 +92,8 @@ public class ShrimpController : MonoBehaviour, EnemyController
                         Instantiate(PurpleOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
                         break;
                 }
-            }
+            }*/
+            spawner.SpawnOrbs();
             Destroy(this.gameObject);
         }
         StartCoroutine("FlashRedOnDamage");
