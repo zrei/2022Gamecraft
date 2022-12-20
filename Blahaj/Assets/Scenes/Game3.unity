@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5177245530200288355, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
 --- !u!4 &34954774 stripped
@@ -239,6 +243,10 @@ PrefabInstance:
     - target: {fileID: 1388506877779934316, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177245530200288355, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
+      propertyPath: health
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
@@ -574,6 +582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5177245530200288355, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
 --- !u!4 &435693824 stripped
@@ -784,6 +796,10 @@ PrefabInstance:
     - target: {fileID: 912346708484662582, guid: b1aabc9aaa0f54043ae87c800d475e3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944026196244995213, guid: b1aabc9aaa0f54043ae87c800d475e3f, type: 3}
+      propertyPath: attackDamage
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1aabc9aaa0f54043ae87c800d475e3f, type: 3}
@@ -1130,6 +1146,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5177245530200288355, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e7d741912e25c499632f133a6d9cec, type: 3}
 --- !u!4 &942130089 stripped
@@ -1209,6 +1229,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 825571364}
     m_Modifications:
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: attackDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7272983846670014081, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
       propertyPath: m_Name
       value: Pufferfish (2)
@@ -1718,6 +1746,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 825571364}
     m_Modifications:
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: attackDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7272983846670014081, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
       propertyPath: m_Name
       value: Pufferfish
@@ -2143,6 +2179,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 825571364}
     m_Modifications:
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: attackDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7272983846670014081, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
       propertyPath: m_Name
       value: Pufferfish (1)

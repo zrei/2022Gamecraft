@@ -232,6 +232,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1467297669}
     m_Modifications:
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: attackDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7272983846670014081, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
       propertyPath: m_Name
       value: Pufferfish
@@ -935,6 +943,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1467297669}
     m_Modifications:
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: attackDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7272983846670014081, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
       propertyPath: m_Name
       value: Pufferfish (1)
@@ -2212,6 +2228,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1467297669}
     m_Modifications:
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: health
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980288693557512921, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
+      propertyPath: attackDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7272983846670014081, guid: eb56f5cf9c77b214aa9d8da733002ba4, type: 3}
       propertyPath: m_Name
       value: Pufferfish
