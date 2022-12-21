@@ -20,6 +20,7 @@ public class OrcaController : MonoBehaviour, EnemyController
     private GameObject player;
     private PlayerStats playerStats;
     private Collider2D objectCollider;
+    private OrbSpawner spawner;
 
     public delegate void ChangeStats(float damageAmount);
     public static ChangeStats DamageEvent;
@@ -41,17 +42,22 @@ public class OrcaController : MonoBehaviour, EnemyController
 
     #region Methods
 
+    private void Start()
+    {
+        OrcaController.DamageEvent += Damage;
+        OrcaController.SlowEvent += SlowDown;
+        OrcaController.StunEvent += Stun;
+        OrcaController.PoisonEvent += Poison;
+    }
+
     private void Awake()
     {
         this.rb2D = GetComponent<Rigidbody2D>();
         this.mySR = GetComponent<SpriteRenderer>();
         this.player = GameObject.FindWithTag("Player");
         this.objectCollider = GetComponent<Collider2D>();
-        OrcaController.DamageEvent += Damage;
-        OrcaController.SlowEvent += SlowDown;
-        this.objectCollider = GetComponent<Collider2D>();
-        OrcaController.StunEvent += Stun;
-        OrcaController.PoisonEvent += Poison;
+        //this.objectCollider = GetComponent<Collider2D>();
+        this.spawner = GetComponent<OrbSpawner>();
     }
 
     // Update is called once per frame
@@ -135,7 +141,7 @@ public class OrcaController : MonoBehaviour, EnemyController
         this.health -= damageAmount;
         if (this.health <= 0)
         {
-            for (int i = 0; i < numOrbsDropped; i++)
+            /*for (int i = 0; i < numOrbsDropped; i++)
             {
                 int randomNumber = UnityEngine.Random.Range(0, 3);
                 Vector3 spawnPosition = new Vector3(transform.position.x + UnityEngine.Random.Range(-2.0f, 2.0f), 
@@ -153,7 +159,8 @@ public class OrcaController : MonoBehaviour, EnemyController
                         Instantiate(PurpleOrb, spawnPosition, new Quaternion(0f, 0f, 0f, 0f));
                         break;
                 }
-            }
+            }*/
+            spawner.SpawnOrbs();
             // death anim     
             Destroy(this.gameObject);
         }
