@@ -99,6 +99,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.WinLevel:
                 // Win Level
+                if (Time.timeScale == 0f)
+                {
+                    Time.timeScale = 1f;
+                }
                 if (SceneManager.GetActiveScene().name != GameStages.stages[level])
                 {
                     SceneManager.LoadScene(GameStages.stages[level]);
@@ -127,7 +131,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.DigestionState:
                 // Digestion State
-                if (SceneManager.GetActiveScene().name != GameScenes.DigestionScene)
+                /*if (SceneManager.GetActiveScene().name != GameScenes.DigestionScene)
                 {
                     Debug.Log("DigestionState");
                     cachedOrbs = new List<Tuple<Orbs, Vector2>>();
@@ -147,6 +151,10 @@ public class GameManager : MonoBehaviour
                     cachedPlayerPosition = cachedPlayerTransform.position;
                     cachedPlayerRotation = cachedPlayerTransform.rotation;
                     SceneManager.LoadScene(GameScenes.DigestionScene);
+                }*/
+                if (Time.timeScale == 1f)
+                {
+                    Time.timeScale = 0f;
                 }
                 break;
             case GameState.Crafting:

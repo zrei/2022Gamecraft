@@ -29,18 +29,21 @@ public class DigestControls : MonoBehaviour
     private GameObject player;
     private PlayerStats stats;
 
+    public delegate void ResetDisplayDelegate();
+    public static ResetDisplayDelegate ResetDisplayEvent;
+
     #region Methods
+
+    private void Start()
+    {
+        ResetDisplayEvent += ResetDisplay;
+    }
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
         stats = GameObject.FindWithTag("GameController").GetComponent<PlayerStats>();
-        redOrbs.text = $"{stats.getRedOrbs()}";
-        yellowOrbs.text = $"{stats.getYellowOrbs()}";
-        purpleOrbs.text = $"{stats.getPurpleOrbs()}";
-        redOrbs1 = Int32.Parse(redOrbs.text);
-        yellowOrbs1 = Int32.Parse(yellowOrbs.text);
-        purpleOrbs1 = Int32.Parse(purpleOrbs.text);
-        skillMade = GameObject.FindWithTag("SkillDisplay").GetComponent<TMP_Text>();
+        //skillMade = GameObject.FindWithTag("SkillDisplay").GetComponent<TMP_Text>();
+        ResetDisplay();
     }
 
     public void Plus(string color) {
@@ -79,18 +82,9 @@ public class DigestControls : MonoBehaviour
     public void DigestButton()
     {
         Digest(Int32.Parse(redOrbsConsumed.text), Int32.Parse(purpleOrbsConsumed.text), Int32.Parse(yellowOrbsConsumed.text));
-        redOrbs.text = $"{stats.getRedOrbs()}";
-        yellowOrbs.text = $"{stats.getYellowOrbs()}";
-        purpleOrbs.text = $"{stats.getPurpleOrbs()}";
-        redOrbs1 = Int32.Parse(redOrbs.text);
-        yellowOrbs1 = Int32.Parse(yellowOrbs.text);
-        purpleOrbs1 = Int32.Parse(purpleOrbs.text);
-        redOrbsC = 0; 
-        redOrbsConsumed.text = "0";
-        yellowOrbsC = 0;
-        yellowOrbsConsumed.text = "0";
-        purpleOrbsC = 0;
-        purpleOrbsConsumed.text = "0";
+        Debug.Log(skillMade.text);
+        ResetDisplay();
+        Debug.Log(skillMade.text);
     }
 
     public void Digest(int red, int purple, int yellow)
@@ -168,6 +162,27 @@ public class DigestControls : MonoBehaviour
             PlayerStats.ChangeOrbsEvent(red, yellow, purple);
             skillMade.text = $"You have given your shark indigestion >:(";
         }
+    }
+
+    private void ResetDisplay()
+    {
+        redOrbs.text = $"{stats.getRedOrbs()}";
+        yellowOrbs.text = $"{stats.getYellowOrbs()}";
+        purpleOrbs.text = $"{stats.getPurpleOrbs()}";
+        redOrbs1 = Int32.Parse(redOrbs.text);
+        yellowOrbs1 = Int32.Parse(yellowOrbs.text);
+        purpleOrbs1 = Int32.Parse(purpleOrbs.text);
+        redOrbsC = 0; 
+        redOrbsConsumed.text = "0";
+        yellowOrbsC = 0;
+        yellowOrbsConsumed.text = "0";
+        purpleOrbsC = 0;
+        purpleOrbsConsumed.text = "0";
+    }
+
+    private void OnDestroy()
+    {
+        ResetDisplayEvent -= ResetDisplay;
     }
     #endregion
 }

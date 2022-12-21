@@ -18,7 +18,7 @@ public class CraftingMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.GetStateEvent() == GameState.WinLevel)
+        if (GameManager.GetStateEvent() == GameState.WinLevel || GameManager.GetStateEvent() == GameState.DigestionState)
         {
             foreach (GameObject child in list)
             {

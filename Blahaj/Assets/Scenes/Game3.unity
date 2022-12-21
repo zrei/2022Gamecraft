@@ -450,7 +450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8527771128965615757, guid: c39681cfec0c24d0e99d2704411bf0e9, type: 3}
       propertyPath: m_Name
-      value: CraftingMenu
+      value: DigestionAndCraftingMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c39681cfec0c24d0e99d2704411bf0e9, type: 3}
@@ -1835,7 +1835,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713889283}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.586147, y: -0.0032100007, z: 0}
+  m_LocalPosition: {x: -12.583741, y: -0.0032097623, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2103,7 +2103,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925340017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.213852, y: 0.04321, z: -10}
+  m_LocalPosition: {x: -2.216258, y: 0.04321, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
