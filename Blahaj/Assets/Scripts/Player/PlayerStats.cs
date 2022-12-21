@@ -69,6 +69,8 @@ public class PlayerStats : MonoBehaviour
         {Orbs.PurpleOrb, 0}
     };
 
+    private int numIndigestion = 0;
+
     public delegate void StatsChange(float changeAmount);
     public static StatsChange ChangeAttackDamageEvent;
     public static StatsChange RestoreHealthEvent;
@@ -87,6 +89,7 @@ public class PlayerStats : MonoBehaviour
     
     public delegate void StatsReset();
     public static StatsReset ResetStatsEvent;
+    public static StatsReset GiveIndigestionEvent;
 
     #endregion
     
@@ -106,6 +109,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent += GainSkill;
         PlayerStats.ChangeMaxHealthEvent += ChangeMaxHealth;
         PlayerStats.ResetStatsEvent += ResetStats;
+        PlayerStats.GiveIndigestionEvent += GiveIndigestion;
     }
 
     // Update is called once per frame
@@ -348,6 +352,7 @@ public class PlayerStats : MonoBehaviour
         this.health = this.maxHealth;
         ResetOrbs();
         ResetSkills();
+        this.numIndigestion = 0;
         //ChangeSprite(SpriteStates.Normal);
     }
 
@@ -397,6 +402,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStats.GainSkillEvent -= GainSkill;
         PlayerStats.ChangeMaxHealthEvent -= ChangeMaxHealth;
         PlayerStats.ResetStatsEvent -= ResetStats;
+        PlayerStats.GiveIndigestionEvent -= GiveIndigestion;
     }
 
     public int getRedOrbs() {
@@ -419,6 +425,16 @@ public class PlayerStats : MonoBehaviour
     public float getMaxHealth()
     {
         return this.maxHealth;
+    }
+
+    private void GiveIndigestion()
+    {
+        this.numIndigestion += 1;
+    }
+
+    public int GetNumIndigestion()
+    {
+        return this.numIndigestion;
     }
     
     #endregion
